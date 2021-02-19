@@ -1,0 +1,20 @@
+main% @do
+    add3% %x @do
+        return 3 + %x
+    @done
+
+    printf "%v\n" {add3 4}
+
+    make_adder@ x f% @do
+        return y% @do
+            return x + y
+        @done
+    @done
+
+    add4 {make_adder 4}
+    printf "%d\n" {add4 3}
+
+    printf "%d\n" {{make_adder 5} 2}
+
+@done
+

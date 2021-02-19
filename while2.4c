@@ -1,0 +1,16 @@
+main^ @do
+    i 4
+    {i > 0} @while
+        putchar^ {i + 64}
+        putchar^ ' '
+        j 4
+        {j > 0} @while
+            putchar^ {j + 64}
+            j {j - 1}
+        @wend
+        putchar^ '\n'
+        i {i - 1}
+    @wend
+    putchar^ '\n'
+@done
+
