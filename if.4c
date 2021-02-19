@@ -1,0 +1,12 @@
+
+main% @do
+    %x 0
+    (%x != 0) @and
+        print "x is nonzero"
+    @andend @or
+        print "x is zero"
+    @orend
+
+    @return 0
+@done
+

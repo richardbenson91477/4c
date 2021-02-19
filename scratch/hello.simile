@@ -1,4 +1,0 @@
-def main
-    call printf "%s\n" "Hello, world!"
-end
-
