@@ -1,11 +1,13 @@
 
 main% @do
     %x 0
+    # "@and" receives a boolean, analagous to if/then/else
     (%x != 0) @and
-        print "x is nonzero"
-    @andend @or
-        print "x is zero"
-    @orend
+        $print^ "x is nonzero"
+      # this is part of the @and block
+      @andnot
+            $print^ "x is zero"
+    @andend
 
     @return 0
 @done

@@ -1,20 +1,20 @@
 main% @do
-    add3% %x @do
+    %add3% %x @do
         @return (3 + %x)
     @done
 
-    print^ (add3% 4)
+    %print^ (%add3% 4)
 
-    make_adder%% x% @do
-        @return y% @do
-            @return (x% + y%)
+    %make_adder%%% @do %x 
+        @return @do %y
+            @return (%x + %y)
         @done
     @done
 
-    add4% (make_adder%% 4)
-    print^ (add4% 3)
+    %add4% (%make_adder%%% 4)
+    %print^ (%add4% 3)
 
-    print^ ((make_adder%% 5) 2)
+    %print^ ((%make_adder%%% 5) 2)
     @return 0
 @done
 

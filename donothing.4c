@@ -1,4 +1,10 @@
+#
+# large comments look like this
+#
+
+# main receives no arguments and returns a number
 main% @do
+    # return receives whatever type the enclosing @do expects
     @return 0
 @done
 

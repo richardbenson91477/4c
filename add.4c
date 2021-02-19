@@ -1,10 +1,17 @@
+#
+## NOTE: this is a test and not stadard practice
+#
+
 main% @do
+    # %a receives a single number
     %a 1
+    # (%a + 9) reduces to a single number
     %a (%a + 9)
     %a (%a - 5)
     %a (%a * 4)
     %a (%a / 2)
-    print^ %a
+    # %print^ recevies a number and returns a boolean
+    %print^ %a
     @return 0
 @done
 

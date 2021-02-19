@@ -1,35 +1,45 @@
 @load "../view"
 
+# user defined type (here analagous to a "struct")
 :model @is
+    # number type
     %vert_n
     %poly_n
+    # block of numbers type
     .verts
     .v_norms
     .t_coords
     .p_norms
     %rad
+    # boolean type
     ^poly_col
+    # string (block of chars) type
     $tex_name
 
     :view_tex.vt
 @isend
 
-:model new^ @do
+# :model:new^ receives a :model and returns a boolean
+:model:new^ @do
+    # ^poly_col is a member of the created :model:variable
     ^poly_col false
     @return true
 @done
 
-:model del^ :view.v @do
+:model:del^ :view.v @do
     debug ":model del^"
 
     (:view_tex.vt != _) @and
         :view.v unref^ :view_tex.vt 
 
-    .verts del^
-    .v_norms del^
-    .t_coords del^
-    .p_norms del^
-    $tex_name del^
+    # .del^ recevies a block of numbers and returns a boolean
+    .verts .del^
+    .v_norms .del^
+    .t_coords .del^
+    .p_norms .del^
+
+    # $del receives a string and return a boolean
+    $tex_name $del^
 
     @return true
 @done
