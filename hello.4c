@@ -1,5 +1,5 @@
 main% @do
-    print^ "Hello, world!"
+    print^ "Hello, world!" `nl
     return 0
 @done
 

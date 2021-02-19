@@ -1,29 +1,31 @@
 @load "../view"
 
 :model @is
-    vert_n
-    poly_n
+    %vert_n
+    %poly_n
     .verts
     .v_norms
     .t_coords
     .p_norms
-    rad
+    %rad
     ^poly_col
     $tex_name
 
-    .view_tex view_tex
+    :view_tex.vt
 @end
 
 :model new^ @do
     ^poly_col false
-    return true
+    @return true
 @done
 
-:model del^ (_view) @do
-    dlog_debug (_ "model_decons")
+:model del^ :view.v @do
+    debug ":model del^"
 
-    if (_model->_tex_name_s)
-        free(_model->_tex_name_s);
+    del $tex_name
+
+    (:view_tex.vt != _) @and
+        del :view_tex.vt
 
     if (_model->_view_tex) {
         view_tex_unref (_view, _model->_view_tex);

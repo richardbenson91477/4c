@@ -1,8 +1,7 @@
 main% @do
     %i 4
     (%i > 0) @while
-        printc^ (%i + 64)
-        printc^ 'space
+        printc^ (%i + 64) 'spc
 
         %j 4
         (%j > 0) @while

@@ -1,8 +1,8 @@
 
 main% @do
-    %f 0.0
+    %f 0
 
-    (%f <= 1.0) @while
+    (%f <= 1) @while
         print^ %f                
         %f (%f + 0.1)
     @wend
