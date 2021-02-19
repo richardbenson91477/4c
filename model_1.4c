@@ -23,64 +23,64 @@ main% @do
     :win.w win_open^ @or
         return 4
 
-    .view new^ :view @or
+    :view.v new^ @or
         return 5
  
-    .view set^ %win_w %win_h @or
+    :view.v set^ %win_w %win_h @or
         return 6
  
-    .model new^ :model @or
+    :model.m new^ @or
         return 7
 
-    .model load^ .view _ "test1.model" @or
+    :model.m load^ :view.v _ "test1.model" @or
         return 8
 
-    .model_pos 0.0 0.0 -4.0
+    .m_pos 0.0 0.0 -4.0
     .eye_v 0.0 0.0 4.0
     .light_v 0.0 0.0 0.0 0.0
-    .model_r 0.0 0.0 0.0
+    .m_rot 0.0 0.0 0.0
  
     %frame_t (1.0 / %win_run_fps)
  
     %zr 0.0
     win_tick^ @while
-        .view tick^ %frame_t @or
+        :view.v tick^ %frame_t @or
             break
 
         %zr (%zr + (%frame_t / 2.0))
         (%zr > %PI2) @and
             %zr (%zr - %PI2)
 
-        .view render^
+        :view.v render^
 
-        .view mv_reset^
+        :view.v mv_reset^
 
         .light_v[0] (:win.w\%m_xf * 4.0)
         .light_v[1] (:win.w\%m_yf * 4.0)
-        .view light_setpos^ .light_v
+        :view.v light_setpos^ .light_v
  
-        .view mv_negtrans^ .eye_v
-        .view mv_push^
-            .view mv_trans^ .model_pos
+        :view.v mv_negtrans^ .eye_v
+        :view.v mv_push^
+            :view.v mv_trans^ .m_pos
 
-            .model_r[0] (:win.w\%m_yf * 1.8)
-            .model_r[1] (:win.w\%m_xf * 1.8)
-            .model_r[2] 0.0
-            .view mv_rot^ .model_r
+            .m_rot[0] (:win.w\%m_yf * 1.8)
+            .m_rot[1] (:win.w\%m_xf * 1.8)
+            .m_rot[2] 0.0
+            :view.v mv_rot^ .m_rot
 
-            .model_r[0] 0.0
-            .model_r[1] 0.0
-            .model_r[2] %zr
-            .view mv_rot^ .model_r
+            .m_rot[0] 0.0
+            .m_rot[1] 0.0
+            .m_rot[2] %zr
+            :view.v mv_rot^ .m_rot
 
-            .model render^ .view
-        .view mv_pop^
+            :model.m render^ :view.v
+        :view.v mv_pop^
 
         :win.w render^
     @wend
  
-    .model del^ .view
-    .view del^
+    :model.m del^ :view.v
+    :view.v del^
 
     win_deinit^
 
