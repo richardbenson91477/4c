@@ -12,7 +12,7 @@
     $tex_name
 
     :view_tex.vt
-@end
+@isend
 
 :model new^ @do
     ^poly_col false
@@ -22,20 +22,16 @@
 :model del^ :view.v @do
     debug ":model del^"
 
-    del $tex_name
-
     (:view_tex.vt != _) @and
-        del :view_tex.vt
+        :view.v unref^ :view_tex.vt 
 
-    if (_model->_view_tex) {
-        view_tex_unref (_view, _model->_view_tex);
-    }
+    .verts del^
+    .v_norms del^
+    .t_coords del^
+    .p_norms del^
+    $tex_name del^
 
-    free(_model->_verts);
-    free(_model->_v_norms);
-    free(_model->_t_coords);
-    free(_model->_p_norms);
-    return true;
+    @return true
 @done
 
 bool model_load (model *_model, view *_view, arc *_arc, char const *_name_s) {

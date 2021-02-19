@@ -6,14 +6,12 @@ main% @do
         %j 4
         (%j > 0) @while
             printc^ (%j + 64)
-            %j (%j - 1)
-        @wend
-        printc^ 'nl
+            @wend (%j (%j - 1))
 
-        %i (%i - 1)
-    @wend
+        printc^ 'nl
+        @wend (%i (%i - 1))
 
     printc^ 'nl
     @return 0
-@done
+    @done
 
