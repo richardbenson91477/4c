@@ -57,7 +57,7 @@ main% @do
 
         .light_v[0] (.win\%m_xf * 4.0)
         .light_v[1] (.win\%m_yf * 4.0)
-        .view light_setpos^ _light_v
+        .view light_setpos^ .light_v
  
         .view mv_negtrans^ .eye_v
         .view mv_push^
@@ -71,7 +71,7 @@ main% @do
             .model_r[0] 0.0
             .model_r[1] 0.0
             .model_r[2] %zr
-            .view mv_rot^ _model_r
+            .view mv_rot^ .model_r
 
             .model render^ .view
         .view mv_pop^

@@ -1,16 +1,20 @@
-main^ @do
-    i 4
-    {i > 0} @while
-        putchar^ {i + 64}
-        putchar^ ' '
-        j 4
-        {j > 0} @while
-            putchar^ {j + 64}
-            j {j - 1}
+main% @do
+    %i 4
+    (%i > 0) @while
+        printc^ (%i + 64)
+        printc^ 'space
+
+        %j 4
+        (%j > 0) @while
+            printc^ (%j + 64)
+            %j (%j - 1)
         @wend
-        putchar^ '\n'
-        i {i - 1}
+        printc^ 'nl
+
+        %i (%i - 1)
     @wend
-    putchar^ '\n'
+
+    printc^ 'nl
+    @return 0
 @done
 

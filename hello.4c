@@ -1,5 +1,5 @@
 main% @do
-    printf "%s\n" "Hello, world!"
+    print^ "Hello, world!"
     return 0
 @done
 
