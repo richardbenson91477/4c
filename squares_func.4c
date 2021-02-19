@@ -1,0 +1,11 @@
+my_square% %x @do
+    @return (%x * %x)
+@done
+
+main% @do
+    %x 1
+    (%x <= 10) @do
+        print^ (my_square% %x)
+    @done
+@done
+
