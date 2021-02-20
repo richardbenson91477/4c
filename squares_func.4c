@@ -1,9 +1,9 @@
-sqr (y (* y y))
+sqr @do y @done (* y y)
 
 main @do
     x 1
     @while^ (^<= x 10)
         print (sqr x)
-    @wend& (x (+ x 1))
+    @wend (x (+ x 1))
 @done 0
 
