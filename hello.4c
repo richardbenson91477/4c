@@ -1,6 +1,7 @@
 # comments look like this
 
-(main (do
+(def main (do
     (print$ "Hello, world!\n")
-) 0)
+  0)
+)
 

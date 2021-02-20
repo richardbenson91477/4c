@@ -1,11 +1,12 @@
 # NOTE: this is a compiler test
 
-(main (do
-    (a 1)
-    (a (+ a 9))
-    (a (- a 5))
-    (a (* a 4))
-    (a (/ a 2))
+(def main (do
+    (set a 1)
+    (set a (+ a 9))
+    (set a (- a 5))
+    (set a (* a 4))
+    (set a (/ a 2))
     (print a)
-) 0)
+  0)
+)
 

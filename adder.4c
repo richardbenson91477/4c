@@ -1,19 +1,20 @@
 #
-(main (do
-    (add2 (do x
+(def main (do
+    (def add2 (do x
         (+ 3 x)
     ))
 
     (print (add2 3))
 
-    (%%make_adder (do x
+    (def %%make_adder (do x
         ) (%%do y
             ) (+ x y)
     )
 
-    (add4 (%%make_adder 4))
+    (def add4 (%%make_adder 4))
     (print (add4 3))
 
     (print ((%%make_adder 5) 2))
-) 0)
+  0)
+)
 

@@ -1,7 +1,7 @@
 #
-(main (do
-    (x 0)
-    #(x 1)
+(def main (do
+    (def x 0)
+    #(def x 1)
     (if (!= x 0)
         (print$ "x is nonzero")
         (return 0)
@@ -10,5 +10,6 @@
         (return -1)
       )
     )
-) 0)
+  0)
+)
 

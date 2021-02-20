@@ -1,11 +1,12 @@
 # NOTE: this is a compiler test
 
 (main (do
-    (f 0)
+    (set f 0)
 
     (while (<= f 1)
         (print f)
-      (f (+ f 0.1)
+      (set f (+ f 0.1))
     )
-) 0)
+  0)
+)
 

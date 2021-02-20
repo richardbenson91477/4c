@@ -1,25 +1,27 @@
 #
 (load "../view")
 
-(:nabs (is
+(def :nabs (is
     n
     a.
     b^
     s$
-    gobble&
 ))
 
-(:nabs.new^ (do
-    (gobble& (print$ ":nabs.new^"))
-    (n 3)
-    (a. (.new% 5))
-    (s$ ($new% 6))
-    (s$ "hello\0")
-    (b^ false)
-) true)
+(def :nabs.new^ (do
+    (print$ ":nabs.new^")
+    (set n 3)
+    (set a. (.new% 5))
+    ; ? (copy a. 5 4 3 2 1)
+    (set s$ ($new% 6))
+    (str-copy s$ "hello\0")
+    (set b^ false)
+  true)
+)
 
-(:nabs.del^ (do
+(def :nabs.del^ (do
     (^del. a.)
     (^del$ s$)
-) true)
+  true)
+)
 
