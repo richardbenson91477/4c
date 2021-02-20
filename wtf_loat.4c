@@ -2,11 +2,11 @@
 ## NOTE: this is a test to ensure working addition
 #
 
-main% @do
+%main@ @do
     %f 0
 
-    (%f <= 1) @while 
-        %print^ %f                
+    @while^ (^lte%% %f 1)
+        print% %f
     @wend (%f (%f + 0.1))
 
     @return 0

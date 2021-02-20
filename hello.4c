@@ -3,10 +3,11 @@
 #
 
 # main receives no arguments and returns a number
-main% @do
+%main @do
     # $print^ receives a string and returns a boolean
-    $print^ ("Hello, world!" $+ 'nl $+ 'nil)
-    # return receives whatever type the enclosing @do expects
+    ^print$ ("Hello, world!" $+ 'nl $+ 'nil)
+
+    # return receives the type @do expects
     @return 0
 @done
 

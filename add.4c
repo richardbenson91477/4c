@@ -2,7 +2,8 @@
 ## NOTE: this is a test and not stadard practice
 #
 
-main% @do
+# %main receives a block and returns a number
+%main@ @do%
     # %a receives a single number
     %a 1
     # (%a + 9) reduces to a single number
