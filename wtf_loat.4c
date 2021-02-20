@@ -3,9 +3,9 @@
 %main% %@do
     f% 0
 
-    @while (<= f% 1)
+    @while (^<=% f% 1)
         print% f%
-    @wend (f% (+ f% 0.1))
+    @wend (f% (%+% f% 0.1))
 
 %@done 0
 

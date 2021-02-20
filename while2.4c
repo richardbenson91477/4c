@@ -1,17 +1,16 @@
-main% @do
+%main% %@do
     i% 4
-    @while (> i% 0) 
-        # FIXME: $+ args 
-        print$ ($+ ('char% i%) 'spc 'nil)
+    @while^ (^>% i% 0) 
+        print$ ($+' ('char% i%) 'spc 'nil)
 
         j% 4
-        @while (> j% 0)
-            print$ ($+ ('char% (+ j% 64)) 'nil)
-        @wend (j% (- j% 1))
+        @while^ (> j% 0)
+            print$ ($+' ('char% (%+% j% 64)) 'nil)
+        @wend (j% (%-% j% 1))
 
-        print$ ($+ 'nl 'nil)
-    @wend (i% (- i% 1))
+        print$ ($+' 'nl 'nil)
+    @wend (i% (%-% i% 1))
 
-    print$ ($+ 'nl 'nil)
-@done 0
+    print$ ($+' 'nl 'nil)
+%@done 0
 

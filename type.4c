@@ -1,24 +1,21 @@
 @load "../view"
 
 :nabs @is
-    %n
-    .a
-    ^b
-    $s
-@isend
+    n%
+    a.
+    b^
+    s$
+@endis
 
-:nabs.new^ @do
-    .a %new. 5
-    $s %new$ 6
-    $s "hello\0"
-    ^b false
-    @return true
-@done
+:nabs.new^ ^@do
+    a. (.new% 5)
+    s$ ($new% 6)
+    s$ "hello\0"
+    b^ false
+^@done true
 
-:model.del^ @do
-    .a .del^
-    $s $del^
-
-    @return true
-@done
+:model.del^ ^@do
+    ^del. a.
+    ^del$ s$
+^@done true
 
