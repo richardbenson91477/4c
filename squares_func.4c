@@ -6,10 +6,10 @@
 
 main% @do
     %x 1
-    # (%x <= 10) reduces to a single bool for @do
-    (%x <= 10) @do
+    # (%x <= 10) reduces to a single bool for @while
+    (%x <= 10) @while
         # (%sqr% %x) reduces to a single number for print
         %print^ (%sqr% %x)
-    @done
+    @wend (%x (%x + 1))
 @done
 
