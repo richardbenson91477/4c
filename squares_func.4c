@@ -1,15 +1,11 @@
-# %sqr% recevies a number and returns a number
 %sqr% %x @do
-    # (%x * %x) reduces to a single number for @return
     @return (%x * %x)
 @done
 
 main% @do
     %x 1
-    # (%x <= 10) reduces to a single bool for @while
-    (%x <= 10) @while
-        # (%sqr% %x) reduces to a single number for print
-        %print^ (%sqr% %x)
+    @while (%x <= 10) 
+        print% (%sqr% %x)
     @wend (%x (%x + 1))
 @done
 

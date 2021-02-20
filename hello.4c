@@ -1,13 +1,7 @@
-#
-## large comments look like this
-#
 
-# main receives no arguments and returns a number
-%main @do
-    # $print^ receives a string and returns a boolean
-    ^print$ ("Hello, world!" $+ 'nl $+ 'nil)
+# comments look like this
 
-    # return receives the type @do expects
-    @return 0
-@done
+%main% %@do
+    print$ ("Hello, world!" $+ 'nl $+ 'nil)
+%@done 0
 

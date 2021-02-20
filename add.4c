@@ -1,18 +1,11 @@
-#
-## NOTE: this is a test and not stadard practice
-#
+# NOTE: this is a compiler test
 
-# %main receives a block and returns a number
-%main@ @do%
-    # %a receives a single number
-    %a 1
-    # (%a + 9) reduces to a single number
-    %a (%a + 9)
-    %a (%a - 5)
-    %a (%a * 4)
-    %a (%a / 2)
-    # %print^ recevies a number and returns a boolean
-    %print^ %a
-    @return 0
-@done
+%main% %@do
+    a% 1
+    a% (%a + 9)
+    a% (%a - 5)
+    a% (%a * 4)
+    a% (%a / 2)
+    print% a%
+%@done 0
 

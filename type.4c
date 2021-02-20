@@ -1,14 +1,9 @@
 @load "../view"
 
-# user defined type (here analagous to a "struct")
 :nabs @is
-    # number type
     %n
-    # block of numbers type
     .a
-    # boolean type
     ^b
-    # string (block of chars) type
     $s
 @isend
 

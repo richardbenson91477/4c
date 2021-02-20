@@ -1,27 +1,17 @@
 main% @do
-    %i 4
-    #(%i > 0) reduces to a bool
-    # @while receives a bool
-    (%i > 0) @while
-        # 'spc, 'nil are predefined characters
-        # $+ is string addition (concatenation)
-        # FIXME: below $+ args are number and char
-        $print^ ((%i + 64) $+ 'spc $+ 'nil)
+    i% 4
+    @while (i%  > 0) 
+        # FIXME: $+ args 
+        print$ ($+ i% 'spc 'nil)
 
-        %j 4
-        (%j > 0) @while
-            # FIXME: below $+ args are number and char
-            $print^ ((%j + 64) $+ 'nil)
-            # @wend returns a... TODO
-            @wend (%j (%j - 1))
+        j% 4
+        @while (j% > 0)
+            $print^ ((j% + 64) $+ 'nil)
+        @wend (j% (- j% 1))
 
-        # FIXME: below $+ args are char and char
-        $print^ ('nl $+ 'nil)
-        # @wend returns a... TODO
-        @wend (%i (%i - 1))
+        print$ ($+ 'nl 'nil)
+    @wend (i% (- i% 1))
 
-    #FIXME: below $+ args are char and char
-    $print^ ('nl $+ 'nil)
-    @return 0
-    @done
+    print$ ($+ 'nl 'nil)
+@done 0
 
