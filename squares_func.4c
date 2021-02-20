@@ -1,12 +1,12 @@
-#
-(def sqr (do [y] (* y y)))
 
-(def main (do
+(def sqr (do [y] [(return (* y y))]))
+
+(def main (do [] [
     (set x 1)
-    (while (<= x 10)
+    (while (<= x 10) [
         (print (sqr x))
-      (set x (+ x 1))
+      ] [(set x (+ x 1))]
     )
-  0)
+  0])
 )
 

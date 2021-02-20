@@ -1,20 +1,21 @@
-#
-(def main (do []
-    (def add2 (do [x]
+
+(def main (do [] [
+    (def add2 (do [x] [
         (+ 3 x)
-    ))
+    ]))
 
     (print (add2 3))
 
-    (def %%make_adder (do [x]
-        ) (%%do [y]
-            ) (+ x y)
-    )
+    (def make_adder (do [x] [
+        (do [y] [
+            (return (+ x y))
+        ])
+    ]))
 
-    (def add4 (%%make_adder 4))
+    (def add4 (make_adder 4))
     (print (add4 3))
 
-    (print ((%%make_adder 5) 2))
-  0)
+    (print ((make_adder 5) 2))
+    ] 0)
 )
 
