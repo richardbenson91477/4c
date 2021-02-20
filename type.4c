@@ -1,0 +1,29 @@
+@load "../view"
+
+# user defined type (here analagous to a "struct")
+:nabs @is
+    # number type
+    %n
+    # block of numbers type
+    .a
+    # boolean type
+    ^b
+    # string (block of chars) type
+    $s
+@isend
+
+:nabs.new^ @do
+    .a %new. 5
+    $s %new$ 6
+    $s "hello\0"
+    ^b false
+    @return true
+@done
+
+:model.del^ @do
+    .a .del^
+    $s $del^
+
+    @return true
+@done
+

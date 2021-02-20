@@ -16,21 +16,22 @@
     # string (block of chars) type
     $tex_name
 
-    :view_tex.vt
+    # :view_tex type
+    :view_tex:vt
 @isend
 
-# :model:new^ receives a :model and returns a boolean
-:model:new^ @do
-    # ^poly_col is a member of the created :model:variable
+# :model new^
+:model.new^ @do
+    # ^poly_col is a member of the created :model instance
     ^poly_col false
     @return true
 @done
 
-:model:del^ :view.v @do
-    debug ":model del^"
+:model.del^ @do :view:v
+    debug ":model.del^"
 
-    (:view_tex.vt != _) @and
-        :view.v unref^ :view_tex.vt 
+    (:view_tex:vt != _) @and
+        :view:v unref^ :view_tex:vt 
 
     # .del^ recevies a block of numbers and returns a boolean
     .verts .del^
