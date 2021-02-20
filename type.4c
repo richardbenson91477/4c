@@ -1,25 +1,25 @@
 #
 (load "../view")
 
-(def :nabs (is
+(def-type :nabs
     n
     a.
     b^
     s$
-))
+)
 
-(def :nabs.new^ (do
+(def :nabs.new (do [this]
     (print$ ":nabs.new^")
-    (set n 3)
-    (set a. (.new% 5))
-    ; ? (copy a. 5 4 3 2 1)
-    (set s$ ($new% 6))
-    (str-copy s$ "hello\0")
-    (set b^ false)
+    (set this:n 3)
+    (set this:a. (.new% 5))
+    ; ? (copy this:a. 5 4 3 2 1)
+    (set this:s$ ($new% 6))
+    (str-copy this:s$ "hello\0")
+    (set this:b^ false)
   true)
 )
 
-(def :nabs.del^ (do
+(def :nabs.del^ (do []
     (^del. a.)
     (^del$ s$)
   true)

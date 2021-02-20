@@ -1,13 +1,13 @@
 #
-(def main (do
-    (def add2 (do x
+(def main (do []
+    (def add2 (do [x]
         (+ 3 x)
     ))
 
     (print (add2 3))
 
-    (def %%make_adder (do x
-        ) (%%do y
+    (def %%make_adder (do [x]
+        ) (%%do [y]
             ) (+ x y)
     )
 

@@ -1,5 +1,5 @@
 #
-(def sqr (do y (* y y)))
+(def sqr (do [y] (* y y)))
 
 (def main (do
     (set x 1)

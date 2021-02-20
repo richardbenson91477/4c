@@ -1,6 +1,6 @@
 # NOTE: this is a compiler test
 
-(def main (do
+(def main (do []
     (set a 1)
     (set a (+ a 9))
     (set a (- a 5))

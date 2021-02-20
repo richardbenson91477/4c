@@ -1,6 +1,6 @@
 # NOTE: this is a compiler test
 
-(main (do
+(main (do []
     (set f 0)
 
     (while (<= f 1)
