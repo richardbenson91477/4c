@@ -1,0 +1,3 @@
+send/receive number (%) type is implied,
+    e.g. (x 3) is internally identical to (%x% 3)
+

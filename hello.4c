@@ -2,6 +2,6 @@
 # comments look like this
 
 main @do
-    print$ ($+$ "Hello, world!" ($+' 'nl 'nil))
+    print$ "Hello, world!\n"
 @done 0
 

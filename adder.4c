@@ -7,13 +7,14 @@ main @do
 
     print (add1 (add2 3))
 
-    %%make_adder @do x
-        %%@done @do y
+    # FIXME syntax
+    make_adder @do x
+        @done @do y
             @done (+ x y)
 
     add4 (make_adder 4)
     print (add4 3)
 
-    print ((%%make_adder 5) 2)
+    print ((make_adder 5) 2)
 @done 0
 
