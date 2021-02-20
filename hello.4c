@@ -1,7 +1,6 @@
-
 # comments look like this
 
-main @do
-    print$ "Hello, world!\n"
-@done 0
+(main (do
+    (print$ "Hello, world!\n")
+) 0)
 

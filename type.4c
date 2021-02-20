@@ -1,24 +1,25 @@
-@load "../view"
+#
+(load "../view")
 
-:nabs :@is
+(:nabs (is
     n
     a.
     b^
     s$
     gobble&
-@endis
+))
 
-:nabs.new^ ^@do
-    gobble& (print$ ":nabs.new^")
-    n 3
-    a. (.new% 5)
-    s$ ($new% 6)
-    s$ "hello\0"
-    b^ false
-@done^ true
+(:nabs.new^ (do
+    (gobble& (print$ ":nabs.new^"))
+    (n 3)
+    (a. (.new% 5))
+    (s$ ($new% 6))
+    (s$ "hello\0")
+    (b^ false)
+) true)
 
-:nabs.del^ ^@do
-    ^del. a.
-    ^del$ s$
-@done^ true
+(:nabs.del^ (do
+    (^del. a.)
+    (^del$ s$)
+) true)
 

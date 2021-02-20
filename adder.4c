@@ -1,17 +1,19 @@
+#
+(main (do
+    (add2 (do x
+        (+ 3 x)
+    ))
 
-main @do
-    add2 @do x
-        @done (+ 3 x)
+    (print (add2 3))
 
-    print (add2 3)
+    (%%make_adder (do x
+        ) (%%do y
+            ) (+ x y)
+    )
 
-    %%make_adder @do x
-        @done %%@do y
-            @done (+ x y)
+    (add4 (%%make_adder 4))
+    (print (add4 3))
 
-    add4 (%%make_adder 4)
-    print (add4 3)
-
-    print ((%%make_adder 5) 2)
-@done 0
+    (print ((%%make_adder 5) 2))
+) 0)
 
