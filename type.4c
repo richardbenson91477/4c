@@ -9,7 +9,7 @@
 ])
 
 (def :nabs.new (do [this] [
-    (print$ ":nabs.new^")
+    (print ":nabs.new^")
     (set this:n 3)
     (set this:a. (new 5))
     (set this:s$ (new$ 6))
