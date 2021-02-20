@@ -1,4 +1,3 @@
 
-%main% %@do
-%@done 0
+main @do @done 0
 

@@ -1,20 +1,23 @@
 @load "../view"
 
-:nabs @is
-    n%
+:nabs :@is
+    n
     a.
     b^
     s$
+    gobble&
 @endis
 
 :nabs.new^ ^@do
+    gobble& (print$ ":nabs.new^")
+    n 3
     a. (.new% 5)
     s$ ($new% 6)
     s$ "hello\0"
     b^ false
 ^@done true
 
-:model.del^ ^@do
+:nabs.del^ ^@do
     ^del. a.
     ^del$ s$
 ^@done true

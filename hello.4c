@@ -1,7 +1,7 @@
 
 # comments look like this
 
-%main% %@do
-    print$ ("Hello, world!" $+ 'nl $+ 'nil)
-%@done 0
+main @do
+    print$ ($+$ "Hello, world!" ($+' 'nl 'nil))
+@done 0
 
