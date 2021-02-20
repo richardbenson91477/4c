@@ -15,10 +15,10 @@
     s$ ($new% 6)
     s$ "hello\0"
     b^ false
-^@done true
+@done^ true
 
 :nabs.del^ ^@do
     ^del. a.
     ^del$ s$
-^@done true
+@done^ true
 

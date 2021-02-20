@@ -1,11 +1,9 @@
 
 main @do
-    add1 (x (+ x 1))
-
     add2 @do x
-    @done (+ 3 x)
+        @done (+ 3 x)
 
-    print (add1 (add2 3))
+    print (add2 3)
 
     # FIXME syntax
     make_adder @do x
