@@ -1,0 +1,124 @@
+<h1>4c (foresee) language</h1>
+
+<p>Foresee: To see beforehand</p>
+
+<h2>Overview</h2>
+
+<p>4c is an imperitive (not functional) language with a LISP-like syntax<br/>
+4cc (the 4c compiler) compiles 4c code to GNU assembly</p>
+
+<h2>Syntax</h2>
+
+<h3>Basics</h3>
+
+<p>; comments follow semicolons</p>
+
+<h3>Constants</h3>
+
+<p>-9&hellip;9.9&hellip;9 &hellip; 9&hellip;9.9&hellip;9<br/>
+&ldquo;string constant&rdquo;</p>
+
+<h3>Identifiers</h3>
+
+<p>&hellip;</p>
+
+<h3>Built-in type names</h3>
+
+<p>&lsquo;function<br/>
+'number<br/>
+'number-array<br/>
+'string <br/>
+'boolean</p>
+
+<h3>Built-in constants</h3>
+
+<p>&lsquo;nil<br/>
+'true<br/>
+'false<br/>
+'spc$<br/>
+'nl$</p>
+
+<h3>Variables</h3>
+
+<p>number-var<br/>
+number-array-var.<br/>
+boolean-var^<br/>
+string-var$<br/>
+:type-name<br/>
+:type-name:instance-name<br/>
+:type-name:instance-name.var-instance</p>
+
+<h3>Program structure</h3>
+
+<p>(function args)<br/>
+[list of items]</p>
+
+<h2>Built-in functions</h2>
+
+<p>NOTE: &ldquo;bool&rdquo; in result types below are shorthand for one of the predefined &lsquo;boolean-s 'true and 'false</p>
+
+<p>(def var-name value) &lsquo;nil<br/>
+(set var-name value) 'nil<br/>
+(def-type :type-name [var-list]) 'nil<br/>
+(do [arg-list] [fn-list] default-return-value) -> 'function instance<br/>
+(return value-for-do) -> 'nil<br/>
+(if (bool function) [true-fn-list] [false-fn-list]) -> 'nil<br/>
+(while (bool function) [fn-list] [per-loop fn-list]) -> 'nil<br/>
+(print value) -> 'nil<br/>
+(input) -> 'string instance<br/>
+(and bool bool) -> <br/>
+(or bool bool) -> bool<br/>
+(not bool) -> 'true or 'false<br/>
+(+ num num) -> num<br/>
+(- num num) -> num<br/>
+(* num num) -> num<br/>
+(/ num num) -> num<br/>
+(% num num) -> num<br/>
+(= num num) -> 'true or 'false<br/>
+(!= num num) -> bool<br/>
+(> num num) -> bool<br/>
+(&lt; num num) -> bool<br/>
+(&lt;= num num) -> bool<br/>
+(>= num num) -> bool<br/>
+(str-copy target-string-var source-string) -> bool<br/>
+(str-from char-number) -> string<br/>
+(str-add string string) -> string<br/>
+(str-cmp string string) -> bool<br/>
+(new :type var [extra-args]) -> bool<br/>
+(del :type var [extra-args]) -> bool</p>
+
+<p>(def :type.new (do [:type:this extra-param-vars] [alloc/init :type:this.vars]))<br/>
+(def :type.del (do [:type:this extra-param-vars] [dealloc/deinit :type:this.vars]))</p>
+
+<h2>Internals</h2>
+
+<h3>&lsquo;function internals</h3>
+
+<p>function name<br/>
+function argument types<br/>
+memory label</p>
+
+<h3>&lsquo;number internals</h3>
+
+<p>TODO RIGHT</p>
+
+<h3>&lsquo;number array internals</h3>
+
+<p>TODO</p>
+
+<h3>&lsquo;string internals</h3>
+
+<p>memory address<br/>
+memory label<br/>
+string length</p>
+
+<h3>&lsquo;boolean internals</h3>
+
+<p>var name<br/>
+flag bit #</p>
+
+<hr />
+
+<h2>Credits</h2>
+
+<p>© 2021 Richard A. Benson <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#105;&#99;&#104;&#97;&#114;&#100;&#98;&#101;&#110;&#115;&#111;&#110;&#57;&#49;&#52;&#55;&#55;&#64;&#112;&#114;&#111;&#116;&#111;&#110;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#114;&#105;&#99;&#104;&#97;&#114;&#100;&#98;&#101;&#110;&#115;&#111;&#110;&#57;&#49;&#52;&#55;&#55;&#64;&#112;&#114;&#111;&#116;&#111;&#110;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a><br></p>

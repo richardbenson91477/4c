@@ -1,13 +1,10 @@
-Foresee (4c) language
-===
+4c (foresee) language
+=====================
 
-## WIP programming language  
-### Foresee: to see beforehand
-Still in the design phase - based on patterns in the implementation and
-coding style used in the nitro4c (Nitrogen for C) engine - something
-that I foresaw that I would do 
-(although I didn't foresee that the new language would be called 4c when
-I named the engine nitro4c :-)
+## WIP programming language / compiler
+  
+Foresee: to see beforehand
 
-© 2021 Richard A. Benson <richardbenson91477@protonmail.com><br>
+# Please refer to [4c_lang.md](4c_lang.md).
 ---
+© 2021 Richard A. Benson <richardbenson91477@protonmail.com><br>
