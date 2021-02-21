@@ -22,7 +22,7 @@ string-var$
 (def var-name value) -> #nil
 (set var-name value) -> #nil
 (def-type :type-name [var-list])
-(do [arg-list] [fn-list] default-return-value) -> #closure
+(do [arg-list] [fn-list] default-return-value) -> ?
 (return value-for-do) -> #nil
 (print value) -> #nil
 (if (bool function) [true-fn-list] [false-fn-list]) -> ?
@@ -37,7 +37,8 @@ string-var$
 (< num num) -> bool
 (<= num num) -> bool
 (>= num num) -> bool
-(str-copy target-string-var source-string)
+(str-copy target-string-var source-string) -> bool
+(str-from number) -> string
 (new :type var [extra-args]) -> bool
 (del :type var [extra-args]) -> bool
 (def :type.new (do [:this extra-param-vars] [alloc/init :this.vars]))
