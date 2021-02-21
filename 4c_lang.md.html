@@ -1,11 +1,11 @@
-<h1>4c (foresee) language</h1>
+<h1>4c (foresee) programming language</h1>
 
-<p>Foresee: To see beforehand</p>
+<p><em>Foresee: To see beforehand</em></p>
 
 <h2>Overview</h2>
 
-<p>4c is an imperitive (not functional) language with a LISP-like syntax<br/>
-4cc (the 4c compiler) compiles 4c code to GNU assembly</p>
+<p><strong>4c</strong> is an imperitive (not functional) language with a LISP-like syntax<br/>
+<strong>4cc</strong> (the 4c compiler) compiles 4c code to GNU assembly (GAS)</p>
 
 <h2>Syntax</h2>
 
@@ -15,12 +15,12 @@
 
 <h3>Constants</h3>
 
-<p>-9&hellip;9.9&hellip;9 &hellip; 9&hellip;9.9&hellip;9<br/>
+<p>-9..9<strong>.</strong>9..9 .. 9..9<strong>.</strong>9..9<br/>
 &ldquo;string constant&rdquo;</p>
 
 <h3>Identifiers</h3>
 
-<p>&hellip;</p>
+<p>TODO: Gory academic details</p>
 
 <h3>Built-in type names</h3>
 
@@ -50,31 +50,35 @@ string-var$<br/>
 
 <h3>Program structure</h3>
 
-<p>(function args)<br/>
-[list of items]</p>
+<p>(function-name arg_1 .. arg_n)<br/>
+[list-item_1 .. list-item_n]</p>
 
 <h2>Built-in functions</h2>
 
-<p>NOTE: &ldquo;bool&rdquo; in result types below are shorthand for one of the predefined &lsquo;boolean-s 'true and 'false</p>
+<p>(<strong>def</strong> <em>var-name</em> <em>value</em>)<br/>
+description: reference <em>value</em> with the variable <em>var-name</em><br/>
+returns: &lsquo;nil</p>
 
-<p>(def var-name value) &lsquo;nil<br/>
-(set var-name value) 'nil<br/>
-(def-type :type-name [var-list]) 'nil<br/>
+<p>(<strong>set</strong> <em>var-name</em> <em>value</em>)<br/>
+description: assign <em>value</em> to the variable referenced by <em>var-name</em><br/>
+returns: &lsquo;nil</p>
+
+<p>(def-type :type-name [var-list]) &lsquo;nil<br/>
 (do [arg-list] [fn-list] default-return-value) -> 'function instance<br/>
 (return value-for-do) -> 'nil<br/>
-(if (bool function) [true-fn-list] [false-fn-list]) -> 'nil<br/>
-(while (bool function) [fn-list] [per-loop fn-list]) -> 'nil<br/>
+(if ('function->'boolean) [true-fn-list] [false-fn-list]) -> 'nil<br/>
+(while ('function->'boolean) [fn-list] [per-loop fn-list]) -> 'nil<br/>
 (print value) -> 'nil<br/>
 (input) -> 'string instance<br/>
 (and bool bool) -> <br/>
 (or bool bool) -> bool<br/>
-(not bool) -> 'true or 'false<br/>
+(not bool) -> bool
 (+ num num) -> num<br/>
 (- num num) -> num<br/>
 (* num num) -> num<br/>
 (/ num num) -> num<br/>
 (% num num) -> num<br/>
-(= num num) -> 'true or 'false<br/>
+(= num num) -> bool
 (!= num num) -> bool<br/>
 (> num num) -> bool<br/>
 (&lt; num num) -> bool<br/>
@@ -92,30 +96,29 @@ string-var$<br/>
 
 <h2>Internals</h2>
 
-<h3>&lsquo;function internals</h3>
+<h3>&lsquo;function type</h3>
 
 <p>function name<br/>
-function argument types<br/>
+function argument names and types<br/>
 memory label</p>
 
-<h3>&lsquo;number internals</h3>
+<h3>&lsquo;number type</h3>
 
 <p>TODO RIGHT</p>
 
-<h3>&lsquo;number array internals</h3>
+<h3>&lsquo;number-array type</h3>
 
 <p>TODO</p>
 
-<h3>&lsquo;string internals</h3>
+<h3>&lsquo;string type</h3>
 
-<p>memory address<br/>
-memory label<br/>
-string length</p>
+<p>memory address (if dynamic) or memory label (if static)
+length in bytes</p>
 
-<h3>&lsquo;boolean internals</h3>
+<h3>&lsquo;boolean type</h3>
 
 <p>var name<br/>
-flag bit #</p>
+truth flag</p>
 
 <hr />
 

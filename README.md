@@ -1,9 +1,8 @@
-4c (foresee) language
-=====================
+4c (foresee) programming language
+===
+_Foresee: To see beforehand_
 
-## WIP programming language / compiler
-  
-Foresee: to see beforehand
+**NOTE:** 4c is still in the language design phase
 
 # Please refer to [4c_lang.md](4c_lang.md).
 ---

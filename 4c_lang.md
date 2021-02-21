@@ -1,19 +1,19 @@
-4c (foresee) language
-=======================
-Foresee: To see beforehand
+4c (foresee) programming language
+===
+_Foresee: To see beforehand_
 
 ## Overview
-4c is an imperitive (not functional) language with a LISP-like syntax  
-4cc (the 4c compiler) compiles 4c code to GNU assembly
+**4c** is an imperitive (not functional) language with a LISP-like syntax  
+**4cc** (the 4c compiler) compiles 4c code to GNU assembly (GAS)
 
 ## Syntax
 ### Basics
 ; comments follow semicolons
 ### Constants
--9...9.9...9 ... 9...9.9...9  
+-9..9**.**9..9 .. 9..9**.**9..9  
 "string constant"
 ### Identifiers
-...  
+TODO: Gory academic details  
 ### Built-in type names
 'function  
 'number  
@@ -35,30 +35,34 @@ string-var$
 :type-name:instance-name  
 :type-name:instance-name.var-instance  
 ### Program structure
-(function args)  
-[list of items]  
+(function-name arg_1 .. arg_n)  
+[list-item_1 .. list-item_n]  
 
 ## Built-in functions
-NOTE: "bool" in result types below are shorthand for one of the predefined 'boolean-s 'true and 'false  
-  
-(def var-name value) 'nil  
-(set var-name value) 'nil  
+(**def** _var-name_ _value_)  
+description: reference _value_ with the variable _var-name_  
+returns: 'nil  
+ 
+(**set** _var-name_ _value_)  
+description: assign _value_ to the variable referenced by _var-name_  
+returns: 'nil  
+
 (def-type :type-name [var-list]) 'nil  
 (do [arg-list] [fn-list] default-return-value) -> 'function instance  
 (return value-for-do) -> 'nil  
-(if (bool function) [true-fn-list] [false-fn-list]) -> 'nil  
-(while (bool function) [fn-list] [per-loop fn-list]) -> 'nil  
+(if ('function->'boolean) [true-fn-list] [false-fn-list]) -> 'nil  
+(while ('function->'boolean) [fn-list] [per-loop fn-list]) -> 'nil  
 (print value) -> 'nil  
 (input) -> 'string instance  
 (and bool bool) ->   
 (or bool bool) -> bool  
-(not bool) -> 'true or 'false  
+(not bool) -> bool
 (+ num num) -> num  
 (- num num) -> num  
 (* num num) -> num  
 (/ num num) -> num  
 (% num num) -> num  
-(= num num) -> 'true or 'false  
+(= num num) -> bool
 (!= num num) -> bool  
 (> num num) -> bool  
 (< num num) -> bool  
@@ -75,21 +79,20 @@ NOTE: "bool" in result types below are shorthand for one of the predefined 'bool
 (def :type.del (do [:type:this extra-param-vars] [dealloc/deinit :type:this.vars]))  
 
 ## Internals
-### 'function internals
+### 'function type
 function name  
-function argument types  
+function argument names and types  
 memory label   
-### 'number internals
+### 'number type
 TODO RIGHT  
-### 'number array internals
+### 'number-array type
 TODO  
-### 'string internals
-memory address  
-memory label  
-string length  
-### 'boolean internals
+### 'string type 
+memory address (if dynamic) or memory label (if static)
+length in bytes
+### 'boolean type
 var name  
-flag bit # 
+truth flag
 
 ===
 ## Credits
