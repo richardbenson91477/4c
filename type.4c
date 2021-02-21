@@ -1,6 +1,4 @@
 
-(load "../view")
-
 (def-type :nabs [
     n
     a.
@@ -9,18 +7,18 @@
 ])
 
 (def :nabs.new (do [this] [
-    (print ":nabs.new^")
+    (print ":nabs.new")
     (set this:n 3)
     (set this:a. (new 5))
     (set this:s$ (new$ 6))
     (str-copy this:s$ "hello")
-    (set this:b^ #false)
-    ] #true)
+    (set this:b^ 'false)
+    ] 'true)
 )
 
 (def :nabs.del (do [] [
     (del a.)
-    (del$ s$)
-  ] #true)
+    (del s$)
+  ] 'true)
 )
 
