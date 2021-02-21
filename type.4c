@@ -6,19 +6,19 @@
     s$
 ])
 
-(def :nabs.new (do [this] [
+(def :nabs.new (do [:nabs:self] [
     (print ":nabs.new")
-    (set this:n 3)
-    (set this:a. (new 5))
-    (set this:s$ (new$ 6))
-    (str-copy this:s$ "hello")
-    (set this:b^ 'false)
+    (set :nabs:self.n 3)
+    (set :nabs:self.a. (new 'number [5]))
+    (set :nabs:self.s$ (new 'string [6]))
+    (str-copy :nabs:self.s$ "hello")
+    (set :nabs:self.b^ 'false)
     ] 'true)
 )
 
-(def :nabs.del (do [] [
-    (del a.)
-    (del s$)
+(def :nabs.del (do [:nabs:this] [
+    (del :nabs:this.a.)
+    (del :nabs:this.s$)
   ] 'true)
 )
 

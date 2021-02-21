@@ -7,9 +7,9 @@
     (print (add2 3))
 
     (def make_adder (do [x] [
-        (do [y] [
+        (return (do [y] [
             (return (+ x y))
-        ])
+        ]))
     ]))
 
     (def add4 (make_adder 4))

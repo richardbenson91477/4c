@@ -6,7 +6,7 @@
 
         (set j 4)
         (while (> j 0) [
-            (print$ (str-from (char-from (+ j 64)) 'nil))
+            (print (str-from (char-from (+ j 64)) 'nil))
             ] [(set j (- j 1))]
         )
 
