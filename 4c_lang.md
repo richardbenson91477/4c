@@ -48,7 +48,7 @@ Where _list-item_ is any of the follwing:
   * a constant
   * a variable name
 
-Note: list elements are left _unevaluated_ until needed, e.g. (do [x] ...) does not _automatically_ become (do [3] ...) when x is set to 3.
+Note: list elements are left _unevaluated_ until required, e.g. (do [x] ...) does not _automatically_ become (do [3] ...) when x is set to 3. (Or ever, in this case, since _do_ requires variable names)
 
 ### Constants
 Number constants (type ':number):
@@ -77,37 +77,49 @@ String constants (type ':string):
 Variable names describe their own types:  
 
   * **\_**function-var  
-        Names beginning with underscore (_) have type ':function.
+        Names beginning with underscore (\_) have type ':function.  
+        Example: _main
 
   * number-var  
-        Otherwise plain names have type ':number by default.
+        Otherwise plain names have type ':number by default.  
+        Example: x
 
   * number-array-var**.**  
-        Names ending with period (.) have type ':number-array  .
+        Names ending with period (.) have type ':number-array.  
+        Example: square-roots.
 
   * boolean-var**^**  
-        Names ending with carat (^) have type ':boolean.
+        Names ending with carat (^) have type ':boolean.  
+        Example: full-screen^
 
   * string-var**$**  
-        Names ending with a dollar sign ($) have type ':string.
+        Names ending with a dollar sign ($) have type ':string.  
+        Example: error-msg$
 
   * **:**type-name  
-        Names beginning with a colon (:) have their own type.
+        Names beginning with a colon (:) have their own type (see _def-type_).  
+        Example: :users
 
   * **:**type-name**:**instance-name  
-        Names beginning with :type: have the type :type.
+        Names beginning with :type-name-: have the type :type-name.  
+        Example: :users:hans
 
   * **:**type-name**:**instance-name**.**var-instance  
-        Names beginning with :type-name:instance-name. are variables belonging to _:instance-name_ of type _:type-name_ and have their own type determined by the name _var-instance_.
+        Names beginning with :type-name:instance-name. are variables belonging to _:instance-name_ of type _:type-name_ and have their own type determined by the name _var-instance_.  
+        Example: :users:hans:full-name^
 
 ## Built-in functions
 (**def** _var-name_ _value_)  
-description: reference _value_ with the variable _var-name_  
-returns: 'nil  
+Description: reference _value_ with the variable _var-name_  
+Returns: 'nil  
+Example: (def \_main (do [] [(print ("Hello, world!" + 'nl))] 0))  
+gives the ':function returned by _do_ the label \_main
  
 (**set** _var-name_ _value_)  
-description: assign _value_ to the variable referenced by _var-name_  
-returns: 'nil  
+Description: assign _value_ to the variable referenced by _var-name_  
+Returns: 'nil  
+Example: (set two-times-two (\* 2 2))  
+gives the variable y-times-two the value 4  
 
 (def-type :type-name [var-list]) -> 'nil  
 (do [arg-list] [fn-list] default-return-value) -> ':function instance  

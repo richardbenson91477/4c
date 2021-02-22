@@ -69,7 +69,7 @@
 </ul>
 
 
-<p>Note: list elements are left <em>unevaluated</em> until needed, e.g. (do [x] &hellip;) does not <em>automatically</em> become (do [3] &hellip;) when x is set to 3.</p>
+<p>Note: list elements are left <em>unevaluated</em> until required, e.g. (do [x] &hellip;) does not <em>automatically</em> become (do [3] &hellip;) when x is set to 3. (Or ever, in this case, since <em>do</em> requires variable names)</p>
 
 <h3>Constants</h3>
 
@@ -109,33 +109,45 @@
 
 <ul>
 <li><p><strong>_</strong>function-var<br/>
-    Names beginning with underscore (_) have type &lsquo;:function.</p></li>
+    Names beginning with underscore (_) have type &lsquo;:function.<br/>
+    Example: _main</p></li>
 <li><p>number-var<br/>
-    Otherwise plain names have type &lsquo;:number by default.</p></li>
+    Otherwise plain names have type &lsquo;:number by default.<br/>
+    Example: x</p></li>
 <li><p>number-array-var<strong>.</strong><br/>
-    Names ending with period (.) have type &lsquo;:number-array  .</p></li>
+    Names ending with period (.) have type &lsquo;:number-array.<br/>
+    Example: square-roots.</p></li>
 <li><p>boolean-var<strong>^</strong><br/>
-    Names ending with carat (^) have type &lsquo;:boolean.</p></li>
+    Names ending with carat (^) have type &lsquo;:boolean.<br/>
+    Example: full-screen^</p></li>
 <li><p>string-var<strong>$</strong><br/>
-    Names ending with a dollar sign ($) have type &lsquo;:string.</p></li>
+    Names ending with a dollar sign ($) have type &lsquo;:string.<br/>
+    Example: error-msg$</p></li>
 <li><p><strong>:</strong>type-name<br/>
-    Names beginning with a colon (:) have their own type.</p></li>
+    Names beginning with a colon (:) have their own type (see <em>def-type</em>).<br/>
+    Example: :users</p></li>
 <li><p><strong>:</strong>type-name<strong>:</strong>instance-name<br/>
-    Names beginning with :type: have the type :type.</p></li>
+    Names beginning with :type-name-: have the type :type-name.<br/>
+    Example: :users:hans</p></li>
 <li><p><strong>:</strong>type-name<strong>:</strong>instance-name<strong>.</strong>var-instance<br/>
-    Names beginning with :type-name:instance-name. are variables belonging to <em>:instance-name</em> of type <em>:type-name</em> and have their own type determined by the name <em>var-instance</em>.</p></li>
+    Names beginning with :type-name:instance-name. are variables belonging to <em>:instance-name</em> of type <em>:type-name</em> and have their own type determined by the name <em>var-instance</em>.<br/>
+    Example: :users:hans:full-name^</p></li>
 </ul>
 
 
 <h2>Built-in functions</h2>
 
 <p>(<strong>def</strong> <em>var-name</em> <em>value</em>)<br/>
-description: reference <em>value</em> with the variable <em>var-name</em><br/>
-returns: &lsquo;nil</p>
+Description: reference <em>value</em> with the variable <em>var-name</em><br/>
+Returns: &lsquo;nil<br/>
+Example: (def _main (do [] [(print (&ldquo;Hello, world!&rdquo; + 'nl))] 0))<br/>
+gives the &rsquo;:function returned by <em>do</em> the label _main</p>
 
 <p>(<strong>set</strong> <em>var-name</em> <em>value</em>)<br/>
-description: assign <em>value</em> to the variable referenced by <em>var-name</em><br/>
-returns: &lsquo;nil</p>
+Description: assign <em>value</em> to the variable referenced by <em>var-name</em><br/>
+Returns: &lsquo;nil<br/>
+Example: (set two-times-two (* 2 2))<br/>
+gives the variable y-times-two the value 4</p>
 
 <p>(def-type :type-name [var-list]) -> &lsquo;nil<br/>
 (do [arg-list] [fn-list] default-return-value) -> &rsquo;:function instance<br/>
