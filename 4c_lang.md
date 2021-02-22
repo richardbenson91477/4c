@@ -68,19 +68,26 @@ Variable names describe their own types:
 
   * **\_**function-var  
         Names beginning with underscore (_) have type ':function
-  * number-array-var**.**
+
+  * number-array-var**.**  
         Names ending with period (.) have type ':number-array  
-  * boolean-var**^** (type ':boolean)  
+
+  * boolean-var**^**  
         Names ending with carat (^) have type ':boolean
-  * string-var**$** (type ':string)  
+
+  * string-var**$**  
         Names ending with a dollar sign ($) have type ':string
+
   * **:**type-name  
         Names beginning with a colon (:) have user defined type
+
   * **:**type-name**:**instance-name  
         Names beginning with :type: have type :type:
-  * **:**type-name**:**instance-name**.**var-instance
+
+  * **:**type-name**:**instance-name**.**var-instance  
         Names beginning with :type:instance. belong to _instance_ of type _type-name_ and have their type determined by _var-instance_
-  * number-var
+
+  * number-var  
         Otherwise plain names have type ':number by default
 
 ## Built-in functions
