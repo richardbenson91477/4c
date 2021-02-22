@@ -1,40 +1,82 @@
-<h1>4c (foresee) programming language</h1>
+<h1>4c programming language</h1>
 
 <p><em>Foresee: To see beforehand</em></p>
 
 <h2>Overview</h2>
 
-<p><strong>4c</strong> is an imperitive (not functional) language with a LISP-like syntax<br/>
-<strong>4cc</strong> (the 4c compiler) compiles 4c code to GNU assembly (GAS)</p>
+<p><strong>4c</strong> is an imperitive <em>(as opposed to functional)</em> programming language with a LISP-like syntax.<br/>
+<strong>4cc</strong> (the 4c compiler) compiles 4c code to GNU assembly (GAS).</p>
+
+<p>This document describes the 4c language; its syntax and standard built-in types, functions, constants, etc.</p>
+
+<h3>Rationale</h3>
+
+<p>Languages that intend to improve on C while filling the same niche are currently a dime-a-dozen. I believe this is a good thing. Let&rsquo;s add another.</p>
+
+<h3>Potential benefits</h3>
+
+<ul>
+<li>Variable names specify their own types.</li>
+<li>Lisp-like syntax rather than the standard &ldquo;Algol family&rdquo; syntax.</li>
+</ul>
+
+
+<h3>Potential down-sides</h3>
+
+<ul>
+<li>Variable names specify their own types.</li>
+<li>Lisp-like syntax rather than the standard &ldquo;Algol family&rdquo; syntax.</li>
+</ul>
+
 
 <h2>Syntax</h2>
 
 <h3>Basic program structure</h3>
 
-<p>; comments follow semicolons</p>
+<p>; <strong>Comments</strong> follow semicolons</p>
 
-<p>(function-name <em>arg_1</em> .. <em>arg_n</em>)</p>
+<p><strong>Function calls</strong> take the following form:<br/>
+(function-name <em>arg_1</em> .. <em>arg_n</em>)</p>
 
-<p>where <em>function-name</em> is a built-in function or a variable of type &lsquo;function <br/>
-and <em>arg</em> is any of the following:</p>
+<p>Where</p>
 
 <ul>
-<li>an inner function to return a result to the outer function, e.g. (+ <strong>(+ 1 1)</strong> 2)</li>
-<li>a constant</li>
+<li><em>function-name</em> names a built-in function or a variable of type &lsquo;function</li>
+<li><p><em>arg</em> is any of the following:</p>
+
+<ul>
+<li>an inner function call which returns a result to its outer function, e.g. (+ <strong>(+ 1 1)</strong> 2)</li>
+<li>a constant (e.g. 3, &ldquo;Hello&rdquo;, &lsquo;nl)</li>
 <li>a variable name</li>
+</ul>
+</li>
 </ul>
 
 
-<p>[list-item_1 .. list-item_n]</p>
+<p><strong>Lists</strong> of values take the following form:<br/>
+[<em>list-item_1 .. </em>list-item_n]</p>
+
+<p>Where <em>list-item</em> is any of the follwing:</p>
+
+<ul>
+<li>thing1</li>
+<li>thing2</li>
+<li>FIXME</li>
+</ul>
+
 
 <h3>Constants</h3>
 
 <p>-9..9<strong>.</strong>9..9 .. 9..9<strong>.</strong>9..9<br/>
 &ldquo;string constant&rdquo;</p>
 
-<h3>Identifiers</h3>
+<h3>Built-in constants</h3>
 
-<p>TODO: Gory academic details</p>
+<p>&lsquo;nil (empty type)<br/>
+'true ('boolean with value set to true)<br/>
+'false ('boolean with value set to false)<br/>
+'spc (blank-space string)<br/>
+'nl (newline string)</p>
 
 <h3>Built-in type names</h3>
 
@@ -43,14 +85,6 @@ and <em>arg</em> is any of the following:</p>
 'number-array<br/>
 'string <br/>
 'boolean</p>
-
-<h3>Built-in constants</h3>
-
-<p>&lsquo;nil<br/>
-'true<br/>
-'false<br/>
-'spc<br/>
-'nl</p>
 
 <h3>Variables</h3>
 
