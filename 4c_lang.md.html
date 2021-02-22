@@ -5,13 +5,17 @@
 <h2>Overview</h2>
 
 <p><strong>4c</strong> is an imperitive <em>(as opposed to functional)</em> programming language with a LISP-like syntax.<br/>
-<strong>4cc</strong> (the 4c compiler) compiles 4c code to GNU assembly (GAS).</p>
+4c is designed to facilitate compilation to native machine code, rather than interpretable byte-code.</p>
+
+<p><strong>4cc</strong> (the reference 4c compiler) compiles 4c code to GNU assembly (GAS).</p>
 
 <p>This document describes the 4c language; its syntax and standard built-in types, functions, constants, etc.</p>
 
 <h3>Rationale</h3>
 
-<p>Languages that intend to improve on C while filling the same niche are currently a dime-a-dozen. I believe this is a good thing. Let&rsquo;s add another.</p>
+<p>Languages that intend to improve on C while filling the same niche are currently a dime-a-dozen.</p>
+
+<p>I believe this is a good thing. Let&rsquo;s add another.</p>
 
 <h3>Potential benefits</h3>
 
@@ -21,7 +25,7 @@
 </ul>
 
 
-<h3>Potential down-sides</h3>
+<h3>Potential drawbacks</h3>
 
 <ul>
 <li>Variable names specify their own types.</li>
@@ -41,11 +45,11 @@
 <p>Where</p>
 
 <ul>
-<li><em>function-name</em> names a built-in function or a variable of type &lsquo;:function</li>
+<li><em>function-name</em> specifies a built-in function or a variable of type &lsquo;:function</li>
 <li><p><em>arg</em> is any of the following:</p>
 
 <ul>
-<li>an inner function call which returns a result to its outer function, e.g. (+ <strong>(+ 1 1)</strong> 2)</li>
+<li>an <em>inner</em> function call which returns a result to its <em>outer</em> function, e.g. (+ <strong>(+ 1 1)</strong> 2)</li>
 <li>a constant (e.g. 3, &ldquo;Hello&rdquo;, &lsquo;nl)</li>
 <li>a variable name</li>
 </ul>
@@ -59,17 +63,29 @@
 <p>Where <em>list-item</em> is any of the follwing:</p>
 
 <ul>
-<li>function calls</li>
-<li>variable names</li>
-<li>FIXME</li>
+<li>a function call</li>
+<li>a constant</li>
+<li>a variable name</li>
 </ul>
 
 
+<p>Note: list elements are left <em>unevaluated</em> until needed, e.g. (do [x] &hellip;) does not <em>automatically</em> become (do [3] &hellip;) when x is set to 3.</p>
+
 <h3>Constants</h3>
 
-<p>Number
--9..9<strong>.</strong>9..9 .. 9..9<strong>.</strong>9..9<br/>
-&ldquo;string constant&rdquo;</p>
+<p>Number constants (type &lsquo;:number):</p>
+
+<ul>
+<li> -9..9<strong>.</strong>9..9 .. 0 .. 9..9<strong>.</strong>9..9</li>
+</ul>
+
+
+<p>String constants (type &lsquo;:string):</p>
+
+<ul>
+<li> &ldquo;This is a string&rdquo;</li>
+</ul>
+
 
 <h3>Built-in constants</h3>
 
@@ -84,8 +100,8 @@
 <p>&lsquo;:function<br/>
 &rsquo;:number<br/>
 &lsquo;:number-array<br/>
-&rsquo;:string<br/>
-&lsquo;:boolean</p>
+&rsquo;:boolean<br/>
+&lsquo;:string</p>
 
 <h3>Variables</h3>
 
@@ -93,21 +109,21 @@
 
 <ul>
 <li><p><strong>_</strong>function-var<br/>
-    Names beginning with underscore (_) have type &lsquo;:function</p></li>
-<li><p>number-array-var<strong>.</strong><br/>
-    Names ending with period (.) have type &lsquo;:number-array</p></li>
-<li><p>boolean-var<strong>^</strong><br/>
-    Names ending with carat (^) have type &lsquo;:boolean</p></li>
-<li><p>string-var<strong>$</strong><br/>
-    Names ending with a dollar sign ($) have type &lsquo;:string</p></li>
-<li><p><strong>:</strong>type-name<br/>
-    Names beginning with a colon (:) have user defined type</p></li>
-<li><p><strong>:</strong>type-name<strong>:</strong>instance-name<br/>
-    Names beginning with :type: have type :type:</p></li>
-<li><p><strong>:</strong>type-name<strong>:</strong>instance-name<strong>.</strong>var-instance<br/>
-    Names beginning with :type:instance. belong to <em>instance</em> of type <em>type-name</em> and have their type determined by <em>var-instance</em></p></li>
+    Names beginning with underscore (_) have type &lsquo;:function.</p></li>
 <li><p>number-var<br/>
-    Otherwise plain names have type &lsquo;:number by default</p></li>
+    Otherwise plain names have type &lsquo;:number by default.</p></li>
+<li><p>number-array-var<strong>.</strong><br/>
+    Names ending with period (.) have type &lsquo;:number-array  .</p></li>
+<li><p>boolean-var<strong>^</strong><br/>
+    Names ending with carat (^) have type &lsquo;:boolean.</p></li>
+<li><p>string-var<strong>$</strong><br/>
+    Names ending with a dollar sign ($) have type &lsquo;:string.</p></li>
+<li><p><strong>:</strong>type-name<br/>
+    Names beginning with a colon (:) have their own type.</p></li>
+<li><p><strong>:</strong>type-name<strong>:</strong>instance-name<br/>
+    Names beginning with :type: have the type :type.</p></li>
+<li><p><strong>:</strong>type-name<strong>:</strong>instance-name<strong>.</strong>var-instance<br/>
+    Names beginning with :type-name:instance-name. are variables belonging to <em>:instance-name</em> of type <em>:type-name</em> and have their own type determined by the name <em>var-instance</em>.</p></li>
 </ul>
 
 

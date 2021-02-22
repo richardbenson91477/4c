@@ -4,18 +4,22 @@ _Foresee: To see beforehand_
 
 ## Overview
 **4c** is an imperitive _(as opposed to functional)_ programming language with a LISP-like syntax.  
-**4cc** (the 4c compiler) compiles 4c code to GNU assembly (GAS).  
+4c is designed to facilitate compilation to native machine code, rather than interpretable byte-code. 
+
+**4cc** (the reference 4c compiler) compiles 4c code to GNU assembly (GAS).
 
 This document describes the 4c language; its syntax and standard built-in types, functions, constants, etc.
 
 ### Rationale
-Languages that intend to improve on C while filling the same niche are currently a dime-a-dozen. I believe this is a good thing. Let's add another.
+Languages that intend to improve on C while filling the same niche are currently a dime-a-dozen.
+
+I believe this is a good thing. Let's add another.
 
 ### Potential benefits
   * Variable names specify their own types.  
   * Lisp-like syntax rather than the standard "Algol family" syntax.  
 
-### Potential down-sides
+### Potential drawbacks
   * Variable names specify their own types.  
   * Lisp-like syntax rather than the standard "Algol family" syntax.  
 
@@ -28,10 +32,10 @@ Languages that intend to improve on C while filling the same niche are currently
  
 Where  
 
-  * _function-name_ names a built-in function or a variable of type ':function
+  * _function-name_ specifies a built-in function or a variable of type ':function
   * _arg_ is any of the following:
 
-    -   an inner function call which returns a result to its outer function, e.g. (+ **(+ 1 1)** 2)
+    -   an _inner_ function call which returns a result to its _outer_ function, e.g. (+ **(+ 1 1)** 2)
     -   a constant (e.g. 3, "Hello", 'nl)
     -   a variable name
 
@@ -40,14 +44,20 @@ Where
 
 Where _list-item_ is any of the follwing:  
 
-  * function calls
-  * variable names
-  * FIXME
+  * a function call
+  * a constant
+  * a variable name
+
+Note: list elements are left _unevaluated_ until needed, e.g. (do [x] ...) does not _automatically_ become (do [3] ...) when x is set to 3.
 
 ### Constants
-Number
--9..9**.**9..9 .. 9..9**.**9..9  
-"string constant"
+Number constants (type ':number):
+
+  *  -9..9**.**9..9 .. 0 .. 9..9**.**9..9
+
+String constants (type ':string):
+
+  *  "This is a string"
 
 ### Built-in constants
 'nil (empty value)  
@@ -60,35 +70,35 @@ Number
 ':function  
 ':number  
 ':number-array  
-':string  
 ':boolean  
+':string  
 
 ### Variables
 Variable names describe their own types:  
 
   * **\_**function-var  
-        Names beginning with underscore (_) have type ':function
-
-  * number-array-var**.**  
-        Names ending with period (.) have type ':number-array  
-
-  * boolean-var**^**  
-        Names ending with carat (^) have type ':boolean
-
-  * string-var**$**  
-        Names ending with a dollar sign ($) have type ':string
-
-  * **:**type-name  
-        Names beginning with a colon (:) have user defined type
-
-  * **:**type-name**:**instance-name  
-        Names beginning with :type: have type :type:
-
-  * **:**type-name**:**instance-name**.**var-instance  
-        Names beginning with :type:instance. belong to _instance_ of type _type-name_ and have their type determined by _var-instance_
+        Names beginning with underscore (_) have type ':function.
 
   * number-var  
-        Otherwise plain names have type ':number by default
+        Otherwise plain names have type ':number by default.
+
+  * number-array-var**.**  
+        Names ending with period (.) have type ':number-array  .
+
+  * boolean-var**^**  
+        Names ending with carat (^) have type ':boolean.
+
+  * string-var**$**  
+        Names ending with a dollar sign ($) have type ':string.
+
+  * **:**type-name  
+        Names beginning with a colon (:) have their own type.
+
+  * **:**type-name**:**instance-name  
+        Names beginning with :type: have the type :type.
+
+  * **:**type-name**:**instance-name**.**var-instance  
+        Names beginning with :type-name:instance-name. are variables belonging to _:instance-name_ of type _:type-name_ and have their own type determined by the name _var-instance_.
 
 ## Built-in functions
 (**def** _var-name_ _value_)  
