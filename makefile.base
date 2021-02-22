@@ -1,0 +1,3 @@
+PREFIX = /usr/local
+FOURC_SHARE = $(PREFIX)/share/4c
+

@@ -1,4 +1,6 @@
-4c programming language
+-- early draft --
+
+4c programming language - version 1.0 specification
 ===
 _Foresee: To see beforehand_
 
