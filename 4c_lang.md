@@ -119,7 +119,7 @@ gives the ':function returned by _do_ the label \_main
 Description: assign _value_ to the variable referenced by _var-name_  
 Returns: 'nil  
 Example: (set two-times-two (\* 2 2))  
-gives the variable y-times-two the value 4  
+gives the variable two-times-two the value 4  
 
 (def-type :type-name [var-list]) -> 'nil  
 (do [arg-list] [fn-list] default-return-value) -> ':function instance  

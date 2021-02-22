@@ -6,16 +6,16 @@
 
     (print (_add2 3))
 
-    (def _make_adder (do [x] [
+    (def _make-adder (do [x] [
         (return (do [y] [
             (return (+ x y))
         ]))
     ]))
 
-    (def _add4 (_make_adder 4))
+    (def _add4 (_make-adder 4))
     (print (_add4 3))
 
-    (print ((_make_adder 5) 2))
+    (print ((_make-adder 5) 2))
   ] 0)
 )
 
