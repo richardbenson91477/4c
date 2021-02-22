@@ -5,7 +5,7 @@
     (if (!= x 0) [
         (print "x is nonzero")
         (return 0)
-      ][
+      ] [
         (print "x is zero")
         (return -1)
       ])

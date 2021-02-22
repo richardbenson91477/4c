@@ -10,11 +10,11 @@
             ] [(set j (- j 1))]
         )
 
-        (print 'nl$)
+        (print 'nl)
       ] [(set i (- i 1))]
     )
 
-    (print 'nl$)
+    (print 'nl)
   ] 0)
 )
 

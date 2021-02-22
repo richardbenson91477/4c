@@ -41,7 +41,7 @@
 <p>Where</p>
 
 <ul>
-<li><em>function-name</em> names a built-in function or a variable of type &lsquo;function</li>
+<li><em>function-name</em> names a built-in function or a variable of type &lsquo;:function</li>
 <li><p><em>arg</em> is any of the following:</p>
 
 <ul>
@@ -59,43 +59,57 @@
 <p>Where <em>list-item</em> is any of the follwing:</p>
 
 <ul>
-<li>thing1</li>
-<li>thing2</li>
+<li>function calls</li>
+<li>variable names</li>
 <li>FIXME</li>
 </ul>
 
 
 <h3>Constants</h3>
 
-<p>-9..9<strong>.</strong>9..9 .. 9..9<strong>.</strong>9..9<br/>
+<p>Number
+-9..9<strong>.</strong>9..9 .. 9..9<strong>.</strong>9..9<br/>
 &ldquo;string constant&rdquo;</p>
 
 <h3>Built-in constants</h3>
 
-<p>&lsquo;nil (empty type)<br/>
-'true ('boolean with value set to true)<br/>
-'false ('boolean with value set to false)<br/>
-'spc (blank-space string)<br/>
-'nl (newline string)</p>
+<p>&lsquo;nil (empty value)<br/>
+'true (&rsquo;:boolean true)<br/>
+&lsquo;false (&rsquo;:boolean false)<br/>
+&lsquo;spc (blank-space &rsquo;:string)<br/>
+&lsquo;nl (newline &rsquo;:string)</p>
 
 <h3>Built-in type names</h3>
 
-<p>&lsquo;function<br/>
-'number<br/>
-'number-array<br/>
-'string <br/>
-'boolean</p>
+<p>&lsquo;:function<br/>
+&rsquo;:number<br/>
+&lsquo;:number-array<br/>
+&rsquo;:string<br/>
+&lsquo;:boolean</p>
 
 <h3>Variables</h3>
 
-<p>_function-var<br/>
-number-var<br/>
-number-array-var.<br/>
-boolean-var^<br/>
-string-var$<br/>
-:type-name<br/>
-:type-name:instance-name<br/>
-:type-name:instance-name.var-instance</p>
+<p>Variable names describe their own types:</p>
+
+<ul>
+<li><strong>_</strong>function-var<br/>
+    Names beginning with underscore (_) have type &lsquo;:function</li>
+<li>number-array-var<strong>.</strong>
+    Names ending with period (.) have type &lsquo;:number-array</li>
+<li>boolean-var<strong>^</strong> (type &lsquo;:boolean)<br/>
+    Names ending with carat (^) have type &rsquo;:boolean</li>
+<li>string-var<strong>$</strong> (type &lsquo;:string)<br/>
+    Names ending with a dollar sign ($) have type &rsquo;:string</li>
+<li><strong>:</strong>type-name<br/>
+    Names beginning with a colon (:) have user defined type</li>
+<li><strong>:</strong>type-name<strong>:</strong>instance-name<br/>
+    Names beginning with :type: have type :type:</li>
+<li><strong>:</strong>type-name<strong>:</strong>instance-name<strong>.</strong>var-instance
+    Names beginning with :type:instance. belong to <em>instance</em> of type <em>type-name</em> and have their type determined by <em>var-instance</em></li>
+<li>number-var
+    Otherwise plain names have type &lsquo;:number by default</li>
+</ul>
+
 
 <h2>Built-in functions</h2>
 
@@ -108,62 +122,62 @@ description: assign <em>value</em> to the variable referenced by <em>var-name</e
 returns: &lsquo;nil</p>
 
 <p>(def-type :type-name [var-list]) -> &lsquo;nil<br/>
-(do [arg-list] [fn-list] default-return-value) -> 'function instance<br/>
-(return value-for-do) -> 'nil<br/>
-(if ('function->'boolean) [true-fn-list] [false-fn-list]) -> 'nil<br/>
-(while ('function->'boolean) [fn-list] [per-loop fn-list]) -> 'nil<br/>
+(do [arg-list] [fn-list] default-return-value) -> &rsquo;:function instance<br/>
+(return value-for-do) -> &lsquo;nil<br/>
+(if (&rsquo;:function->&lsquo;:boolean) [true-fn-list] [false-fn-list]) -> 'nil<br/>
+(while (&rsquo;:function->&lsquo;:boolean) [fn-list] [per-loop fn-list]) -> 'nil<br/>
 (print value) -> 'nil<br/>
 (input) -> 'string instance<br/>
-(and 'boolean 'boolean) -> 'boolean<br/>
-(or 'boolean 'boolean) -> 'boolean<br/>
-(not 'boolean) -> 'boolean<br/>
-(+ num num) -> 'number<br/>
-(- num num) -> 'number<br/>
-(* num num) -> 'number<br/>
-(/ num num) -> 'number<br/>
-(% num num) -> 'number<br/>
-(= num num) -> 'boolean<br/>
-(!= num num) -> 'boolean<br/>
-(> num num) -> 'boolean<br/>
-(&lt; num num) -> 'boolean<br/>
-(&lt;= num num) -> 'boolean<br/>
-(>= num num) -> 'boolean<br/>
-(str-copy target-string-var source-string) -> 'boolean<br/>
+(and &rsquo;:boolean &lsquo;:boolean) -> &rsquo;:boolean<br/>
+(or &lsquo;:boolean &rsquo;:boolean) -> &lsquo;:boolean<br/>
+(not &rsquo;:boolean) -> &lsquo;:boolean<br/>
+(+ num num) -> &rsquo;:number<br/>
+(- num num) -> &lsquo;:number<br/>
+(* num num) -> &rsquo;:number<br/>
+(/ num num) -> &lsquo;:number<br/>
+(% num num) -> &rsquo;:number<br/>
+(= num num) -> &lsquo;:boolean<br/>
+(!= num num) -> &rsquo;:boolean<br/>
+(> num num) -> &lsquo;:boolean<br/>
+(&lt; num num) -> &rsquo;:boolean<br/>
+(&lt;= num num) -> &lsquo;:boolean<br/>
+(>= num num) -> &rsquo;:boolean<br/>
+(str-copy target-string-var source-string) -> &lsquo;:boolean<br/>
 (str-from char-number) -> 'string<br/>
 (str-add string string) -> 'string<br/>
-(str-cmp string string) -> 'boolean<br/>
-(<strong>new</strong> :type var [extra-args]) -> 'boolean<br/>
+(str-cmp string string) -> &rsquo;:boolean<br/>
+(<strong>new</strong> :type var [extra-args]) -> &lsquo;:boolean<br/>
 (def :type._new (do [:type:this extra-param-vars]<br/>
   [alloc/init :type:this.vars]<br/>
 ))</p>
 
-<p>(<strong>del</strong> :type var [extra-args]) -> &lsquo;boolean<br/>
+<p>(<strong>del</strong> :type var [extra-args]) -> &lsquo;:boolean<br/>
 (def :type._del (do [:type:this extra-param-vars]<br/>
   [dealloc/deinit :type:this.vars]<br/>
 ))</p>
 
 <h2>Internals</h2>
 
-<h3>&lsquo;function type</h3>
+<h3>&lsquo;:function type</h3>
 
 <p>function name<br/>
 function argument names and types<br/>
 memory label</p>
 
-<h3>&lsquo;number type</h3>
+<h3>&lsquo;:number type</h3>
 
 <p>TODO RIGHT</p>
 
-<h3>&lsquo;number-array type</h3>
+<h3>&lsquo;:number-array type</h3>
 
 <p>TODO</p>
 
-<h3>&lsquo;string type</h3>
+<h3>&lsquo;:string type</h3>
 
 <p>memory address (if dynamic) or memory label (if static)
 length in bytes</p>
 
-<h3>&lsquo;boolean type</h3>
+<h3>&lsquo;:boolean type</h3>
 
 <p>var name<br/>
 truth flag</p>
