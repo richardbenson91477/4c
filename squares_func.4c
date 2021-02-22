@@ -1,10 +1,10 @@
 
-(def sqr (do [y] [(return (* y y))]))
+(def _sqr (do [y] [(return (* y y))]))
 
-(def main (do [] [
+(def _main (do [] [
     (set x 1)
     (while (<= x 10) [
-        (print (sqr x))
+        (print (_sqr x))
       ] [(set x (+ x 1))]
     )
   0])

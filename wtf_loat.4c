@@ -1,10 +1,10 @@
 ; NOTE: this is a compiler test
 
-(main (do [] [
+(def _main (do [] [
     (set f 0)
     (while (<= f 1) [
         (print f)
-        ] [(set f (+ f 0.1))]
+      ] [(set f (+ f 0.1))]
     )
   ] 0)
 )

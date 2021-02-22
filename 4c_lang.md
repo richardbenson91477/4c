@@ -7,8 +7,17 @@ _Foresee: To see beforehand_
 **4cc** (the 4c compiler) compiles 4c code to GNU assembly (GAS)
 
 ## Syntax
-### Basics
+### Basic program structure
 ; comments follow semicolons
+
+(function-name arg\_1 .. arg\_n)  
+where _function-name_ is a built-in function or a variable of type 'function   
+and _arg_ is any of the following
+* an inner function to return a result to the outer function, e.g. (+ (+ 1 1) 2)
+* a constant
+* a variable name
+
+[list-item\_1 .. list-item\_n]  
 ### Constants
 -9..9**.**9..9 .. 9..9**.**9..9  
 "string constant"
@@ -24,9 +33,10 @@ TODO: Gory academic details
 'nil  
 'true  
 'false  
-'spc$  
-'nl$  
+'spc  
+'nl  
 ### Variables
+\_function-var  
 number-var  
 number-array-var.  
 boolean-var^  
@@ -34,9 +44,6 @@ string-var$
 :type-name  
 :type-name:instance-name  
 :type-name:instance-name.var-instance  
-### Program structure
-(function-name arg_1 .. arg_n)  
-[list-item_1 .. list-item_n]  
 
 ## Built-in functions
 (**def** _var-name_ _value_)  
@@ -54,29 +61,34 @@ returns: 'nil
 (while ('function->'boolean) [fn-list] [per-loop fn-list]) -> 'nil  
 (print value) -> 'nil  
 (input) -> 'string instance  
-(and bool bool) ->   
-(or bool bool) -> bool  
-(not bool) -> bool
-(+ num num) -> num  
-(- num num) -> num  
-(* num num) -> num  
-(/ num num) -> num  
-(% num num) -> num  
-(= num num) -> bool
-(!= num num) -> bool  
-(> num num) -> bool  
-(< num num) -> bool  
-(<= num num) -> bool  
-(>= num num) -> bool  
-(str-copy target-string-var source-string) -> bool  
-(str-from char-number) -> string  
-(str-add string string) -> string  
-(str-cmp string string) -> bool  
-(new :type var [extra-args]) -> bool  
-(del :type var [extra-args]) -> bool  
+(and bool bool) -> 'boolean  
+(or bool bool) -> 'boolean  
+(not bool) -> 'boolean  
+(+ num num) -> 'number  
+(- num num) -> 'number  
+(* num num) -> 'number  
+(/ num num) -> 'number  
+(% num num) -> 'number  
+(= num num) -> 'boolean  
+(!= num num) -> 'boolean  
+(> num num) -> 'boolean  
+(< num num) -> 'boolean  
+(<= num num) -> 'boolean  
+(>= num num) -> 'boolean  
+(str-copy target-string-var source-string) -> 'boolean  
+(str-from char-number) -> 'string  
+(str-add string string) -> 'string  
+(str-cmp string string) -> 'boolean  
+(new :type var [extra-args]) -> 'boolean  
+(del :type var [extra-args]) -> 'boolean  
 
-(def :type.new (do [:type:this extra-param-vars] [alloc/init :type:this.vars]))  
-(def :type.del (do [:type:this extra-param-vars] [dealloc/deinit :type:this.vars]))  
+(def :type.\_new (do [:type:this extra-param-vars]  
+  [alloc/init :type:this.vars]  
+))  
+  
+(def :type.\_del (do [:type:this extra-param-vars]  
+  [dealloc/deinit :type:this.vars]  
+))  
 
 ## Internals
 ### 'function type

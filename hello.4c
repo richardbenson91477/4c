@@ -1,7 +1,7 @@
 ; comments look like this
 
-(def main (do [] [
+(def _main (do [] [
     (print "Hello, world!\n")
-    ] 0)
+  ] 0)
 )
 

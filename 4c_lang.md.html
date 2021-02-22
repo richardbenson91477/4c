@@ -9,9 +9,13 @@
 
 <h2>Syntax</h2>
 
-<h3>Basics</h3>
+<h3>Basic program structure</h3>
 
 <p>; comments follow semicolons</p>
+
+<p>(function-name arg_1 .. arg_n)</p>
+
+<p>[list-item_1 .. list-item_n]</p>
 
 <h3>Constants</h3>
 
@@ -35,23 +39,19 @@
 <p>&lsquo;nil<br/>
 'true<br/>
 'false<br/>
-'spc$<br/>
-'nl$</p>
+'spc<br/>
+'nl</p>
 
 <h3>Variables</h3>
 
-<p>number-var<br/>
+<p>_function-var<br/>
+number-var<br/>
 number-array-var.<br/>
 boolean-var^<br/>
 string-var$<br/>
 :type-name<br/>
 :type-name:instance-name<br/>
 :type-name:instance-name.var-instance</p>
-
-<h3>Program structure</h3>
-
-<p>(function-name arg_1 .. arg_n)<br/>
-[list-item_1 .. list-item_n]</p>
 
 <h2>Built-in functions</h2>
 
@@ -70,29 +70,34 @@ returns: &lsquo;nil</p>
 (while ('function->'boolean) [fn-list] [per-loop fn-list]) -> 'nil<br/>
 (print value) -> 'nil<br/>
 (input) -> 'string instance<br/>
-(and bool bool) -> <br/>
-(or bool bool) -> bool<br/>
-(not bool) -> bool
-(+ num num) -> num<br/>
-(- num num) -> num<br/>
-(* num num) -> num<br/>
-(/ num num) -> num<br/>
-(% num num) -> num<br/>
-(= num num) -> bool
-(!= num num) -> bool<br/>
-(> num num) -> bool<br/>
-(&lt; num num) -> bool<br/>
-(&lt;= num num) -> bool<br/>
-(>= num num) -> bool<br/>
-(str-copy target-string-var source-string) -> bool<br/>
-(str-from char-number) -> string<br/>
-(str-add string string) -> string<br/>
-(str-cmp string string) -> bool<br/>
-(new :type var [extra-args]) -> bool<br/>
-(del :type var [extra-args]) -> bool</p>
+(and bool bool) -> 'boolean<br/>
+(or bool bool) -> 'boolean<br/>
+(not bool) -> 'boolean<br/>
+(+ num num) -> 'number<br/>
+(- num num) -> 'number<br/>
+(* num num) -> 'number<br/>
+(/ num num) -> 'number<br/>
+(% num num) -> 'number<br/>
+(= num num) -> 'boolean<br/>
+(!= num num) -> 'boolean<br/>
+(> num num) -> 'boolean<br/>
+(&lt; num num) -> 'boolean<br/>
+(&lt;= num num) -> 'boolean<br/>
+(>= num num) -> 'boolean<br/>
+(str-copy target-string-var source-string) -> 'boolean<br/>
+(str-from char-number) -> 'string<br/>
+(str-add string string) -> 'string<br/>
+(str-cmp string string) -> 'boolean<br/>
+(new :type var [extra-args]) -> 'boolean<br/>
+(del :type var [extra-args]) -> 'boolean</p>
 
-<p>(def :type.new (do [:type:this extra-param-vars] [alloc/init :type:this.vars]))<br/>
-(def :type.del (do [:type:this extra-param-vars] [dealloc/deinit :type:this.vars]))</p>
+<p>(def :type._new (do [:type:this extra-param-vars]<br/>
+  [alloc/init :type:this.vars]<br/>
+))</p>
+
+<p>(def :type._del (do [:type:this extra-param-vars]<br/>
+  [dealloc/deinit :type:this.vars]<br/>
+))</p>
 
 <h2>Internals</h2>
 

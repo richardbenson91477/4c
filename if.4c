@@ -1,5 +1,5 @@
 
-(def main (do [] [
+(def _main (do [] [
     (def x 0)
     ;(def x 1)
     (if (!= x 0) [
@@ -9,6 +9,6 @@
         (print "x is zero")
         (return -1)
       ])
-    ] 0)
+  ] 0)
 )
 
