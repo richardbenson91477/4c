@@ -10,13 +10,15 @@ _Foresee: To see beforehand_
 ### Basic program structure
 ; comments follow semicolons
 
-(function-name arg\_1 .. arg\_n)  
+(function-name _arg\_1_ .. _arg\_n_)  
+  
 where _function-name_ is a built-in function or a variable of type 'function   
-and _arg_ is any of the following
-* an inner function to return a result to the outer function, e.g. (+ (+ 1 1) 2)
-* a constant
-* a variable name
-
+and _arg_ is any of the following:
+  
+  * an inner function to return a result to the outer function, e.g. (+ **(+ 1 1)** 2)  
+  * a constant  
+  * a variable name  
+  
 [list-item\_1 .. list-item\_n]  
 ### Constants
 -9..9**.**9..9 .. 9..9**.**9..9  
@@ -54,16 +56,16 @@ returns: 'nil
 description: assign _value_ to the variable referenced by _var-name_  
 returns: 'nil  
 
-(def-type :type-name [var-list]) 'nil  
+(def-type :type-name [var-list]) -> 'nil  
 (do [arg-list] [fn-list] default-return-value) -> 'function instance  
 (return value-for-do) -> 'nil  
 (if ('function->'boolean) [true-fn-list] [false-fn-list]) -> 'nil  
 (while ('function->'boolean) [fn-list] [per-loop fn-list]) -> 'nil  
 (print value) -> 'nil  
 (input) -> 'string instance  
-(and bool bool) -> 'boolean  
-(or bool bool) -> 'boolean  
-(not bool) -> 'boolean  
+(and 'boolean 'boolean) -> 'boolean  
+(or 'boolean 'boolean) -> 'boolean  
+(not 'boolean) -> 'boolean  
 (+ num num) -> 'number  
 (- num num) -> 'number  
 (* num num) -> 'number  
@@ -79,13 +81,12 @@ returns: 'nil
 (str-from char-number) -> 'string  
 (str-add string string) -> 'string  
 (str-cmp string string) -> 'boolean  
-(new :type var [extra-args]) -> 'boolean  
-(del :type var [extra-args]) -> 'boolean  
-
+(**new** :type var [extra-args]) -> 'boolean  
 (def :type.\_new (do [:type:this extra-param-vars]  
   [alloc/init :type:this.vars]  
 ))  
   
+(**del** :type var [extra-args]) -> 'boolean  
 (def :type.\_del (do [:type:this extra-param-vars]  
   [dealloc/deinit :type:this.vars]  
 ))  

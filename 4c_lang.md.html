@@ -13,7 +13,17 @@
 
 <p>; comments follow semicolons</p>
 
-<p>(function-name arg_1 .. arg_n)</p>
+<p>(function-name <em>arg_1</em> .. <em>arg_n</em>)</p>
+
+<p>where <em>function-name</em> is a built-in function or a variable of type &lsquo;function <br/>
+and <em>arg</em> is any of the following:</p>
+
+<ul>
+<li>an inner function to return a result to the outer function, e.g. (+ <strong>(+ 1 1)</strong> 2)</li>
+<li>a constant</li>
+<li>a variable name</li>
+</ul>
+
 
 <p>[list-item_1 .. list-item_n]</p>
 
@@ -63,16 +73,16 @@ returns: &lsquo;nil</p>
 description: assign <em>value</em> to the variable referenced by <em>var-name</em><br/>
 returns: &lsquo;nil</p>
 
-<p>(def-type :type-name [var-list]) &lsquo;nil<br/>
+<p>(def-type :type-name [var-list]) -> &lsquo;nil<br/>
 (do [arg-list] [fn-list] default-return-value) -> 'function instance<br/>
 (return value-for-do) -> 'nil<br/>
 (if ('function->'boolean) [true-fn-list] [false-fn-list]) -> 'nil<br/>
 (while ('function->'boolean) [fn-list] [per-loop fn-list]) -> 'nil<br/>
 (print value) -> 'nil<br/>
 (input) -> 'string instance<br/>
-(and bool bool) -> 'boolean<br/>
-(or bool bool) -> 'boolean<br/>
-(not bool) -> 'boolean<br/>
+(and 'boolean 'boolean) -> 'boolean<br/>
+(or 'boolean 'boolean) -> 'boolean<br/>
+(not 'boolean) -> 'boolean<br/>
 (+ num num) -> 'number<br/>
 (- num num) -> 'number<br/>
 (* num num) -> 'number<br/>
@@ -88,14 +98,13 @@ returns: &lsquo;nil</p>
 (str-from char-number) -> 'string<br/>
 (str-add string string) -> 'string<br/>
 (str-cmp string string) -> 'boolean<br/>
-(new :type var [extra-args]) -> 'boolean<br/>
-(del :type var [extra-args]) -> 'boolean</p>
-
-<p>(def :type._new (do [:type:this extra-param-vars]<br/>
+(<strong>new</strong> :type var [extra-args]) -> 'boolean<br/>
+(def :type._new (do [:type:this extra-param-vars]<br/>
   [alloc/init :type:this.vars]<br/>
 ))</p>
 
-<p>(def :type._del (do [:type:this extra-param-vars]<br/>
+<p>(<strong>del</strong> :type var [extra-args]) -> &lsquo;boolean<br/>
+(def :type._del (do [:type:this extra-param-vars]<br/>
   [dealloc/deinit :type:this.vars]<br/>
 ))</p>
 
