@@ -1,13 +1,13 @@
 include makefile.base
 
-CFLAGS = -DFOURC_SHARE=\"$(FOURC_SHARE)\"
+CFLAGS = -D_4C_SHARE=\"$(_4C_SHARE)\"
 ifdef DEBUG
 CFLAGS += -Og -g -gdwarf-4 -fkeep-inline-functions -fPIC
 else
 CFLAGS += -O2 -fPIC
 endif
 
-OBJS=4cc.o file.o syntax_tree.o
+OBJS=4cc.o file.o list.o syntax_tree.o
 LDLIBS=
 
 all: 4cc doc
@@ -22,10 +22,10 @@ doc:
 
 install: all
 	install -s 4cc $(PREFIX)/bin/
-	mkdir -p $(FOURC_SHARE)/tests/
-	install -m 644 tests/* $(FOURC_SHARE)/tests/
-	mkdir -p $(FOURC_SHARE)/examples/
-	install -m 644 examples/* $(FOURC_SHARE)/examples/
+	mkdir -p $(_4C_SHARE)/tests/
+	install -m 644 tests/* $(_4C_SHARE)/tests/
+	mkdir -p $(_4C_SHARE)/examples/
+	install -m 644 examples/* $(_4C_SHARE)/examples/
 	+$(MAKE) -C docs/ install
 
 clean:
