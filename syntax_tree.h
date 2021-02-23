@@ -5,8 +5,19 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+enum elem_types {
+    func,
+    constant,
+    list,
+    var,
+};
+
 struct syntax_tree {
-    
+    elem_types elem_type;
+
+    char *id;
+
+    struct list *_branches;
 };
 
 extern struct syntax_tree *syntax_tree_from_source (uint8_t *_b);

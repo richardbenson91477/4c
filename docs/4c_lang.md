@@ -30,27 +30,39 @@ I believe this is a good thing. Let's add another.
 ; **Comments** follow semicolons  
 
 **Function calls** take the following form:  
-(function-name _arg\_1_ .. _arg\_n_)
+(function-name _arg1_ .. _argn_)
  
 Where  
 
   * _function-name_ specifies a built-in function or a variable of type ':function
   * _arg_ is any of the following:
 
-    -   an _inner_ function call which returns a result to its _outer_ function, e.g. (+ **(+ 1 1)** 2)
-    -   a constant (e.g. 3, "Hello", 'nl)
-    -   a variable name
+    -   An _inner_ function call which returns a result to its _outer_ function  
+        Example: (+ **(+ 1 1)** 2)
+
+    -   A constant  
+        Examples: 3 "Hello" 'nl
+
+    -   A list  
+        Example: [3 x 'false (+ y z)]
+
+    -   A variable name  
+        Examples: x my-string$
+        why is this
+
+Note: function arguments are left unevaluated until required.
 
 **Lists** of values take the following form:  
-[_list-item\_1 .. _list-item\_n]  
+[_list-item1_ .. _list-itemn_]  
 
 Where _list-item_ is any of the follwing:  
 
-  * a function call
-  * a constant
-  * a variable name
+  * A function call
+  * A constant
+  * An _inner_ list
+  * A variable name
 
-Note: list elements are left _unevaluated_ until required, e.g. (do [x] ...) does not _automatically_ become (do [3] ...) when x is set to 3. (Or ever, in this case, since _do_ requires variable names)
+Note: list elements are left unevaluated until required.
 
 ### Constants
 Number constants (type ':number):
@@ -103,7 +115,7 @@ Variable names describe their own types:
         Example: :users
 
   * **:**type-name**:**instance-name  
-        Names beginning with :type-name-: have the type :type-name.  
+        Names beginning with :type-name: have the type :type-name.  
         Example: :users:hans
 
   * **:**type-name**:**instance-name**.**var-instance  
