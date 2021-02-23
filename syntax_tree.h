@@ -13,7 +13,7 @@ enum elem_types {
 };
 
 struct syntax_tree {
-    elem_types elem_type;
+    enum elem_types elem_type;
 
     char *id;
 
