@@ -20,7 +20,7 @@ uint32_t array_add (struct array *_a, void *_v) {
 }
 
 uint32_t array_del (struct array *_a, uint32_t i) {
-    if ((! _a->n) || (i >= _a->n))
+    if ((0 == _a->n) || (i >= _a->n))
         return 0;
 
     void **__v = _a->__p + i;

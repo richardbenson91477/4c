@@ -7,16 +7,16 @@
 #include "array.h"
 
 enum elem_types {
-    func,
-    list,
-    constant,
-    var,
+    elem_type_func,
+    elem_type_list,
+    elem_type_const,
+    elem_type_var,
 };
 
 struct syntax_tree {
     // NOTE: keep these items "calloc"-able
     enum elem_types elem_type;
-    char *id;
+    char *_id;
     struct array nodes;
 };
 

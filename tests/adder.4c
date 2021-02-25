@@ -15,7 +15,7 @@
     (def _add4 (_make-adder 4))
     (print (_add4 3))
 
-    (print ((_make-adder 5) 2))
+    (print (eval (_make-adder 5) 2))
   ] 0)
 )
 

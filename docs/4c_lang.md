@@ -142,6 +142,7 @@ gives the variable two-times-two the value 4
 (while (':function->':boolean) [fn-list] [per-loop fn-list]) -> 'nil  
 (print value) -> 'nil  
 (input) -> 'string instance  
+(eval ':function args) -> ?  
 (and ':boolean ':boolean) -> ':boolean  
 (or ':boolean ':boolean) -> ':boolean  
 (not ':boolean) -> ':boolean  
@@ -170,10 +171,11 @@ gives the variable two-times-two the value 4
   [dealloc/deinit :type:this.vars]  
 ))  
 
+
 ## Internals
 
 ### ':function type
-function name  
+function identifier  
 function argument names and types  
 memory label   
 
