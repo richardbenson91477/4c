@@ -8,13 +8,13 @@ int main (int argc, const char *argv[]) {
     }
 
     uint8_t *_b = file_load (argv[1]);
-    if (! _b) {
+    if (NULL == _b) {
         fprintf(stderr, "file_load failed\n");
         return -2;
     }
 
     struct syntax_tree *_syntax_root = syntax_tree_from_source (_b);
-    if (! _syntax_root) {
+    if (NULL == _syntax_root) {
         fprintf(stderr, "syntax_tree_from_source failed\n");
         return -3;
     }

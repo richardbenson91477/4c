@@ -7,7 +7,7 @@ char *syntax_tree_symbol_read (char *_s) {
     char *_m;
 
     _m = _s;
-    if ((! _m) || ('\0' == *_m))
+    if ((NULL == _m) || ('\0' == *_m))
         return NULL;
 
     s_n = 0;
@@ -26,7 +26,7 @@ char *syntax_tree_symbol_read (char *_s) {
         return NULL;
 
     char *_id = malloc(s_n + 1);
-    if (! _id)
+    if (NULL == _id)
         return NULL;
 
     strncpy (_id, _s, s_n);
@@ -39,7 +39,7 @@ struct syntax_tree *syntax_tree_new () {
     struct syntax_tree *_st;
 
     _st = (struct syntax_tree *)calloc (1, sizeof(struct syntax_tree));
-    if (! _st) {
+    if (NULL == _st) {
         fprintf(stderr, "calloc failed\n");
         return NULL;
     }
@@ -51,11 +51,11 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_b) {
     struct syntax_tree *_st;
     uint8_t *_m, *_m2;
 
-    if ((! _b) || ('\0' == *_b))
+    if ((NULL == _b) || ('\0' == *_b))
         return NULL;
 
     _st = syntax_tree_new();
-    if (! _st)
+    if (NULL == _st)
         return NULL;
     
     _m = _b;
@@ -74,7 +74,7 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_b) {
                 return NULL;
 
             _st->_id = syntax_tree_symbol_read (_m);
-            if (! _st->_id)
+            if (NULL == _st->_id)
                 return NULL;
  
             printf("found function \"%s\"\n", _st->_id);
@@ -103,7 +103,7 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_b) {
 }
 
 uint32_t syntax_tree_destroy (struct syntax_tree *_st) {
-    if (! _st)
+    if (NULL == _st)
         return 0;
 
     return 0;

@@ -7,7 +7,7 @@ uint32_t array_add (struct array *_a, void *_v) {
         void **__v = (void **) realloc(_a->__p, 
             (_4C_ARRAY_BLOCKSIZE * _a->bn) * sizeof(void *));
 
-        if (! __v)
+        if (NULL == __v)
             return 0;
 
         _a->__p = __v;
