@@ -3,12 +3,16 @@
 #include <string.h>
 
 char *syntax_tree_symbol_read (char *_s) {
+    printf("debug: syntax_tree_symbol_read\n");
+
     uint32_t s_n;
     char *_m;
 
     _m = _s;
-    if ((NULL == _m) || ('\0' == *_m))
+    if ((NULL == _m) || ('\0' == *_m)) {
+        fprintf(stderr, "error: syntax_tree_symbol_read: NULL");
         return NULL;
+    }
 
     s_n = 0;
     while ('\0' != *_m) {
@@ -19,12 +23,16 @@ char *syntax_tree_symbol_read (char *_s) {
         _m += 1;
     }
 
-    if (0 == s_n)
+    if (0 == s_n) {
+        fprintf(stderr, "error: syntax_tree_symbol_read: NULL");
         return NULL;
+    }
 
     char *_id = malloc(s_n + 1);
-    if (NULL == _id)
+    if (NULL == _id) {
+        fprintf(stderr, "error: syntax_tree_symbol_read: NULL");
         return NULL;
+    }
 
     strncpy (_id, _s, s_n);
     _id[s_n] = '\0';
@@ -33,11 +41,13 @@ char *syntax_tree_symbol_read (char *_s) {
 };
 
 struct syntax_tree *syntax_tree_new () {
+    printf("debug: syntax_tree_new\n");
+
     struct syntax_tree *_st;
 
     _st = (struct syntax_tree *)calloc (1, sizeof(struct syntax_tree));
     if (NULL == _st) {
-        fprintf(stderr, "calloc failed\n");
+        fprintf(stderr, "error: syntax_tree_new: calloc");
         return NULL;
     }
 
@@ -45,15 +55,21 @@ struct syntax_tree *syntax_tree_new () {
 }
 
 struct syntax_tree *syntax_tree_from_source (uint8_t *_b) {
+    printf("debug: syntax_tree_from_source\n");
+
     struct syntax_tree *_st;
     uint8_t *_m, *_m2;
 
-    if ((NULL == _b) || ('\0' == *_b))
+    if ((NULL == _b) || ('\0' == *_b)) {
+        fprintf(stderr, "error: syntax_tree_from_source: NULL");
         return NULL;
+    }
 
     _st = syntax_tree_new();
-    if (NULL == _st)
+    if (NULL == _st) {
+        fprintf(stderr, "error: syntax_tree_from_source: NULL");
         return NULL;
+    }
     
     _m = _b;
     while ('\0' != *_m) {
@@ -77,12 +93,16 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_b) {
             _st->elem_type = elem_type_func;
 
             _m += 1;
-            if ('\0' == *_m) 
+            if ('\0' == *_m) {
+                fprintf(stderr, "error: syntax_tree_from_source: NULL");
                 return NULL;
+            }
 
             _st->_id = syntax_tree_symbol_read (_m);
-            if (NULL == _st->_id)
+            if (NULL == _st->_id) {
+                fprintf(stderr, "error: syntax_tree_from_source: NULL");
                 return NULL;
+            }
  
             printf("found function \"%s\"\n", _st->_id);
 
@@ -110,8 +130,12 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_b) {
 }
 
 uint32_t syntax_tree_destroy (struct syntax_tree *_st) {
-    if (NULL == _st)
+    printf("debug: syntax_tree_destroy\n");
+
+    if (NULL == _st) {
+        fprintf(stderr, "error: syntax_tree_destroy: NULL");
         return 0;
+    }
 
     return 0;
 }

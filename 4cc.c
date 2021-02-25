@@ -9,20 +9,20 @@ int main (int argc, const char *argv[]) {
 
     uint8_t *_b = file_load (argv[1]);
     if (NULL == _b) {
-        fprintf(stderr, "file_load failed\n");
+        fprintf(stderr, "error: main: file_load\n");
         return -2;
     }
 
     struct syntax_tree *_syntax_root = syntax_tree_from_source (_b);
     if (NULL == _syntax_root) {
-        fprintf(stderr, "syntax_tree_from_source failed\n");
+        fprintf(stderr, "error: main: syntax_tree_from_source\n");
         return -3;
     }
 
     free(_b);
 
     if (0 == syntax_tree_destroy (_syntax_root)) {
-        fprintf(stderr, "syntax_tree_destroy failed\n");
+        fprintf(stderr, "error: main: syntax_tree_destroy\n");
         return -4;
     }
 

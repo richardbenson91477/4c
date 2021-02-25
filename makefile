@@ -10,7 +10,7 @@ endif
 OBJS=4cc.o file.o array.o syntax_tree.o
 LDLIBS=
 
-all: 4cc doc
+all: 4cc doc tags
 
 4cc: $(OBJS)
 
@@ -20,7 +20,7 @@ test: all
 doc:
 	+$(MAKE) -C docs/ all
 
-ctags:
+tags: $(OBJS)
 	ctags -R
 
 install: all
