@@ -7,7 +7,7 @@ else
 CFLAGS += -O2 -fPIC
 endif
 
-OBJS=4cc.o file.o list.o syntax_tree.o
+OBJS=4cc.o file.o array.o syntax_tree.o
 LDLIBS=
 
 all: 4cc doc
@@ -19,6 +19,9 @@ test: all
 
 doc:
 	+$(MAKE) -C docs/ all
+
+ctags:
+	ctags -R
 
 install: all
 	install -s 4cc $(PREFIX)/bin/
