@@ -40,11 +40,11 @@ Where
     -   An _inner_ function call which returns a result to its _outer_ function  
         Example: (+ **(+ 1 1)** 2)
 
-    -   A constant  
-        Examples: 3 "Hello" 'nl
-
     -   A list  
         Example: [3 x 'false (+ y z)]
+
+    -   A constant  
+        Examples: 3 "Hello" 'nl
 
     -   A variable name  
         Examples: x my-string$
@@ -58,8 +58,8 @@ Note: function arguments are left unevaluated until required.
 Where _list-item_ is any of the follwing:  
 
   * A function call
-  * A constant
   * An _inner_ list
+  * A constant
   * A variable name
 
 Note: list elements are left unevaluated until required.
@@ -120,7 +120,7 @@ Variable names describe their own types:
 
   * **:**type-name**:**instance-name**.**var-instance  
         Names beginning with :type-name:instance-name. are variables belonging to _:instance-name_ of type _:type-name_ and have their own type determined by the name _var-instance_.  
-        Example: :users:hans:full-name^
+        Example: :users:hans:full-name$
 
 ## Built-in functions
 (**def** _var-name_ _value_)  

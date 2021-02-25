@@ -4,20 +4,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include "array.h"
 
 enum elem_types {
     func,
-    constant,
     list,
+    constant,
     var,
 };
 
 struct syntax_tree {
+    // NOTE: keep these items "calloc"-able
     enum elem_types elem_type;
-
     char *id;
-
-    struct list *_branches;
+    struct array nodes;
 };
 
 extern struct syntax_tree *syntax_tree_from_source (uint8_t *_b);
