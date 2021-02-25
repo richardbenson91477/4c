@@ -4,6 +4,5 @@ tags
 docs/4c_lang.html
 docs/4c_lang.md.html
 file.o
-list.o
-syntax_tree.h.html
+array.o
 syntax_tree.o
