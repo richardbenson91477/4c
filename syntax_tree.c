@@ -11,10 +11,7 @@ char *syntax_tree_symbol_read (char *_s) {
         return NULL;
 
     s_n = 0;
-    while (*_m) {
-        if ('\0' == *_m)
-            return NULL;
-
+    while ('\0' != *_m) {
         if ((isspace(*_m)) || (']' == *_m) || (')' == *_m))
             break;
 
@@ -59,11 +56,21 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_b) {
         return NULL;
     
     _m = _b;
-    while (*_m) {
+    while ('\0' != *_m) {
         if (isspace(*_m)) {
             // ignore white-spaces
             _m += 1;
             continue;
+        }
+        if (';' == *_m) {
+            // comment line
+            while ('\n' != *_m) {
+                _m ++;
+                if ('\0' == *_m)
+                    break;
+
+            }
+            printf ("skipped comment\n");
         }
         if ('(' == *_m) {
             // function call

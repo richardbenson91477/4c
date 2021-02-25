@@ -24,7 +24,7 @@ uint32_t array_del (struct array *_a, uint32_t i) {
         return 0;
 
     void **__v = _a->__p + i;
-    for (uint32_t c = i; c < (_a->n -1); c ++) {
+    for (uint32_t c = i; c < (_a->n - 1); c ++) {
         *__v = *(__v + 1);
         __v ++;
     }
