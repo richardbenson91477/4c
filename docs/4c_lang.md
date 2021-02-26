@@ -48,9 +48,6 @@ Where
 
     -   A variable name  
         Examples: x my-string$
-        why is this
-
-Note: function arguments are left unevaluated until required.
 
 **Lists** of values take the following form:  
 [_list-item1_ .. _list-itemn_]  
@@ -61,8 +58,6 @@ Where _list-item_ is any of the follwing:
   * An _inner_ list
   * A constant
   * A variable name
-
-Note: list elements are left unevaluated until required.
 
 ### Constants
 Number constants (type ':number):
