@@ -138,11 +138,11 @@ gives the variable two-times-two the value 4
 (def-type :type-name [var-list]) -> 'nil  
 (do [arg-list] [fn-list] default-return-value) -> ':function instance  
 (return value-for-do) -> 'nil  
-(if (':function->':boolean) [true-fn-list] [false-fn-list]) -> 'nil  
-(while (':function->':boolean) [fn-list] [per-loop fn-list]) -> 'nil  
+(if ':boolean [true-fn-list] [false-fn-list]) -> 'nil  
+(while ':boolean) [fn-list] [per-loop fn-list]) -> 'nil  
 (print value) -> 'nil  
 (input) -> 'string instance  
-(eval ':function args) -> ?  
+(eval ':function func-args) -> ?  
 (and ':boolean ':boolean) -> ':boolean  
 (or ':boolean ':boolean) -> ':boolean  
 (not ':boolean) -> ':boolean  
