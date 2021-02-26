@@ -7,19 +7,21 @@ int main (int argc, const char *argv[]) {
         return -1;
     }
 
-    uint8_t *_b = file_load (argv[1]);
-    if (NULL == _b) {
+    uint8_t *_s = file_load (argv[1]);
+    if (NULL == _s) {
         fprintf(stderr, "error: main: file_load\n");
         return -2;
     }
 
-    struct syntax_tree *_syntax_root = syntax_tree_from_source (_b);
+    uint8_t *_sa;
+
+    struct syntax_tree *_syntax_root = syntax_tree_from_source (_s, &_sa);
     if (NULL == _syntax_root) {
         fprintf(stderr, "error: main: syntax_tree_from_source\n");
         return -3;
     }
 
-    free(_b);
+    free(_s);
 
     if (0 == syntax_tree_destroy (_syntax_root)) {
         fprintf(stderr, "error: main: syntax_tree_destroy\n");
