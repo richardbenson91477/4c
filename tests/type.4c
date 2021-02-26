@@ -1,24 +1,24 @@
+[
+    (def-type :nabs [
+        n
+        a.
+        b^
+        s$
+    ])
 
-(def-type :nabs [
-    n
-    a.
-    b^
-    s$
-])
+    (def :nabs._new (do [:nabs:self] [
+        (print ":nabs._new")
+        (set :nabs:self.n 3)
+        (set :nabs:self.a. (new ':number-array [5]))
+        (set :nabs:self.s$ (new ':string [6]))
+        (str-copy :nabs:self.s$ "hello")
+        (set :nabs:self.b^ 'false)
+      ] 'true)
+    )
 
-(def :nabs._new (do [:nabs:self] [
-    (print ":nabs._new")
-    (set :nabs:self.n 3)
-    (set :nabs:self.a. (new ':number-array [5]))
-    (set :nabs:self.s$ (new ':string [6]))
-    (str-copy :nabs:self.s$ "hello")
-    (set :nabs:self.b^ 'false)
-  ] 'true)
-)
-
-(def :nabs._del (do [:nabs:this] [
-    (del :nabs:this.a.)
-    (del :nabs:this.s$)
-  ] 'true)
-)
-
+    (def :nabs._del (do [:nabs:this] [
+        (del :nabs:this.a.)
+        (del :nabs:this.s$)
+      ] 'true)
+    )
+]
