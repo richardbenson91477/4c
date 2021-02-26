@@ -7,7 +7,7 @@
 #include "array.h"
 
 enum elem_types {
-    elem_type_func,
+    elem_type_funcall,
     elem_type_list,
     elem_type_const,
     elem_type_var,
