@@ -3,11 +3,11 @@
 uint32_t array_add (struct array *_a, void *_v) {
     printf("debug: array_add\n");
 
-    if (_a->n == (_4C_ARRAY_BLOCKSIZE * _a->bn)) {
-        _a->bn ++;
+    if (_a->n == (_4C_ARRAY_BLOCKSIZE * _a->b_n)) {
+        _a->b_n ++;
 
         void **__v = (void **) realloc(_a->__p, 
-            (_4C_ARRAY_BLOCKSIZE * _a->bn) * sizeof(void *));
+            (_4C_ARRAY_BLOCKSIZE * _a->b_n) * sizeof(void *));
 
         if (NULL == __v) {
             fprintf(stderr, "error: array_add: realloc\n");

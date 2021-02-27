@@ -50,7 +50,7 @@ Where
         Examples: x my-string$
 
 **Lists** of values take the following form:  
-[_list-item1_ .. _list-itemn_]  
+[_list-item**1**_ .. _list-item**n**_]  
 
 Where _list-item_ is any of the follwing:  
 

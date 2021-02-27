@@ -1,9 +1,7 @@
 #include "syntax_tree.h"
-#include <ctype.h>
-#include <string.h>
 
-uint8_t *syntax_tree_symbol_next (uint8_t *_s) {
-    printf("debug: syntax_tree_symbol_next\n");
+uint8_t *syntax_tree_symbol_seek (uint8_t *_s) {
+    printf("debug: syntax_tree_symbol_seek\n");
 
     uint8_t *_m;
 
@@ -21,7 +19,7 @@ uint8_t *syntax_tree_symbol_next (uint8_t *_s) {
                 if ('\0' == *_m)
                     break;
             }
-            printf("debug: syntax_tree_symbol_next: skipped comment\n");
+            printf("debug: syntax_tree_symbol_seek: skipped comment\n");
         }
         else {
             return _m;
@@ -79,17 +77,17 @@ uint8_t *syntax_tree_symbol_read (uint8_t *_s, uint8_t **__sa) {
         return NULL;
     }
 
-    uint8_t *_id = malloc(s_n + 1);
-    if (NULL == _id) {
+    uint8_t *id_s = malloc(s_n + 1);
+    if (NULL == id_s) {
         fprintf(stderr, "error: syntax_tree_symbol_read: malloc\n");
         return NULL;
     }
 
-    strncpy (_id, _s, s_n);
-    _id[s_n] = '\0';
+    strncpy (id_s, _s, s_n);
+    id_s[s_n] = '\0';
 
     *__sa = _m;
-    return _id;
+    return id_s;
 };
 
 struct syntax_tree *syntax_tree_new () {
@@ -123,8 +121,8 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_s, uint8_t **__sa) {
         return NULL;
     }
  
-    // skip to something significant
-    _m = syntax_tree_symbol_next (_s);
+    // seek ahead to something significant
+    _m = syntax_tree_symbol_seek (_s);
     if (NULL == _m) {
         fprintf(stderr, "error: syntax_tree_from_source: NULL (2)\n");
         return NULL;
@@ -171,13 +169,14 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_s, uint8_t **__sa) {
 
     // read symbold id (unless this is a list)
     if (elem_type_list != _st->elem_type) {
-        _st->_id = syntax_tree_symbol_read (_m, &_ma);
-        if (NULL == _st->_id) {
+        _st->id_s = syntax_tree_symbol_read (_m, &_ma);
+        if (NULL == _st->id_s) {
             fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_symbol_read\n");
             return NULL;
         }
+        _st->id_n = _ma - _m;
 
-        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->_id);
+        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->id_s);
         _m = _ma;
     }
 
@@ -190,8 +189,8 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_s, uint8_t **__sa) {
 
     // otherwise recurse
     while ('\0' != *_m) {
-        // skip to something significant (again)
-        _ma = syntax_tree_symbol_next (_m);
+        // seek ahead to something significant (again)
+        _ma = syntax_tree_symbol_seek (_m);
         if (NULL == _ma) {
             fprintf(stderr, "error: syntax_tree_from_source: NULL (3)\n");
             return NULL;

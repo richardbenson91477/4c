@@ -7,3 +7,6 @@ file.o
 array.o
 syntax_tree.o
 type.o
+var.o
+number.o
+

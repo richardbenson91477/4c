@@ -1,9 +1,7 @@
 #ifndef _4C_SYNTAX_TREE_H
 #define _4C_SYNTAX_TREE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
+#include "cstd.h"
 #include "array.h"
 #include "type.h"
 
@@ -17,7 +15,20 @@ enum elem_types {
 struct syntax_tree {
     // NOTE: keep these items "calloc"-able
     enum elem_types elem_type;
-    uint8_t *_id;
+
+    uint32_t id_n;
+    uint8_t *id_s;
+
+    enum type_ids type_id;
+    union {
+        struct type_func func;
+        struct type_num num;
+        struct type_num_array num_array;
+        struct type_bool bool;
+        struct type_string string;
+        struct type_user user;
+    } type;
+
     struct array nodes;
 };
 
