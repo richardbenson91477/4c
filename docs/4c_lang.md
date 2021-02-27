@@ -166,28 +166,6 @@ gives the variable two-times-two the value 4
   [dealloc/deinit :type:this.vars]  
 ))  
 
-
-## Internals
-
-### ':function type
-function identifier  
-function argument names and types  
-memory label   
-
-### ':number type
-TODO RIGHT  
-
-### ':number-array type
-TODO  
-
-### ':string type 
-memory address (if dynamic) or memory label (if static)
-length in bytes
-
-### ':boolean type
-var name  
-truth flag
-
 ===
 ## Credits
 
