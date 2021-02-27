@@ -17,8 +17,11 @@ enum type_ids {
 
 extern const char *type_id_names[];
 
+// NOTE: type_format_* structures store data in memory at compiled program runtime, to be used by linked-in runtime functions such as "number_to_d"
+
 // NOTE: keep these type_format_* items "zero-able to init"
 struct type_format_func {
+    // return type detauls
     // argument list details
     // ...
 };
@@ -36,14 +39,15 @@ struct type_format_bool {
 };
 
 struct type_format_string {
-    uint32_t s_n;
+    // putting this first might simplify conversion to C strings
     char *_s;
+    uint32_t s_n;
 };
 
 struct type_format_user {
     struct array items_a;
 };
-    
+ 
 // NOTE: keep these items "zero-able to init"
 struct type_data {
     // symbol or 0/NULL

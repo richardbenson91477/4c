@@ -20,5 +20,7 @@ struct number {
 
 extern struct number *number_from_s (char *_s);
 
+extern double number_to_d (struct number *_n);
+
 #endif
 
