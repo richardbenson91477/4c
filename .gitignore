@@ -6,3 +6,4 @@ docs/4c_lang.md.html
 file.o
 array.o
 syntax_tree.o
+type.o
