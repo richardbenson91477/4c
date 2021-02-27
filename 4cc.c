@@ -7,13 +7,13 @@ int main (int argc, const char *argv[]) {
         return -1;
     }
 
-    uint8_t *_s = file_load (argv[1]);
+    char *_s = file_load (argv[1]);
     if (NULL == _s) {
         fprintf(stderr, "error: main: file_load\n");
         return -2;
     }
 
-    uint8_t *_sa;
+    char *_sa;
 
     struct syntax_tree *_syntax_root = syntax_tree_from_source (_s, &_sa);
     if (NULL == _syntax_root) {

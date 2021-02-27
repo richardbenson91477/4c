@@ -3,9 +3,6 @@
 (def _main (do [] [
     (set a 1)
     (set a (+ a 9))
-    (set a (- a 5))
-    (set a (* a 4))
-    (set a (/ a 2))
     (print a)
   ] 0)
 )

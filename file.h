@@ -3,7 +3,7 @@
 
 #include "cstd.h"
 
-extern uint8_t *file_load (const char *file_s);
+extern char *file_load (const char *file_s);
 
 #endif
 

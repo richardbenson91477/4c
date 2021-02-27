@@ -1,9 +1,9 @@
 #include "syntax_tree.h"
 
-uint8_t *syntax_tree_symbol_seek (uint8_t *_s) {
+uint8_t *syntax_tree_symbol_seek (char *_s) {
     printf("debug: syntax_tree_symbol_seek\n");
 
-    uint8_t *_m;
+    char *_m;
 
     _m = _s;
     while ('\0' != *_m) {
@@ -29,11 +29,11 @@ uint8_t *syntax_tree_symbol_seek (uint8_t *_s) {
     return NULL;
 }
 
-uint8_t *syntax_tree_symbol_read (uint8_t *_s, uint8_t **__sa) {
+char *syntax_tree_symbol_read (char *_s, char **__sa) {
     printf("debug: syntax_tree_symbol_read\n");
 
     uint32_t s_n;
-    uint8_t *_m;
+    char *_m;
 
     _m = _s;
     if (NULL == _m) {
@@ -77,7 +77,7 @@ uint8_t *syntax_tree_symbol_read (uint8_t *_s, uint8_t **__sa) {
         return NULL;
     }
 
-    uint8_t *id_s = malloc(s_n + 1);
+    char *id_s = malloc(s_n + 1);
     if (NULL == id_s) {
         fprintf(stderr, "error: syntax_tree_symbol_read: malloc\n");
         return NULL;
@@ -104,11 +104,11 @@ struct syntax_tree *syntax_tree_new () {
     return _st;
 }
 
-struct syntax_tree *syntax_tree_from_source (uint8_t *_s, uint8_t **__sa) {
+struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     printf("debug: syntax_tree_from_source\n");
 
     struct syntax_tree *_st, *_st2;
-    uint8_t *_m, *_ma;
+    char *_m, *_ma;
 
     if (NULL == _s) {
         fprintf(stderr, "error: syntax_tree_from_source: NULL\n");
@@ -202,6 +202,7 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_s, uint8_t **__sa) {
                 (')' == *_m)) || 
             ((elem_type_list == _st->elem_type) &&
                 (']' == *_m))) {
+
             if (elem_type_funcall == _st->elem_type) {
                 printf("debug: syntax_tree_from_source: found function call end\n");
             }
@@ -220,7 +221,7 @@ struct syntax_tree *syntax_tree_from_source (uint8_t *_s, uint8_t **__sa) {
         }
         _m = _ma;
 
-        if (0 == array_add (&_st->nodes, _st2)) {
+        if (0 == array_add (&_st->nodes_a, _st2)) {
             fprintf(stderr, "error: syntax_tree_from_source: array_add\n");
             return NULL;
         }

@@ -1,6 +1,6 @@
 #include "file.h"
 
-uint8_t *file_load (const char *file_s) {
+char *file_load (const char *file_s) {
     printf("debug: file_load %s\n", file_s);
 
     FILE *f_in = fopen(file_s, "r");
@@ -19,7 +19,7 @@ uint8_t *file_load (const char *file_s) {
         return NULL;
     }
 
-    uint8_t *_b = (uint8_t *) malloc(b_n);
+    char *_b = (char *)malloc(b_n);
     if (NULL == _b) {
         fprintf(stderr, "error: file_load: malloc %u\n", b_n);
         fclose(f_in);

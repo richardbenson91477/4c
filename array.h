@@ -5,8 +5,8 @@
 
 #define _4C_ARRAY_BLOCKSIZE (512)
 
+// NOTE: keep these items "zero-able to init"
 struct array {
-    // NOTE: keep these items "calloc"-able
     void **__p;
     uint32_t n;
     uint32_t b_n;
