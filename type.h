@@ -6,6 +6,7 @@
 #include "number.h"
 
 enum type_ids {
+    type_id_nil,
     type_id_func,
     type_id_num,
     type_id_num_array,
@@ -16,10 +17,8 @@ enum type_ids {
 
 extern const char *type_id_names[];
 
+// NOTE: keep these type_format_* items "zero-able to init"
 struct type_format_func {
-    uint32_t label_n;
-    char *label_s;
-
     // argument list details
     // ...
 };
@@ -45,7 +44,16 @@ struct type_format_user {
     struct array items_a;
 };
     
+// NOTE: keep these items "zero-able to init"
 struct type_data {
+    // symbol or 0/NULL
+    uint32_t name_n;
+    char *name_s;
+    
+    // asm label or 0/NULL
+    uint32_t label_n;
+    char *label_s;
+
     enum type_ids type_id;
     union {
         struct type_format_func func;

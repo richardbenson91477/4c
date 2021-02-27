@@ -16,9 +16,6 @@ enum elem_types {
 struct syntax_tree {
     enum elem_types elem_type;
 
-    uint32_t id_n;
-    char *id_s;
-
     struct type_data td;
 
     struct array nodes_a;

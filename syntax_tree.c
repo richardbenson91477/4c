@@ -29,20 +29,20 @@ uint8_t *syntax_tree_symbol_seek (char *_s) {
     return NULL;
 }
 
-char *syntax_tree_symbol_read (char *_s, char **__sa) {
-    printf("debug: syntax_tree_symbol_read\n");
+uint32_t syntax_tree_symbol_len (char *_s) {
+    printf("debug: syntax_tree_symbol_len\n");
 
     uint32_t s_n;
     char *_m;
 
     _m = _s;
     if (NULL == _m) {
-        fprintf(stderr, "error: syntax_tree_symbol_read: NULL\n");
-        return NULL;
+        fprintf(stderr, "error: syntax_tree_symbol_len: NULL\n");
+        return 0;
     }
     else if ('\0' == *_m) {
-        fprintf(stderr, "error: syntax_tree_symbol_read: NIL\n");
-        return NULL;
+        fprintf(stderr, "error: syntax_tree_symbol_len: NIL\n");
+        return 0;
     }
     
     s_n = 0;
@@ -72,22 +72,7 @@ char *syntax_tree_symbol_read (char *_s, char **__sa) {
         }
     }
 
-    if (0 == s_n) {
-        fprintf(stderr, "error: syntax_tree_symbol_read: empty\n");
-        return NULL;
-    }
-
-    char *id_s = malloc(s_n + 1);
-    if (NULL == id_s) {
-        fprintf(stderr, "error: syntax_tree_symbol_read: malloc\n");
-        return NULL;
-    }
-
-    strncpy (id_s, _s, s_n);
-    id_s[s_n] = '\0';
-
-    *__sa = _m;
-    return id_s;
+    return s_n;
 };
 
 struct syntax_tree *syntax_tree_new () {
@@ -115,7 +100,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         return NULL;
     }
 
-    _st = syntax_tree_new();
+    _st = syntax_tree_new ();
     if (NULL == _st) {
         fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_new\n");
         return NULL;
@@ -167,24 +152,30 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         }
     }
 
-    // read symbold id (unless this is a list)
+    // read symbold id (excepting list) into (type data) td
     if (elem_type_list != _st->elem_type) {
-        _st->id_s = syntax_tree_symbol_read (_m, &_ma);
-        if (NULL == _st->id_s) {
-            fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_symbol_read\n");
+        uint32_t n = syntax_tree_symbol_len (_m);
+        if (0 == n) {
+            fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_symbol_len\n");
             return NULL;
         }
-        _st->id_n = _ma - _m;
 
-        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->id_s);
-        _m = _ma;
+        _st->td.name_s = strndup(_m, n);
+        _st->td.name_n = n;
+
+        _m += n;
+
+        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->td.name_s);
     }
 
-    // if this is a constant or variable work is done here
     if ((elem_type_const == _st->elem_type) ||
             (elem_type_var == _st->elem_type)) {
         *__sa = _m;
+        // TODO: deduce and store (type data) td
         return _st;
+    }
+    else if (elem_type_funcall == _st->elem_type) {
+        // TODO: deduce and store (type data) td
     }
 
     // otherwise recurse
@@ -238,6 +229,8 @@ uint32_t syntax_tree_destroy (struct syntax_tree *_st) {
         fprintf(stderr, "error: syntax_tree_destroy: NULL\n");
         return 0;
     }
+
+    // TODO: actually decompose the tree
 
     return 0;
 }

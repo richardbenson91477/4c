@@ -5,14 +5,12 @@
 #include "type.h"
 
 struct var {
-    uint32_t name_n;
-    char *name_s;
-
-    uint32_t label_n;
-    char *label_s;
-
     struct type_data td;
+
+    // TODO: whatever else vars crave below
 };
+
+extern struct var *var_from_s (char *_s);
 
 #endif
 
