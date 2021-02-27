@@ -7,7 +7,7 @@ else
 CFLAGS += -O2 -fPIC
 endif
 
-OBJS=4cc.o file.o array.o syntax_tree.o
+OBJS=4cc.o file.o array.o syntax_tree.o type.o
 LDLIBS=
 
 all: 4cc doc tags

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "array.h"
+#include "type.h"
 
 enum elem_types {
     elem_type_funcall,
