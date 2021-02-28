@@ -5,7 +5,7 @@ const char *type_id_names[] = {
     "':nil",
     "':function",
     "':number",
-    "':number-array",
+    "':list",
     "':boolean",
     "':string",
     "':user",
@@ -64,17 +64,17 @@ enum type_ids type_id_from_symbol (char *_s, uint32_t s_n) {
 
     // non-function variable or built-in constant, possibly with special end character 
     char e = *(_s + s_n - 1);
-    // ':number-array
-    if ('.' == e) {
-        return type_id_num_array;
-    }
     // ':boolean
-    else if ('^' == e) {
+    if ('^' == e) {
         return type_id_bool;
     }
     // ':string
     else if ('$' == e) {
         return type_id_string;
+    }
+    // ':list
+    else if ('.' == e) {
+        return type_id_list;
     }
     
     // ':number by default

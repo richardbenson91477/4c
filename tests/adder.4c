@@ -1,21 +1,21 @@
 
-(set _main% (do_ [] ':number [
-    (set _add2% (do_ [x] ':number [
-        (return% (+% 3 x))
+(set main (do [] ':number [
+    (set add2 (do [x] ':number [
+        (return (+ 3 x))
     ]))
 
-    (print (_add2% 3) 'nl$)
+    (print (add2 3) 'nl)
 
-    (set _make-adder_ (do_ [x] ':function [
-        (return_ (do_ [y] ':number [
-            (return% (+% x y))
+    (set make-adder (do [x] ':function [
+        (return (do [y] ':number [
+            (return (+ x y))
         ]))
     ]))
 
-    (set _add4% (_make-adder_ 4))
-    (print (_add4% 3) 'nl$)
+    (set add4 (make-adder 4))
+    (print (add4 3) 'nl)
 
-    (print (eval (_make-adder_ 5) 2) 'nl$)
+    (print ((make-adder 5) 2) 'nl)
   ] 0)
 )
 

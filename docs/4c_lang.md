@@ -7,7 +7,7 @@ _Foresee: To see beforehand_
 
 ## Overview
 **4c** is an imperitive _(as opposed to functional)_ programming language with a LISP-like syntax.  
-4c aims to be as easily reasoned about by a programmer as is attainable, while maintaining high performance.
+4c aims to be easily reasoned about by a programmer, while maintaining high performance.
 
 **4cc** (the reference 4c compiler) compiles 4c code.  
 __FIXME:__ be more specific about the generated code
@@ -18,11 +18,9 @@ This document describes the 4c language; its syntax, standard built-in types, fu
 The language known as "Modern C++" has great value in terms of performance and capabilities - at a usability cost that many people would rather avoid paying. Easier to use - and still powerful - languages like Python already exist - with an obvious performance cost. Many "C performance with modern features" languages have come forth to try and remedy this situation. Perhaps one will dethrone C++ - or perhaps none will. Nevertheless, _all_ languages have value to those who enjoy using them. I do not _expect_ 4c to become popular - nor do I plan to force the issue, by design. 4c is simply my personal attempt to avoid using "Modern C++" when I can - if others find it useful, that's great too.  
 
 ### Potential benefits
-  * Variable and function names specify their own types.  
   * LISP-like syntax rather than the standard "Algol family" syntax.  
 
 ### Potential drawbacks
-  * Variable and function names specify their own types.  
   * LISP-like syntax rather than the standard "Algol family" syntax.  
 
 ## Syntax
@@ -38,16 +36,16 @@ Where
   * _arg_ is any of the following:
 
     -   An _inner_ function call which returns a result to its _outer_ function  
-        Example: (+% **(+% 1 1)** 2)
+        Example: (+ **(+ 1 1)** 2)
 
     -   A list  
-        Example: [3 x$ 'false^ (+% y z)]
+        Example: [3 x 'false (+ y z)]
 
     -   A constant  
-        Examples: 3 "Hello" 'nl$
+        Examples: 3 "Hello" 'nl
 
     -   A variable name  
-        Examples: x my-string$
+        Examples: x my-string
 
 **Lists** of values take the following form:  
 [_list-item_**1**_ .. _list-item_**n**_]  
@@ -70,10 +68,10 @@ String constants (type ':string):
 
 ### Built-in constants
 'nil (empty value)  
-'true^ (':boolean true)  
-'false^ (':boolean false)  
-'spc$ (blank-space ':string)  
-'nl$ (newline ':string)  
+'true (':boolean true)  
+'false (':boolean false)  
+'spc (blank-space ':string)  
+'nl (newline ':string)  
 
 ### Built-in type names
 ':nil  
@@ -83,31 +81,7 @@ String constants (type ':string):
 ':string  
 ':list
 
-### Variables
-Variable names describe their own types:  
-
-  * **\_**function-var  
-        Names beginning with the character \_ have type ':function.  
-        If there is not a special end character, the return type is ':nil. The end character % has return type ':number. Other end characters follow the conventions below.  
-        Example 1: \_main% (a function that returns a ':number)  
-        Example 2: \_do-nothing (a function that returns ':nil)  
-        Example 3: \_is-ok^ (a function that returns a ':boolean)  
-
-  * number-var  
-        Otherwise plain names have type ':number by default.  
-        Example: x (a variable referencing a ':number)  
-
-  * boolean-var**^**  
-        Names ending with carat (^) have type ':boolean.  
-        Example: full-screen^ (a variable referencing a ':bool)  
-
-  * string-var**$**  
-        Names ending with a dollar sign ($) have type ':string.  
-        Example: error-msg$ (a variable referencing a ':string)  
-
-  * list-var**.**  
-        Names ending with period (.) have type ':list.  
-        Example: square-roots.  
+### User-defined types
 
   * **:**type-name  
         Names beginning with a colon (:) have their own type (see _def-type_).  
@@ -119,48 +93,47 @@ Variable names describe their own types:
 
   * **:**type-name**:**instance-name**.**var-instance  
         Names beginning with :type-name:instance-name. are variables belonging to _:instance-name_ of type _:type-name_ and have their own type determined by the name _var-instance_.  
-        Example: :employee:hans:full-name$ (a variable referencing a ':string)  
+        Example: :employee:hans:full-name (a variable referencing a ':string)  
 
 ## Built-in functions
 (**set** _var-name_ _value_)  
 Description: reference _value_ with the variable _var-name_  
 Returns: 'nil  
-Example: (set x-times-y (\*% x y)) (computes x multiplied by y and sets the variable x-times-y to the result)
+Example: (set x-times-y (\* x y)) (computes x multiplied by y and sets the variable x-times-y to the result)
 
 __FIXME:__ very volatile below this line  
 
 (def-type :type-name [var-list]) -> 'nil  
-(do\_ [arg-list] type-name [fn-list] default-return-value) -> ':function that returns type _type-name_  
-(return($,%,^) value-for-do) -> (depends on end character)  
+(do [arg-list] type-name [fn-list] default-return-value) -> ':function that returns type _type-name_  
+(return value-for-do) -> 'nil  
 (if ':boolean [true-fn-list] [false-fn-list]) -> 'nil  
 (while ':boolean) [fn-list] [per-loop fn-list]) -> 'nil  
 (print args) -> 'nil  
-(input$) -> ':string  
-(eval($,%,^) ':function func-args) -> (depends on end character)  
-(and^ ':boolean ':boolean) -> ':boolean  
-(or^ ':boolean ':boolean) -> ':boolean  
-(not^ ':boolean) -> ':boolean  
-(+% num num) -> ':number  
-(-% num num) -> ':number  
-(\*% num num) -> ':number  
-(/% num num) -> ':number  
-(%% num num) -> ':number  
-(=^ num num) -> ':boolean  
-(!=^ num num) -> ':boolean  
-(>^ num num) -> ':boolean  
-(<^ num num) -> ':boolean  
-(<=^ num num) -> ':boolean  
-(>=^ num num) -> ':boolean  
-(str-dup^ source-string) -> ':string  
-(str-from-char$ char) -> ':string  
-(str-cat$ string string) -> ':string  
-(str-cmp^ string string) -> ':boolean  
-(new^ :type instance-var [extra-args]) -> ':boolean  
-    (set :type._new^ (do\_ [:type:this extra-param-vars] ':boolean  
+(input) -> ':string  
+(and ':boolean ':boolean) -> ':boolean  
+(or ':boolean ':boolean) -> ':boolean  
+(not ':boolean) -> ':boolean  
+(+ num num) -> ':number  
+(- num num) -> ':number  
+(\* num num) -> ':number  
+(/ num num) -> ':number  
+(% num num) -> ':number  
+(= num num) -> ':boolean  
+(!= num num) -> ':boolean  
+(> num num) -> ':boolean  
+(< num num) -> ':boolean  
+(<= num num) -> ':boolean  
+(>= num num) -> ':boolean  
+(str-dup source-string) -> ':string  
+(str-from-char char) -> ':string  
+(str-cat string string) -> ':string  
+(str-cmp string string) -> ':boolean  
+(new :type instance-var [extra-args]) -> ':boolean  
+    (set :type._new (do\_ [:type:this extra-param-vars] ':boolean  
       [alloc/init :type:this.vars]  
     ))  
-(del^ :type instance-var [extra-args]) -> ':boolean  
-    (set :type.\_del^ (do\_ [:type:this extra-param-vars]  ':boolean  
+(del :type instance-var [extra-args]) -> ':boolean  
+    (set :type.\_del (do\_ [:type:this extra-param-vars]  ':boolean  
       [dealloc/deinit :type:this.vars]  
     ))  
 

@@ -9,9 +9,9 @@ enum type_ids {
     type_id_nil = 0,
     type_id_func,
     type_id_num,
-    type_id_num_array,
     type_id_bool,
     type_id_string,
+    type_id_list,
     type_id_user,
 };
 
@@ -44,10 +44,6 @@ struct type_format_num {
     struct number n;
 };
 
-struct type_format_num_array {
-    struct array num_a;
-};
- 
 struct type_format_bool {
     uint8_t t_;
 };
@@ -58,6 +54,10 @@ struct type_format_string {
     uint32_t s_n;
 };
 
+struct type_format_list {
+    struct array a;
+};
+ 
 struct type_format_user {
     // type_info array representing member items
     struct array items_a;

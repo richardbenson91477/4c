@@ -1,13 +1,13 @@
 
-(set _main% (do_ [] ':number [
+(set main (do [] ':number [
     (set x 0)
     ;(set x 1)
-    (if (!=^ x 0) [
-        (print "x is nonzero" 'nl$)
-        (return% 0)
+    (if (!= x 0) [
+        (print "x is nonzero" 'nl)
+        (return 0)
       ] [
-        (print "x is zero" 'nl$)
-        (return% -1)
+        (print "x is zero" 'nl)
+        (return -1)
       ])
   ] 0)
 )

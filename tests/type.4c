@@ -1,25 +1,21 @@
 [
-(def-type :nabs [
-    n
-    a.
-    b^
-    s$
-])
+(def-type :nabs [n a b s])
 
-(set :nabs._new^ (do_ [:nabs:self] ':boolean [
-    (print ":nabs._new^" 'nl$)
+(set :nabs.new (do [:nabs:self] ':boolean [
+    (print ":nabs.new" 'nl)
     (set :nabs:self.n 3)
-    (set :nabs:self.a. (new ':number-array [5]))
-    (set :nabs:self.s$ (new ':string [6]))
-    (str-copy$ :nabs:self.s$ "hello")
-    (set :nabs:self.b^ 'false)
+    (set :nabs:self.a (new ':list 5))
+    (set :nabs:self.s (new ':string 6))
+    (str-copy :nabs:self.s "hello")
+    (set :nabs:self.b 'false)
   ] 'true)
 )
 
-(set :nabs._del^ (do_ [:nabs:this] ':boolean [
-    (print ":nabs._del^" 'nl$)
-    (del :nabs:this.a.)
-    (del :nabs:this.s$)
+(set :nabs.del (do [:nabs:this] ':boolean [
+    (print ":nabs.del" 'nl)
+    (del :nabs:this.a)
+    (del :nabs:this.s)
   ] 'true)
 )
 ]
+
