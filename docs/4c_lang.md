@@ -15,7 +15,7 @@ __FIXME:__ be more specific about the generated code
 This document describes the 4c language; its syntax, standard built-in types, functions, constants, and so on.  
 
 ### Rationale
-The language known as "Modern C++" has great value in terms of performance and capabilities - at a usability cost that many people would rather avoid paying. Simpler to use languages like Python already exist - with an obvious performance cost. Many "C performance with modern features" languages have come forth to try and remedy this situation. Perhaps one will dethrone C++ - or perhaps none will. Nevertheless, they have their own inherent value to those who enjoy using them (as does C++). I do not _expect_ 4c to become popular - nor do I plan to force the issue, by design. 4c is simply my personal attempt to avoid using "Modern C++" when I can - if others find it useful, that's great too.  
+The language known as "Modern C++" has great value in terms of performance and capabilities - at a usability cost that many people would rather avoid paying. Easier to use - and still powerful - languages like Python already exist - with an obvious performance cost. Many "C performance with modern features" languages have come forth to try and remedy this situation. Perhaps one will dethrone C++ - or perhaps none will. Nevertheless, _all_ languages have value to those who enjoy using them. I do not _expect_ 4c to become popular - nor do I plan to force the issue, by design. 4c is simply my personal attempt to avoid using "Modern C++" when I can - if others find it useful, that's great too.  
 
 ### Potential benefits
   * Variable and function names specify their own types.  
