@@ -1,13 +1,13 @@
 [
-    (set _sqr% (do_ [y] [(return% (*% y y))]))
+(set _sqr% (do_ [y] '%number [(return% (*% y y))]))
 
-    (set _main% (do_ [] [
-        (set x 1)
-        (while (<=^ x 10) [
-            (print (_sqr% x) 'nl$)
-          ] [(set x (+% x 1))]
-        )
-      0])
+(set _main% (do_ [] '%number [
+    (set x 1)
+    (while (<=^ x 10) [
+        (print (_sqr% x) 'nl$)
+      ] [(set x (+% x 1))]
     )
+  0])
+)
 ]
 

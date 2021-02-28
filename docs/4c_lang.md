@@ -88,8 +88,8 @@ String constants (type ':string):
 Variable names describe their own types:  
 
   * **\_**function-var  
-        Names beginning with underscore (\_) have type ':function.  
-        If there is not a special ending symbol, the return type is ':nil. The ending symbol % has return type ':number. Other ending symbols follow the conventions below.  
+        Names beginning with the character \_ have type ':function.  
+        If there is not a special end character, the return type is ':nil. The end character % has return type ':number. Other end characters follow the conventions below.  
         Example 1: \_main% (a function that returns a ':number)  
         Example 2: \_do-nothing (a function that returns ':nil)  
         Example 3: \_is-ok^ (a function that returns a ':boolean)  
@@ -129,13 +129,13 @@ Returns: 'nil
 Example: (set two-times-two (\*% 2 2)) (gives the variable two-times-two the value 4)  
 
 (def-type :type-name [var-list]) -> 'nil  
-(do\_ [arg-list] [fn-list] default-return-value) -> ':function instance  
-(return($,%,^) value-for-do) -> (depends on ending symbol)  
+(do\_ [arg-list] type-name [fn-list] default-return-value) -> ':function that returns type _type-name_  
+(return($,%,^) value-for-do) -> (depends on end character)  
 (if ':boolean [true-fn-list] [false-fn-list]) -> 'nil  
 (while ':boolean) [fn-list] [per-loop fn-list]) -> 'nil  
 (print args) -> 'nil  
 (input$) -> 'string instance  
-(eval($,%,^) ':function func-args) -> (depends on ending symbol)  
+(eval($,%,^) ':function func-args) -> (depends on end character)  
 (and^ ':boolean ':boolean) -> ':boolean  
 (or^ ':boolean ':boolean) -> ':boolean  
 (not^ ':boolean) -> ':boolean  
@@ -155,11 +155,11 @@ Example: (set two-times-two (\*% 2 2)) (gives the variable two-times-two the val
 (str-add$ string string) -> 'string  
 (str-cmp^ string string) -> ':boolean  
 (new^ :type instance-var [extra-args]) -> ':boolean  
-    (set :type._new^ (do\_ [:type:this extra-param-vars]  
+    (set :type._new^ (do\_ [:type:this extra-param-vars] ':boolean  
       [alloc/init :type:this.vars]  
     ))  
 (del^ :type instance-var [extra-args]) -> ':boolean  
-    (set :type.\_del^ (do\_ [:type:this extra-param-vars]  
+    (set :type.\_del^ (do\_ [:type:this extra-param-vars]  ':boolean  
       [dealloc/deinit :type:this.vars]  
     ))  
 

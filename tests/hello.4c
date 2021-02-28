@@ -1,6 +1,6 @@
 ; comments look like this
 
-(set _main% (do_ [] [
+(set _main% (do_ [] ':number [
     (print "Hello, world!" 'nl$)
   ] 0)
 )

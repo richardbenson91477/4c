@@ -6,7 +6,7 @@
 #include "number.h"
 
 enum type_ids {
-    type_id_nil,
+    type_id_nil = 0,
     type_id_func,
     type_id_num,
     type_id_num_array,
@@ -70,7 +70,7 @@ struct type_data {
     } type_format;
 };
 
-extern enum type_ids type_id_from_symbol (char *_s);
+extern enum type_ids type_id_from_symbol (char *_s, uint32_t s_n);
 
 #endif
 

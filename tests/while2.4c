@@ -1,5 +1,5 @@
 
-(set _main% (do_ [] [
+(set _main% (do_ [] ':number [
     (set i 4)
     (while (>^ i 0) [
         (print (str-from$ (+% i 96)))

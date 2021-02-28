@@ -114,26 +114,25 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         return NULL;
     }
 
+    // function call
     if ('(' == *_m) {
         printf("debug: syntax_tree_from_source: found function call\n");
-        // function call
         _st->syntax_type = syntax_funcall;
     }
+    // list
     else if ('[' == *_m) {
         printf("debug: syntax_tree_from_source: found list\n");
-        // list
         _st->syntax_type = syntax_list;
     }
-    // -, 0-9, ', " 
+    // constant
     else if (('\'' == *_m) || ('\"' == *_m) ||
             ('-' == *_m) || isdigit(*_m)) {
         printf("debug: syntax_tree_from_source: found constant\n");
-        // constant
         _st->syntax_type = syntax_const;
     }
+    // variable
     else {
         printf("debug: syntax_tree_from_source: found variable\n");
-        // variable
         _st->syntax_type = syntax_var;
     }
 
@@ -173,7 +172,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
             (syntax_var == _st->syntax_type)) {
 
         // deduce type_id from symbol
-        _st->td.type_id = type_id_from_symbol (_st->td.name_s);
+        _st->td.type_id = type_id_from_symbol (_st->td.name_s, _st->td.name_n);
 
         printf("debug: syntax_tree_from_source: deduced type \"%s\"\n",
                 type_id_names[_st->td.type_id]);
@@ -183,7 +182,8 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         return _st;
     }
     else if (syntax_funcall == _st->syntax_type) {
-        // TODO: deduce td.type_id based on ...
+        // first symbol in function call must be ':function type
+        _st->td.type_id = type_id_func;
     }
 
     while ('\0' != *_m) {

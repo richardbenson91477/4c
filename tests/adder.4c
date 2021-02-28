@@ -1,13 +1,13 @@
 
-(set _main% (do_ [] [
-    (set _add2% (do_ [x] [
+(set _main% (do_ [] ':number [
+    (set _add2% (do_ [x] ':number [
         (return% (+% 3 x))
     ]))
 
     (print (_add2% 3) 'nl$)
 
-    (set _make-adder_ (do_ [x] [
-        (return_ (do_ [y] [
+    (set _make-adder_ (do_ [x] ':function [
+        (return_ (do_ [y] ':number [
             (return% (+% x y))
         ]))
     ]))

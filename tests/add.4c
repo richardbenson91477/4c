@@ -1,6 +1,6 @@
 ; NOTE: this is a compiler test
 
-(set _main% (do_ [] [
+(set _main% (do_ [] ':number [
     (set a 1)
     (set a (+% a 9))
     (print a 'nl$)
