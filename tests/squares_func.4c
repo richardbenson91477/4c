@@ -1,11 +1,11 @@
 [
-    (def _sqr (do [y] [(return (* y y))]))
+    (set _sqr% (do_ [y] [(return% (*% y y))]))
 
-    (def _main (do [] [
+    (set _main% (do_ [] [
         (set x 1)
-        (while (<= x 10) [
-            (print (_sqr x))
-          ] [(set x (+ x 1))]
+        (while (<=^ x 10) [
+            (print (_sqr% x))
+          ] [(set x (+% x 1))]
         )
       0])
     )

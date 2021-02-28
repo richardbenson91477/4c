@@ -80,6 +80,7 @@ struct syntax_tree *syntax_tree_new () {
 
     struct syntax_tree *_st;
 
+    // calloc to zero out new syntax_tree
     _st = (struct syntax_tree *)calloc (1, sizeof(struct syntax_tree));
     if (NULL == _st) {
         fprintf(stderr, "error: syntax_tree_new: calloc\n");
@@ -116,44 +117,44 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     if ('(' == *_m) {
         printf("debug: syntax_tree_from_source: found function call\n");
         // function call
-        _st->elem_type = elem_type_funcall;
+        _st->syntax_type = syntax_funcall;
     }
     else if ('[' == *_m) {
         printf("debug: syntax_tree_from_source: found list\n");
         // list
-        _st->elem_type = elem_type_list;
+        _st->syntax_type = syntax_list;
     }
     // -, 0-9, ', " 
     else if (('\'' == *_m) || ('\"' == *_m) ||
             ('-' == *_m) || isdigit(*_m)) {
         printf("debug: syntax_tree_from_source: found constant\n");
         // constant
-        _st->elem_type = elem_type_const;
+        _st->syntax_type = syntax_const;
     }
     else {
         printf("debug: syntax_tree_from_source: found variable\n");
         // variable
-        _st->elem_type = elem_type_var;
+        _st->syntax_type = syntax_var;
     }
 
     // move just past '[' or '('
-    if ((elem_type_funcall == _st->elem_type) ||
-            (elem_type_list == _st->elem_type)) {
+    if ((syntax_funcall == _st->syntax_type) ||
+            (syntax_list == _st->syntax_type)) {
         _m += 1;
         if ('\0' == *_m) {
             fprintf(stderr, "error: syntax_tree_from_source: NIL (2)\n");
             return NULL;
         }
 
-        if ((elem_type_funcall == _st->elem_type) &&
+        if ((syntax_funcall == _st->syntax_type) &&
                 (')' == *_m)) {
             fprintf(stderr, "error: syntax_tree_from_source: function name missing\n");
             return NULL;
         }
     }
 
-    // read symbold id (excepting list) into (type data) td
-    if (elem_type_list != _st->elem_type) {
+    // read symbol name (excepting list) into (type_data) td
+    if (syntax_list != _st->syntax_type) {
         uint32_t n = syntax_tree_symbol_len (_m);
         if (0 == n) {
             fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_symbol_len\n");
@@ -168,19 +169,25 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->td.name_s);
     }
 
-    if ((elem_type_const == _st->elem_type) ||
-            (elem_type_var == _st->elem_type)) {
+    if ((syntax_const == _st->syntax_type) ||
+            (syntax_var == _st->syntax_type)) {
+
+        // deduce type_id from symbol
+        _st->td.type_id = type_id_from_symbol (_st->td.name_s);
+
+        printf("debug: syntax_tree_from_source: deduced type \"%s\"\n",
+                type_id_names[_st->td.type_id]);
+
+        // save current position and return
         *__sa = _m;
-        // TODO: deduce and store (type data) td
         return _st;
     }
-    else if (elem_type_funcall == _st->elem_type) {
-        // TODO: deduce and store (type data) td
+    else if (syntax_funcall == _st->syntax_type) {
+        // TODO: deduce td.type_id based on ...
     }
 
-    // otherwise recurse
     while ('\0' != *_m) {
-        // seek ahead to something significant (again)
+        // seek ahead to something significant (2)
         _ma = syntax_tree_symbol_seek (_m);
         if (NULL == _ma) {
             fprintf(stderr, "error: syntax_tree_from_source: NULL (3)\n");
@@ -189,22 +196,25 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         _m = _ma;
 
         // end of function call or list
-        if (((elem_type_funcall == _st->elem_type) &&
+        if (((syntax_funcall == _st->syntax_type) &&
                 (')' == *_m)) || 
-            ((elem_type_list == _st->elem_type) &&
+            ((syntax_list == _st->syntax_type) &&
                 (']' == *_m))) {
 
-            if (elem_type_funcall == _st->elem_type) {
+            if (syntax_funcall == _st->syntax_type) {
                 printf("debug: syntax_tree_from_source: found function call end\n");
             }
             else {
                 printf("debug: syntax_tree_from_source: found list end\n");
             }
+
+            // save current position and return
             _m += 1;
             *__sa = _m;
             return _st;
         }
 
+        // recurse
         _st2 = syntax_tree_from_source (_m, &_ma);
         if (NULL == _st) {
             fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_from_source\n");
@@ -212,12 +222,14 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         }
         _m = _ma;
 
+        // add resultant tree to nodes_a
         if (0 == array_add (&_st->nodes_a, _st2)) {
             fprintf(stderr, "error: syntax_tree_from_source: array_add\n");
             return NULL;
         }
     }
 
+    // save current position and return
     *__sa = _m;
     return _st;
 }

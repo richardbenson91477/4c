@@ -11,3 +11,8 @@ const char *type_id_names[] = {
     "':user",
 };
 
+enum type_ids type_id_from_symbol (char *_s) {
+
+    return type_id_nil;
+}
+

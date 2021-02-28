@@ -1,6 +1,6 @@
 ; comments look like this
 
-(def _main (do [] [
+(set _main% (do_ [] [
     (print "Hello, world!\n")
   ] 0)
 )

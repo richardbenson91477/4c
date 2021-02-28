@@ -1,20 +1,20 @@
 
-(def _main (do [] [
+(set _main% (do_ [] [
     (set i 4)
-    (while (> i 0) [
-        (print (str-from (+ i 96)))
+    (while (>^ i 0) [
+        (print (str-from$ (+% i 96)))
 
         (set j 4)
-        (while (> j 0) [
-            (print (str-from (+ j 64)))
-            ] [(set j (- j 1))]
+        (while (>^ j 0) [
+            (print (str-from$ (+% j 64)))
+            ] [(set j (-% j 1))]
         )
 
-        (print 'nl)
-      ] [(set i (- i 1))]
+        (print 'nl$)
+      ] [(set i (-% i 1))]
     )
 
-    (print 'nl)
+    (print 'nl$)
   ] 0)
 )
 

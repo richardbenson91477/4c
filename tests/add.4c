@@ -1,8 +1,8 @@
 ; NOTE: this is a compiler test
 
-(def _main (do [] [
+(set _main (do_ [] [
     (set a 1)
-    (set a (+ a 9))
+    (set a (+% a 9))
     (print a)
   ] 0)
 )

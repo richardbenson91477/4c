@@ -5,16 +5,16 @@
 #include "array.h"
 #include "type.h"
 
-enum elem_types {
-    elem_type_funcall,
-    elem_type_list,
-    elem_type_const,
-    elem_type_var,
+enum syntax_types {
+    syntax_funcall,
+    syntax_list,
+    syntax_const,
+    syntax_var,
 };
 
 // NOTE: keep these items "zero-able to init"
 struct syntax_tree {
-    enum elem_types elem_type;
+    enum syntax_types syntax_type;
 
     struct type_data td;
 
