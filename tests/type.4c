@@ -6,8 +6,8 @@
         s$
     ])
 
-    (set :nabs._new (do_ [:nabs:self] [
-        (print ":nabs._new")
+    (set :nabs._new^ (do_ [:nabs:self] [
+        (print ":nabs._new^" 'nl$)
         (set :nabs:self.n 3)
         (set :nabs:self.a. (new ':number-array [5]))
         (set :nabs:self.s$ (new ':string [6]))
@@ -16,7 +16,8 @@
       ] 'true)
     )
 
-    (set :nabs._del (do_ [:nabs:this] [
+    (set :nabs._del^ (do_ [:nabs:this] [
+        (print ":nabs._del^" 'nl$)
         (del :nabs:this.a.)
         (del :nabs:this.s$)
       ] 'true)
