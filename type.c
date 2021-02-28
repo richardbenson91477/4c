@@ -62,7 +62,7 @@ enum type_ids type_id_from_symbol (char *_s, uint32_t s_n) {
         return type_id_user;
     }
 
-    // non-function variable or built-in constant, with possible special end character 
+    // non-function variable or built-in constant, possibly with special end character 
     char e = *(_s + s_n - 1);
     // ':number-array
     if ('.' == e) {

@@ -7,6 +7,7 @@ struct number *number_from_s (char *_s) {
 
     return NULL;
 }
+// NOTE: linked to target code
 
 double number_to_d (struct number *_n) {
     //printf("debug: number_to_d);
@@ -18,4 +19,5 @@ double number_to_d (struct number *_n) {
 
     return _n->d;
 }
+// NOTE: linked to target code
 

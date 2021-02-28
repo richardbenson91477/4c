@@ -16,7 +16,7 @@ enum syntax_types {
 struct syntax_tree {
     enum syntax_types syntax_type;
 
-    struct type_data td;
+    struct type_info ti;
 
     struct array nodes_a;
 };

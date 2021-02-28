@@ -80,7 +80,7 @@ struct syntax_tree *syntax_tree_new () {
 
     struct syntax_tree *_st;
 
-    // calloc to zero out new syntax_tree
+    // calloc to init new syntax_tree
     _st = (struct syntax_tree *)calloc (1, sizeof(struct syntax_tree));
     if (NULL == _st) {
         fprintf(stderr, "error: syntax_tree_new: calloc\n");
@@ -145,6 +145,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
             return NULL;
         }
 
+        // disallow empty functions
         if ((syntax_funcall == _st->syntax_type) &&
                 (')' == *_m)) {
             fprintf(stderr, "error: syntax_tree_from_source: function name missing\n");
@@ -152,7 +153,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         }
     }
 
-    // read symbol name (excepting list) into (type_data) td
+    // read symbol name (excepting list) into (type_info) ti
     if (syntax_list != _st->syntax_type) {
         uint32_t n = syntax_tree_symbol_len (_m);
         if (0 == n) {
@@ -160,22 +161,22 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
             return NULL;
         }
 
-        _st->td.name_s = strndup(_m, n);
-        _st->td.name_n = n;
+        _st->ti.name_s = strndup(_m, n);
+        _st->ti.name_n = n;
 
         _m += n;
 
-        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->td.name_s);
+        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->ti.name_s);           
     }
 
     if ((syntax_const == _st->syntax_type) ||
             (syntax_var == _st->syntax_type)) {
 
         // deduce type_id from symbol
-        _st->td.type_id = type_id_from_symbol (_st->td.name_s, _st->td.name_n);
+        _st->ti.type_id = type_id_from_symbol (_st->ti.name_s, _st->ti.name_n);
 
         printf("debug: syntax_tree_from_source: deduced type \"%s\"\n",
-                type_id_names[_st->td.type_id]);
+                type_id_names[_st->ti.type_id]);
 
         // save current position and return
         *__sa = _m;
@@ -183,7 +184,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     }
     else if (syntax_funcall == _st->syntax_type) {
         // first symbol in function call must be ':function type
-        _st->td.type_id = type_id_func;
+        _st->ti.type_id = type_id_func;
     }
 
     while ('\0' != *_m) {

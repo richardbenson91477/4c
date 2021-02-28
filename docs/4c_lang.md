@@ -7,16 +7,15 @@ _Foresee: To see beforehand_
 
 ## Overview
 **4c** is an imperitive _(as opposed to functional)_ programming language with a LISP-like syntax.  
-4c is designed to facilitate compilation to native machine code, rather than interpretable byte-code. 
+4c is designed to facilitate compilation to native machine code (as in the languages C/C++), rather than interpretable (or JIT-able) byte-code, symbols, and so forth.  
+4c code is intended to be as easily parsed and reasoned about by a programmer as is reasonably attainable.  
 
 **4cc** (the reference 4c compiler) compiles 4c code to GNU assembly (GAS).
 
 This document describes the 4c language; its syntax and standard built-in types, functions, constants, etc.
 
 ### Rationale
-Languages that intend to improve on C while filling the same niche are _so_ hot right now.
-
-I believe this is a good thing. Let's add another.
+The hydra known as "Modern C++" has great value in terms of performance and capabilities - at a usability cost that many people would like to avoid paying. Simpler to use languages like Python already exist - with an obvious performance cost. Many "C performance with modern features" languages have come forth to try and remedy the situation. Perhaps one will dethrone C++ - or perhaps none will. Nevertheless, they have their own inherent value to those who enjoy using them. I do not _expect_ 4c to become popular - nor do I plan to force the issue. 4c is simply my personal attempt to avoid using "Modern C++" - if others find it useful, that's great.  
 
 ### Potential benefits
   * Variable and function names specify their own types.  
@@ -126,7 +125,7 @@ Variable names describe their own types:
 (**set** _var-name_ _value_)  
 Description: assign _value_ to the variable referenced by _var-name_  
 Returns: 'nil  
-Example: (set two-times-two (\*% 2 2)) (gives the variable two-times-two the value 4)  
+Example: (set x-times-y (\*% x y)) (computes x multiplied by y and assignes the result to the variable x-times-y 
 
 (def-type :type-name [var-list]) -> 'nil  
 (do\_ [arg-list] type-name [fn-list] default-return-value) -> ':function that returns type _type-name_  
@@ -134,7 +133,7 @@ Example: (set two-times-two (\*% 2 2)) (gives the variable two-times-two the val
 (if ':boolean [true-fn-list] [false-fn-list]) -> 'nil  
 (while ':boolean) [fn-list] [per-loop fn-list]) -> 'nil  
 (print args) -> 'nil  
-(input$) -> 'string instance  
+(input$) -> ':string  
 (eval($,%,^) ':function func-args) -> (depends on end character)  
 (and^ ':boolean ':boolean) -> ':boolean  
 (or^ ':boolean ':boolean) -> ':boolean  
@@ -144,15 +143,15 @@ Example: (set two-times-two (\*% 2 2)) (gives the variable two-times-two the val
 (\*% num num) -> ':number  
 (/% num num) -> ':number  
 (%% num num) -> ':number  
-(=% num num) -> ':boolean  
-(!=% num num) -> ':boolean  
+(=^ num num) -> ':boolean  
+(!=^ num num) -> ':boolean  
 (>^ num num) -> ':boolean  
 (<^ num num) -> ':boolean  
 (<=^ num num) -> ':boolean  
 (>=^ num num) -> ':boolean  
-(str-copy^ target-string-var source-string) -> ':boolean  
-(str-from$ char-number) -> 'string  
-(str-add$ string string) -> 'string  
+(str-dup^ source-string) -> ':string  
+(str-from-char$ char) -> ':string  
+(str-cat$ string string) -> ':string  
 (str-cmp^ string string) -> ':boolean  
 (new^ :type instance-var [extra-args]) -> ':boolean  
     (set :type._new^ (do\_ [:type:this extra-param-vars] ':boolean  

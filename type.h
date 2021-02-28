@@ -17,6 +17,19 @@ enum type_ids {
 
 extern const char *type_id_names[];
 
+// NOTE: keep these items "zero-able to init"
+struct type_info {
+
+    uint32_t name_n;
+    char *name_s;
+
+    enum type_ids type_id;
+    
+    // asm label or 0/NULL
+    uint32_t label_n;
+    char *label_s;
+};
+
 // NOTE: type_format_* structure data in memory during target program runtime, to be used by specialized linked-in runtime functions such as "number_to_d"
 
 // NOTE: keep these type_format_* items "zero-able to init"
@@ -24,7 +37,7 @@ extern const char *type_id_names[];
 struct type_format_func {
     // return type detauls
     // argument list details
-    // ...
+    // ...?
 };
 
 struct type_format_num {
@@ -46,30 +59,10 @@ struct type_format_string {
 };
 
 struct type_format_user {
+    // type_info array representing member items
     struct array items_a;
 };
  
-// NOTE: keep these items "zero-able to init"
-struct type_data {
-    // symbol or 0/NULL
-    uint32_t name_n;
-    char *name_s;
-    
-    // asm label or 0/NULL
-    uint32_t label_n;
-    char *label_s;
-
-    enum type_ids type_id;
-    union {
-        struct type_format_func func;
-        struct type_format_num num;
-        struct type_format_num_array num_array;
-        struct type_format_bool bool;
-        struct type_format_string string;
-        struct type_format_user user;
-    } type_format;
-};
-
 extern enum type_ids type_id_from_symbol (char *_s, uint32_t s_n);
 
 #endif

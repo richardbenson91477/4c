@@ -4,13 +4,13 @@
 #include "cstd.h"
 #include "type.h"
 
-struct var {
-    struct type_data td;
+struct var_info {
+    struct type_info ti;
 
     // TODO: whatever else vars crave below
 };
 
-extern struct var *var_from_s (char *_s);
+extern struct var_info *var_info_from (struct type_info *_ti_partial);
 
 #endif
 
