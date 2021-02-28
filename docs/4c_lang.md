@@ -129,11 +129,11 @@ Returns: 'nil
 Example: (set two-times-two (\*% 2 2)) (gives the variable two-times-two the value 4)  
 
 (def-type :type-name [var-list]) -> 'nil  
-(do_ [arg-list] [fn-list] default-return-value) -> ':function instance  
+(do\_ [arg-list] [fn-list] default-return-value) -> ':function instance  
 (return($,%,^) value-for-do) -> (depends on ending symbol)  
 (if ':boolean [true-fn-list] [false-fn-list]) -> 'nil  
 (while ':boolean) [fn-list] [per-loop fn-list]) -> 'nil  
-(print value) -> 'nil  
+(print args) -> 'nil  
 (input$) -> 'string instance  
 (eval($,%,^) ':function func-args) -> (depends on ending symbol)  
 (and^ ':boolean ':boolean) -> ':boolean  
@@ -155,11 +155,11 @@ Example: (set two-times-two (\*% 2 2)) (gives the variable two-times-two the val
 (str-add$ string string) -> 'string  
 (str-cmp^ string string) -> ':boolean  
 (new^ :type instance-var [extra-args]) -> ':boolean  
-    (set :type._new^ (do [:type:this extra-param-vars]  
+    (set :type._new^ (do\_ [:type:this extra-param-vars]  
       [alloc/init :type:this.vars]  
     ))  
 (del^ :type instance-var [extra-args]) -> ':boolean  
-    (set :type.\_del^ (do [:type:this extra-param-vars]  
+    (set :type.\_del^ (do\_ [:type:this extra-param-vars]  
       [dealloc/deinit :type:this.vars]  
     ))  
 
