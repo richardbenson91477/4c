@@ -7,23 +7,23 @@ _Foresee: To see beforehand_
 
 ## Overview
 **4c** is an imperitive _(as opposed to functional)_ programming language with a LISP-like syntax.  
-4c is designed to facilitate compilation to native machine code (as in the languages C/C++), rather than interpretable (or JIT-able) byte-code, symbols, and so forth.  
-4c code is intended to be as easily parsed and reasoned about by a programmer as is reasonably attainable.  
+4c aims to be as easily reasoned about by a programmer as is attainable, while maintaining high performance.
 
-**4cc** (the reference 4c compiler) compiles 4c code to GNU assembly (GAS).
+**4cc** (the reference 4c compiler) compiles 4c code.  
+__FIXME:__ be more specific about the generated code
 
-This document describes the 4c language; its syntax and standard built-in types, functions, constants, etc.
+This document describes the 4c language; its syntax, standard built-in types, functions, constants, and so on.  
 
 ### Rationale
-The hydra known as "Modern C++" has great value in terms of performance and capabilities - at a usability cost that many people would like to avoid paying. Simpler to use languages like Python already exist - with an obvious performance cost. Many "C performance with modern features" languages have come forth to try and remedy the situation. Perhaps one will dethrone C++ - or perhaps none will. Nevertheless, they have their own inherent value to those who enjoy using them. I do not _expect_ 4c to become popular - nor do I plan to force the issue. 4c is simply my personal attempt to avoid using "Modern C++" - if others find it useful, that's great.  
+The language known as "Modern C++" has great value in terms of performance and capabilities - at a usability cost that many people would rather avoid paying. Simpler to use languages like Python already exist - with an obvious performance cost. Many "C performance with modern features" languages have come forth to try and remedy this situation. Perhaps one will dethrone C++ - or perhaps none will. Nevertheless, they have their own inherent value to those who enjoy using them (as does C++). I do not _expect_ 4c to become popular - nor do I plan to force the issue, by design. 4c is simply my personal attempt to avoid using "Modern C++" when I can - if others find it useful, that's great too.  
 
 ### Potential benefits
   * Variable and function names specify their own types.  
-  * Lisp-like syntax rather than the standard "Algol family" syntax.  
+  * LISP-like syntax rather than the standard "Algol family" syntax.  
 
 ### Potential drawbacks
   * Variable and function names specify their own types.  
-  * Lisp-like syntax rather than the standard "Algol family" syntax.  
+  * LISP-like syntax rather than the standard "Algol family" syntax.  
 
 ## Syntax
 ### Basic program structure
@@ -79,9 +79,9 @@ String constants (type ':string):
 ':nil  
 ':function  
 ':number  
-':number-array  
 ':boolean  
 ':string  
+':list
 
 ### Variables
 Variable names describe their own types:  
@@ -95,19 +95,19 @@ Variable names describe their own types:
 
   * number-var  
         Otherwise plain names have type ':number by default.  
-        Example: x (a variable holding a ':number)  
-
-  * number-array-var**.**  
-        Names ending with period (.) have type ':number-array.  
-        Example: square-roots. (an array of ':number-s)  
+        Example: x (a variable referencing a ':number)  
 
   * boolean-var**^**  
         Names ending with carat (^) have type ':boolean.  
-        Example: full-screen^ (a variable holding a ':bool)  
+        Example: full-screen^ (a variable referencing a ':bool)  
 
   * string-var**$**  
         Names ending with a dollar sign ($) have type ':string.  
-        Example: error-msg$ (a variable holding a ':string)  
+        Example: error-msg$ (a variable referencing a ':string)  
+
+  * list-var**.**  
+        Names ending with period (.) have type ':list.  
+        Example: square-roots.  
 
   * **:**type-name  
         Names beginning with a colon (:) have their own type (see _def-type_).  
@@ -115,17 +115,19 @@ Variable names describe their own types:
 
   * **:**type-name**:**instance-name  
         Names beginning with :type-name: have the type :type-name.  
-        Example: :employee:hans (a variable holding an :employee)  
+        Example: :employee:hans (a variable referencing an :employee)  
 
   * **:**type-name**:**instance-name**.**var-instance  
         Names beginning with :type-name:instance-name. are variables belonging to _:instance-name_ of type _:type-name_ and have their own type determined by the name _var-instance_.  
-        Example: :employee:hans:full-name$ (a variable holding a ':string)  
+        Example: :employee:hans:full-name$ (a variable referencing a ':string)  
 
 ## Built-in functions
 (**set** _var-name_ _value_)  
-Description: assign _value_ to the variable referenced by _var-name_  
+Description: reference _value_ with the variable _var-name_  
 Returns: 'nil  
-Example: (set x-times-y (\*% x y)) (computes x multiplied by y and assignes the result to the variable x-times-y 
+Example: (set x-times-y (\*% x y)) (computes x multiplied by y and sets the variable x-times-y to the result)
+
+__FIXME:__ very volatile below this line  
 
 (def-type :type-name [var-list]) -> 'nil  
 (do\_ [arg-list] type-name [fn-list] default-return-value) -> ':function that returns type _type-name_  
@@ -162,9 +164,40 @@ Example: (set x-times-y (\*% x y)) (computes x multiplied by y and assignes the 
       [dealloc/deinit :type:this.vars]  
     ))  
 
-===
 ## Credits
 
-© 2021 Richard A. Benson <richardbenson91477@protonmail.com><br>
+### Authors
+Richard A. Benson <richardbenson91477@protonmail.com><br>
 
-Special thanks to: TODO
+### Special thanks to  
+__FIXME:__ be more thankful
+
+## Legal stuff
+
+###This license applies to all code in this repository except where otherwise specified.
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <http://unlicense.org/>
+
