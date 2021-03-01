@@ -3,11 +3,16 @@
 // match order of types in type.h
 const char *type_id_names[] = {
     "':nil",
-    "':function",
-    "':number",
+    "':func",
+    "':i32",
+    "':s32",
+    "':i64",
+    "':s64",
+    "':f32",
+    "':f64",
+    "':bool",
+    "':str",
     "':list",
-    "':boolean",
-    "':string",
     "':user",
 };
 

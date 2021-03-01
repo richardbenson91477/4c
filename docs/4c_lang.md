@@ -32,7 +32,7 @@ The language known as "Modern C++" has great value in terms of performance and c
  
 Where  
 
-  * _function-name_ specifies a built-in function or a variable of type ':function
+  * _function-name_ specifies a built-in function or a variable of type ':func
   * _arg_ is any of the following:
 
     -   An _inner_ function call which returns a result to its _outer_ function  
@@ -75,7 +75,7 @@ String constants (type ':str):
 
 ### Built-in type names
 ':nil (empty type)  
-':function (function type)  
+':func (function type)  
 ':i32 (unsigned 32-bit integer)  
 ':s32 (signed 32-bit integer)  
 ':i64 (unsigned 64-bit integer)  
@@ -101,7 +101,7 @@ Example: (set x-times-y (\* x y)) (computes x multiplied by y and sets the varia
 __FIXME:__ very volatile below this line  
 
 (def-type :type-name [var-list]) -> 'nil  
-(do [arg-list] type-name [fn-list]) -> ':function that returns type _type-name_  
+(do [arg-list] type-name [fn-list]) -> ':func that returns type _type-name_  
 (return value-for-do) -> 'nil  
 (if ':bool [true-fn-list] [false-fn-list]) -> 'nil  
 (while ':bool) [fn-list] [per-loop fn-list]) -> 'nil  
