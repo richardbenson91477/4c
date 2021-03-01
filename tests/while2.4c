@@ -1,5 +1,5 @@
 
-(set main (do [] ':number [
+(set main (do [] ':i32 [
     (set i 4)
     (while (> i 0) [
         (print (str-from (+ i 96)))
@@ -15,6 +15,6 @@
     )
 
     (print 'nl)
-  ] 0)
-)
+    (return 0)
+]))
 

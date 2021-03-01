@@ -1,11 +1,10 @@
 ; NOTE: this is a compiler test
 
-(set main (do [] ':number [
-    (set f 0)
-    (while (<= f 1) [
+(set main (do [] ':f32 [
+    (set f 0.0)
+    (while (<= f 1.0) [
         (print f 'nl)
       ] [(set f (+ f 0.1))]
     )
-  ] 0)
-)
+]))
 

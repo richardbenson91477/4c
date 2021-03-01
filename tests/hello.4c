@@ -1,7 +1,7 @@
 ; comments look like this
 
-(set main (do [] ':number [
+(set main (do [] ':i32 [
     (print "Hello, world!" 'nl)
-  ] 0)
-)
+    (return 0)
+]))
 

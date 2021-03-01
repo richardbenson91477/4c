@@ -62,38 +62,35 @@ Number constants (type ':number):
 
   *  -9..9**.**9..9 .. 0 .. 9..9**.**9..9
 
-String constants (type ':string):
+String constants (type ':str):
 
   *  "This is a string"
 
 ### Built-in constants
 'nil (empty value)  
-'true (':boolean true)  
-'false (':boolean false)  
-'spc (blank-space ':string)  
-'nl (newline ':string)  
+'true (':bool true)  
+'false (':bool false)  
+'spc (blank-space ':str)  
+'nl (newline ':str)  
 
 ### Built-in type names
-':nil  
-':function  
-':number  
-':boolean  
-':string  
-':list
+':nil (empty type)  
+':function (function type)  
+':i32 (unsigned 32-bit integer)  
+':s32 (signed 32-bit integer)  
+':i64 (unsigned 64-bit integer)  
+':s64 (signed 64-bit integer)  
+':f32 (32-bit floating point number)  
+':f64 (64-bit floating point number)  
+':bool (boolean 'true or 'false)  
+':str (string)  
+':list (list)  
 
 ### User-defined types
 
   * **:**type-name  
         Names beginning with a colon (:) have their own type (see _def-type_).  
         Example: :employee (a user-defined type named :employee)  
-
-  * **:**type-name**:**instance-name  
-        Names beginning with :type-name: have the type :type-name.  
-        Example: :employee:hans (a variable referencing an :employee)  
-
-  * **:**type-name**:**instance-name**.**var-instance  
-        Names beginning with :type-name:instance-name. are variables belonging to _:instance-name_ of type _:type-name_ and have their own type determined by the name _var-instance_.  
-        Example: :employee:hans:full-name (a variable referencing a ':string)  
 
 ## Built-in functions
 (**set** _var-name_ _value_)  
@@ -104,37 +101,37 @@ Example: (set x-times-y (\* x y)) (computes x multiplied by y and sets the varia
 __FIXME:__ very volatile below this line  
 
 (def-type :type-name [var-list]) -> 'nil  
-(do [arg-list] type-name [fn-list] default-return-value) -> ':function that returns type _type-name_  
+(do [arg-list] type-name [fn-list]) -> ':function that returns type _type-name_  
 (return value-for-do) -> 'nil  
-(if ':boolean [true-fn-list] [false-fn-list]) -> 'nil  
-(while ':boolean) [fn-list] [per-loop fn-list]) -> 'nil  
+(if ':bool [true-fn-list] [false-fn-list]) -> 'nil  
+(while ':bool) [fn-list] [per-loop fn-list]) -> 'nil  
 (print args) -> 'nil  
-(input) -> ':string  
-(and ':boolean ':boolean) -> ':boolean  
-(or ':boolean ':boolean) -> ':boolean  
-(not ':boolean) -> ':boolean  
+(input) -> ':str  
+(and ':bool ':bool) -> ':bool  
+(or ':bool ':bool) -> ':bool  
+(not ':bool) -> ':bool  
 (+ num num) -> ':number  
 (- num num) -> ':number  
 (\* num num) -> ':number  
 (/ num num) -> ':number  
 (% num num) -> ':number  
-(= num num) -> ':boolean  
-(!= num num) -> ':boolean  
-(> num num) -> ':boolean  
-(< num num) -> ':boolean  
-(<= num num) -> ':boolean  
-(>= num num) -> ':boolean  
-(str-dup source-string) -> ':string  
-(str-from-char char) -> ':string  
-(str-cat string string) -> ':string  
-(str-cmp string string) -> ':boolean  
-(new :type instance-var [extra-args]) -> ':boolean  
-    (set :type._new (do\_ [:type:this extra-param-vars] ':boolean  
-      [alloc/init :type:this.vars]  
+(= num num) -> ':bool  
+(!= num num) -> ':bool  
+(> num num) -> ':bool  
+(< num num) -> ':bool  
+(<= num num) -> ':bool  
+(>= num num) -> ':bool  
+(str-dup source-string) -> ':str  
+(str-from-char char) -> ':str  
+(str-cat string string) -> ':str  
+(str-cmp string string) -> ':bool  
+(new :type instance-var [extra-args]) -> ':bool  
+    (set :type.new (do [this :type extra-params] ':bool
+      [alloc/init this.vars]  
     ))  
-(del :type instance-var [extra-args]) -> ':boolean  
-    (set :type.\_del (do\_ [:type:this extra-param-vars]  ':boolean  
-      [dealloc/deinit :type:this.vars]  
+(del :type instance-var [extra-args]) -> ':bool  
+    (set :type.del (do [this :type extra-params] ':bool  
+      [dealloc/deinit this.vars]  
     ))  
 
 ## Credits

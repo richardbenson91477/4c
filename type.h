@@ -3,7 +3,6 @@
 
 #include "cstd.h"
 #include "array.h"
-#include "number.h"
 
 enum type_ids {
     type_id_nil = 0,

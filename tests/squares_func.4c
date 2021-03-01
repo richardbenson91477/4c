@@ -1,13 +1,15 @@
-[
-(set sqr (do [y] ':number [(return (* y y))]))
 
-(set main (do [] ':number [
+(set main (do [] ':i32 [
+    (set sqr (do [y 'f64] ':f64 [
+        (return (* y y))
+    ]))
+
     (set x 1)
     (while (<= x 10) [
         (print (sqr x) 'nl)
       ] [(set x (+ x 1))]
     )
-  0])
-)
-]
+
+    (return 0) 
+]))
 

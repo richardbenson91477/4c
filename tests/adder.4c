@@ -1,13 +1,12 @@
-
-(set main (do [] ':number [
-    (set add2 (do [x] ':number [
+(set main (do [] ':i32 [
+    (set add2 (do [x ':i32] ':i32 [
         (return (+ 3 x))
     ]))
 
     (print (add2 3) 'nl)
 
-    (set make-adder (do [x] ':function [
-        (return (do [y] ':number [
+    (set make-adder (do [x ':i32] ':function [
+        (return (do [y ':i32] ':i32 [
             (return (+ x y))
         ]))
     ]))
@@ -16,6 +15,6 @@
     (print (add4 3) 'nl)
 
     (print ((make-adder 5) 2) 'nl)
-  ] 0)
-)
+    (return 0)
+]))
 

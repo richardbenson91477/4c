@@ -1,7 +1,6 @@
-(set main (do [] ':number [
+(set main (do [] ':i32 [
     (set a 1)
     (set a (+ a 9))
     (print a 'nl)
-  ] 0)
-)
+]))
 
