@@ -1,3 +1,3 @@
 
-(set main (do [] ':i32 [(return 0)]))
+(set main (do [] ':int [(return 0)]))
 

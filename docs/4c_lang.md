@@ -15,7 +15,7 @@ __FIXME:__ be more specific about the generated code
 This document describes the 4c language; its syntax, standard built-in types, functions, constants, and so on.  
 
 ### Rationale
-__TODO__ 
+__TODO__ rationalize my weird hobby  
 
 ### Potential benefits
   * LISP-like syntax rather than the standard "Algol family" syntax.  
@@ -76,12 +76,8 @@ String constants (type ':str):
 ### Built-in type names
 ':nil (empty type)  
 ':func (function type)  
-':i32 (unsigned 32-bit integer)  
-':s32 (signed 32-bit integer)  
-':i64 (unsigned 64-bit integer)  
-':s64 (signed 64-bit integer)  
-':f32 (32-bit floating point number)  
-':f64 (64-bit floating point number)  
+':int (unsigned 64-bit integer)  
+':float (64-bit floating point number)  
 ':bool (boolean 'true or 'false)  
 ':str (string)  
 ':list (list)  

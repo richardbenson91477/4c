@@ -1,5 +1,5 @@
 
-(set main (do [] ':i32 [
+(set main (do [] ':int [
     (set x 0)
     ;(set x 1)
     (if (!= x 0) [
@@ -9,6 +9,6 @@
         (print "x is zero" 'nl)
         (return -1)
       ])
-  ] 0)
-)
+    (return 0)
+]))
 

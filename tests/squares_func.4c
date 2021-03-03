@@ -1,6 +1,6 @@
 
-(set main (do [] ':i32 [
-    (set sqr (do [y 'f64] ':f64 [
+(set main (do [] ':int [
+    (set sqr (do [y 'float] ':float [
         (return (* y y))
     ]))
 

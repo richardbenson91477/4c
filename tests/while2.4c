@@ -1,5 +1,5 @@
 
-(set main (do [] ':i32 [
+(set main (do [] ':int [
     (set i 4)
     (while (> i 0) [
         (print (str-from (+ i 96)))

@@ -1,5 +1,5 @@
-(set main (do [] ':i32 [
-    (def-type :nabs [n ':i32 a ':list b ':bool s ':str])
+(set main (do [] ':int [
+    (def-type :nabs [n ':int a ':list b ':bool s ':str])
 
     (set :nabs.new (do [self :nabs] ':bool [
         (print ":nabs.new" 'nl)
@@ -19,5 +19,7 @@
         (return 'true)
       ])
     )
+
+    (return 0)
 ]))
 

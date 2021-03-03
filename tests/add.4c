@@ -1,4 +1,4 @@
-(set main (do [] ':i32 [
+(set main (do [] ':int [
     (set a 1)
     (set a (+ a 9))
     (print a 'nl)

@@ -12,10 +12,9 @@ struct var_info *var_info_from (struct type_info *_ti_partial) {
         return NULL;
     }
 
-    // _ti_partial should contain name_s, name_n and type_id
-    _vi->ti.name_n = _ti_partial->name_n;
-    _vi->ti.name_s = strdup(_ti_partial->name_s);
-    _vi->ti.type_id = _ti_partial->type_id;
+    // _ti_partial should contain sym_s, sym_n
+    _vi->ti.sym_n = _ti_partial->sym_n;
+    _vi->ti.sym_s = strdup(_ti_partial->sym_s);
 
     // create a label
     // TODO

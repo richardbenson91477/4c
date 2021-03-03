@@ -1,12 +1,12 @@
-(set main (do [] ':i32 [
-    (set add2 (do [x ':i32] ':i32 [
+(set main (do [] ':int [
+    (set add2 (do [x ':int] ':int [
         (return (+ 3 x))
     ]))
 
     (print (add2 3) 'nl)
 
-    (set make-adder (do [x ':i32] ':function [
-        (return (do [y ':i32] ':i32 [
+    (set make-adder (do [x ':int] ':func [
+        (return (do [y ':int] ':int [
             (return (+ x y))
         ]))
     ]))

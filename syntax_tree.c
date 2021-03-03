@@ -1,7 +1,7 @@
 #include "syntax_tree.h"
 
-uint8_t *syntax_tree_symbol_seek (char *_s) {
-    printf("debug: syntax_tree_symbol_seek\n");
+uint8_t *syntax_tree_sym_seek (char *_s) {
+    printf("debug: syntax_tree_sym_seek\n");
 
     char *_m;
 
@@ -19,7 +19,7 @@ uint8_t *syntax_tree_symbol_seek (char *_s) {
                 if ('\0' == *_m)
                     break;
             }
-            printf("debug: syntax_tree_symbol_seek: skipped comment\n");
+            printf("debug: syntax_tree_sym_seek: skipped comment\n");
         }
         else {
             return _m;
@@ -29,19 +29,19 @@ uint8_t *syntax_tree_symbol_seek (char *_s) {
     return NULL;
 }
 
-uint32_t syntax_tree_symbol_len (char *_s) {
-    printf("debug: syntax_tree_symbol_len\n");
+uint32_t syntax_tree_sym_len (char *_s) {
+    printf("debug: syntax_tree_sym_len\n");
 
     uint32_t s_n;
     char *_m;
 
     _m = _s;
     if (NULL == _m) {
-        fprintf(stderr, "error: syntax_tree_symbol_len: NULL\n");
+        fprintf(stderr, "error: syntax_tree_sym_len: NULL\n");
         return 0;
     }
     else if ('\0' == *_m) {
-        fprintf(stderr, "error: syntax_tree_symbol_len: NIL\n");
+        fprintf(stderr, "error: syntax_tree_sym_len: NIL\n");
         return 0;
     }
     
@@ -108,7 +108,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     }
  
     // seek ahead to something significant
-    _m = syntax_tree_symbol_seek (_s);
+    _m = syntax_tree_sym_seek (_s);
     if (NULL == _m) {
         fprintf(stderr, "error: syntax_tree_from_source: NULL (2)\n");
         return NULL;
@@ -131,6 +131,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         _st->syntax_type = syntax_const;
     }
     // variable
+    // TODO: enforce variable name rules
     else {
         printf("debug: syntax_tree_from_source: found variable\n");
         _st->syntax_type = syntax_var;
@@ -153,43 +154,41 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         }
     }
 
-    // read symbol name (excepting list) into (type_info) ti
+    // read symbol (excepting list) into (type_info) ti
     if (syntax_list != _st->syntax_type) {
-        uint32_t n = syntax_tree_symbol_len (_m);
+        uint32_t n = syntax_tree_sym_len (_m);
         if (0 == n) {
-            fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_symbol_len\n");
+            fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_sym_len\n");
             return NULL;
         }
 
-        _st->ti.name_s = strndup(_m, n);
-        _st->ti.name_n = n;
+        _st->ti.sym_s = strndup(_m, n);
+        _st->ti.sym_n = n;
 
         _m += n;
 
-        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->ti.name_s);           
+        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->ti.sym_s);           
     }
 
-    if ((syntax_const == _st->syntax_type) ||
-            (syntax_var == _st->syntax_type)) {
-
-        // deduce type_id from symbol
-        _st->ti.type_id = type_id_from_symbol (_st->ti.name_s, _st->ti.name_n);
+    // attempt to deduce type_id from symbol
+    if (syntax_const == _st->syntax_type) {
+        _st->ti.type_id = type_id_from_const_sym (_st->ti.sym_s, _st->ti.sym_n);
 
         printf("debug: syntax_tree_from_source: deduced type \"%s\"\n",
-                type_id_names[_st->ti.type_id]);
+                type_id_syms[_st->ti.type_id]);
 
         // save current position and return
         *__sa = _m;
         return _st;
     }
     else if (syntax_funcall == _st->syntax_type) {
-        // first symbol in function call must be ':function type
+        // first symbol in function call deduced to be of ':function type
         _st->ti.type_id = type_id_func;
     }
 
     while ('\0' != *_m) {
         // seek ahead to something significant (2)
-        _ma = syntax_tree_symbol_seek (_m);
+        _ma = syntax_tree_sym_seek (_m);
         if (NULL == _ma) {
             fprintf(stderr, "error: syntax_tree_from_source: NULL (3)\n");
             return NULL;
