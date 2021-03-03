@@ -1,7 +1,7 @@
 #include "array.h"
 
-uint32_t array_add (struct array *_a, void *_v) {
-    printf("debug: array_add\n");
+bool array_add (struct array *_a, void *_v) {
+    fprintf(stderr, "debug: array_add\n");
 
     if (_a->n == (_4C_ARRAY_BLOCKSIZE * _a->b_n)) {
         _a->b_n ++;
@@ -11,7 +11,7 @@ uint32_t array_add (struct array *_a, void *_v) {
 
         if (NULL == __v) {
             fprintf(stderr, "error: array_add: realloc\n");
-            return 0;
+            return false;
         }
 
         _a->__p = __v;
@@ -20,15 +20,15 @@ uint32_t array_add (struct array *_a, void *_v) {
     *(_a->__p + _a->n) = _v;
 
     _a->n ++;
-    return 1;
+    return true;
 }
 
-uint32_t array_del (struct array *_a, uint32_t i) {
-    printf("debug: array_del\n");
+bool array_del (struct array *_a, uint32_t i) {
+    fprintf(stderr, "debug: array_del\n");
 
     if ((0 == _a->n) || (i >= _a->n)) {
         fprintf(stderr, "error: array_del: empty\n");
-        return 0;
+        return false;
     }
 
     void **__v = _a->__p + i;
@@ -38,6 +38,6 @@ uint32_t array_del (struct array *_a, uint32_t i) {
     }
 
     _a->n --;
-    return 1;
+    return true;
 }
 

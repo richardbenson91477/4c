@@ -7,4 +7,8 @@
 #include <ctype.h>
 #include <string.h>
 
+typedef uint32_t bool;
+#define true ((bool)1)
+#define false ((bool)0)
+
 #endif

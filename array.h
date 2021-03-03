@@ -12,8 +12,8 @@ struct array {
     uint32_t b_n;
 };
 
-extern uint32_t array_add (struct array *_a, void *_v);
-extern uint32_t array_del (struct array *_a, uint32_t i);
+extern bool array_add (struct array *_a, void *_v);
+extern bool array_del (struct array *_a, uint32_t i);
 
 #endif
 

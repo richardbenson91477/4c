@@ -1,14 +1,14 @@
 #include "var.h"
 
 struct var_info *var_info_from (struct type_info *_ti_partial) {
-    printf("debug: var_from");
+    fprintf(stderr, "debug: var_info_from");
 
     struct var_info *_vi;
 
     // calloc to init new var
     _vi = (struct var_info *)calloc (1, sizeof(struct var_info));
     if (NULL == _vi) {
-        fprintf(stderr, "error: var_from: calloc\n");
+        fprintf(stderr, "error: var_info_from: calloc\n");
         return NULL;
     }
 

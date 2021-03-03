@@ -1,7 +1,7 @@
 #include "syntax_tree.h"
 
-uint8_t *syntax_tree_sym_seek (char *_s) {
-    printf("debug: syntax_tree_sym_seek\n");
+char *syntax_tree_sym_seek (char *_s) {
+    fprintf(stderr, "debug: syntax_tree_sym_seek\n");
 
     char *_m;
 
@@ -19,7 +19,7 @@ uint8_t *syntax_tree_sym_seek (char *_s) {
                 if ('\0' == *_m)
                     break;
             }
-            printf("debug: syntax_tree_sym_seek: skipped comment\n");
+            fprintf(stderr, "debug: syntax_tree_sym_seek: skipped comment\n");
         }
         else {
             return _m;
@@ -30,12 +30,10 @@ uint8_t *syntax_tree_sym_seek (char *_s) {
 }
 
 uint32_t syntax_tree_sym_len (char *_s) {
-    printf("debug: syntax_tree_sym_len\n");
+    fprintf(stderr, "debug: syntax_tree_sym_len\n");
 
-    uint32_t s_n;
-    char *_m;
+    char *_m = _s;
 
-    _m = _s;
     if (NULL == _m) {
         fprintf(stderr, "error: syntax_tree_sym_len: NULL\n");
         return 0;
@@ -44,12 +42,14 @@ uint32_t syntax_tree_sym_len (char *_s) {
         fprintf(stderr, "error: syntax_tree_sym_len: NIL\n");
         return 0;
     }
-    
-    s_n = 0;
+ 
+    // we have at least one character
+    uint32_t s_n = 1;
+
+    // is it a double-quote
     if ('\"' == *_m) {
-        s_n += 1;
-        _m += 1;
         // seek end of string consant
+        _m += 1;
         while ('\0' != *_m) {
             if ('\"' == *_m)
                 break;
@@ -57,11 +57,18 @@ uint32_t syntax_tree_sym_len (char *_s) {
             s_n += 1;
             _m += 1;
         }
-        s_n += 1;
-        _m += 1;
-     }
+        if ('\"' == *_m) {
+            s_n += 1;
+            _m += 1;
+        }
+        else {
+            // hit end of data
+            // ...
+        }
+    }
     else {
         // seek end of symbol
+        _m += 1;
         while ('\0' != *_m) {
             // symbol delimeters
             if ((isspace(*_m)) || (']' == *_m) || (')' == *_m))
@@ -76,7 +83,7 @@ uint32_t syntax_tree_sym_len (char *_s) {
 };
 
 struct syntax_tree *syntax_tree_new () {
-    printf("debug: syntax_tree_new\n");
+    fprintf(stderr, "debug: syntax_tree_new\n");
 
     struct syntax_tree *_st;
 
@@ -91,7 +98,7 @@ struct syntax_tree *syntax_tree_new () {
 }
 
 struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
-    printf("debug: syntax_tree_from_source\n");
+    fprintf(stderr, "debug: syntax_tree_from_source\n");
 
     struct syntax_tree *_st, *_st2;
     char *_m, *_ma;
@@ -116,24 +123,24 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
 
     // function call
     if ('(' == *_m) {
-        printf("debug: syntax_tree_from_source: found function call\n");
+        fprintf(stderr, "debug: syntax_tree_from_source: found function call\n");
         _st->syntax_type = syntax_funcall;
     }
     // list
     else if ('[' == *_m) {
-        printf("debug: syntax_tree_from_source: found list\n");
+        fprintf(stderr, "debug: syntax_tree_from_source: found list\n");
         _st->syntax_type = syntax_list;
     }
     // constant
     else if (('\'' == *_m) || ('\"' == *_m) ||
             ('-' == *_m) || isdigit(*_m)) {
-        printf("debug: syntax_tree_from_source: found constant\n");
+        fprintf(stderr, "debug: syntax_tree_from_source: found constant\n");
         _st->syntax_type = syntax_const;
     }
     // variable
     // TODO: enforce variable name rules
     else {
-        printf("debug: syntax_tree_from_source: found variable\n");
+        fprintf(stderr, "debug: syntax_tree_from_source: found variable\n");
         _st->syntax_type = syntax_var;
     }
 
@@ -167,14 +174,17 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
 
         _m += n;
 
-        printf("debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->ti.sym_s);           
+        fprintf(stderr, "debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->ti.sym_s);
     }
 
     // attempt to deduce type_id from symbol
     if (syntax_const == _st->syntax_type) {
-        _st->ti.type_id = type_id_from_const_sym (_st->ti.sym_s, _st->ti.sym_n);
+        if (false == type_ids_from_const_sym (&(_st->ti))) {
+            fprintf(stderr, "error: syntax_tree_from_source: failed to deduce type\n");
+            return NULL;
+        }
 
-        printf("debug: syntax_tree_from_source: deduced type \"%s\"\n",
+        fprintf(stderr, "debug: syntax_tree_from_source: deduced type \"%s\"\n",
                 type_id_syms[_st->ti.type_id]);
 
         // save current position and return
@@ -202,10 +212,10 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
                 (']' == *_m))) {
 
             if (syntax_funcall == _st->syntax_type) {
-                printf("debug: syntax_tree_from_source: found function call end\n");
+                fprintf(stderr, "debug: syntax_tree_from_source: found function call end\n");
             }
             else {
-                printf("debug: syntax_tree_from_source: found list end\n");
+                fprintf(stderr, "debug: syntax_tree_from_source: found list end\n");
             }
 
             // save current position and return
@@ -216,7 +226,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
 
         // recurse
         _st2 = syntax_tree_from_source (_m, &_ma);
-        if (NULL == _st) {
+        if (NULL == _st2) {
             fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_from_source\n");
             return NULL;
         }
@@ -234,16 +244,16 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     return _st;
 }
 
-uint32_t syntax_tree_destroy (struct syntax_tree *_st) {
-    printf("debug: syntax_tree_destroy\n");
+bool syntax_tree_destroy (struct syntax_tree *_st) {
+    fprintf(stderr, "debug: syntax_tree_destroy\n");
 
     if (NULL == _st) {
         fprintf(stderr, "error: syntax_tree_destroy: NULL\n");
-        return 0;
+        return false;
     }
 
     // TODO: actually decompose the tree
 
-    return 0;
+    return true;
 }
 

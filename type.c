@@ -13,72 +13,90 @@ const char *type_id_syms[] = {
     "':user",
 };
 
-enum type_ids type_id_from_const_sym (char *_s, uint32_t s_n) {
-    printf("debug: type_id_from_const_sym\n");
+bool type_ids_from_const_sym (struct type_info *_ti) {
+    fprintf(stderr, "debug: type_id_from_const_sym\n");
+
+    if (NULL == _ti) {
+        fprintf(stderr, "error: type_id_from_const_sym: NULL type_info\n");
+        return false;
+    }
+
+    const char *_s = _ti->sym_s;
+    const uint32_t s_n = _ti->sym_n;
 
     if (NULL == _s) {
-        fprintf(stderr, "error: type_id_from_const_sym: NULL\n");
-        return type_id_nil;
+        fprintf(stderr, "error: type_id_from_const_sym: NULL sym\n");
+        return false;
     }
     else if ('\0' == *_s) {
-        fprintf(stderr, "error: type_id_from_const_sym: NIL\n");
-        return type_id_nil;
+        fprintf(stderr, "error: type_id_from_const_sym: NIL sym\n");
+        return false;
     }
     else if (0 == s_n) {
-        fprintf(stderr, "error: type_id_from_const_sym: zero\n");
-        return type_id_nil;
+        fprintf(stderr, "error: type_id_from_const_sym: zero sym len\n");
+        return false;
     }
 
     // string constant
     if ('\"' == *_s) {
-        return type_id_str;
+        _ti->type_id = type_id_str;
+        return true;
     }
     // int or float constant
     else if (('-' == *_s) || isdigit(*_s)) {
         for (uint32_t c = 0; c < s_n; c ++) {
-            if ('.' == *(_s + c))
-                return type_id_float;
+            if ('.' == *(_s + c)) {
+                _ti->type_id = type_id_float;
+                return true;
+            }
         }
-        return type_id_int;
+        _ti->type_id = type_id_int;
+        return true;
     }
     // user-defined type
     else if (':' == *_s) {
-        return type_id_user;
+        _ti->type_id = type_id_user;
+        return true;
     }
     // built-in constant
     else if ('\'' == *_s) {
         // built-in type name
         if ((s_n > 2) && (':' == *(_s + 1))) {
             for (uint32_t c = 0; c < 7; c++) {
-                if (! strcmp (type_id_syms[c], _s))
-                    return c;
+                if (0 == strcmp (type_id_syms[c], _s)) {
+                    _ti->type_id = c;
+                    return true;
+                }
             }
 
             fprintf(stderr, "error: type_id_from_const_sym: unknown built-in type \"%s\"\n", _s);
-            return type_id_nil;
+            return false;
         }
         // 'nil type
-        else if (! strcmp ("'nil", _s)) {
-            // NOTE: this type_id_nil is not an error
-            return type_id_nil;
+        else if (0 == strcmp ("'nil", _s)) {
+            _ti->type_id = type_id_nil;
+            return true;
         }
         // types of other predefined constants
-        else if (! strcmp ("'true", _s)) {
-            return type_id_bool;
+        else if (0 == strcmp ("'true", _s)) {
+            _ti->type_id = type_id_bool;
+            return true;
         }
-        else if (! strcmp ("'false", _s)) {
-            return type_id_bool;
+        else if (0 == strcmp ("'false", _s)) {
+            _ti->type_id = type_id_bool;
+            return true;
         }
-        else if (! strcmp ("'spc", _s)) {
-            return type_id_str;
+        else if (0 == strcmp ("'spc", _s)) {
+            _ti->type_id = type_id_str;
+            return true;
         }
-        else if (! strcmp ("'nl", _s)) {
-            return type_id_str;
+        else if (0 == strcmp ("'nl", _s)) {
+            _ti->type_id = type_id_str;
+            return true;
         }
         // else fall through
     }
 
-    // ':nil by default
-    return type_id_nil;
+    return false;
 }
 

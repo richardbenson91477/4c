@@ -24,13 +24,14 @@ struct type_info {
     char *sym_s;
     
     enum type_ids type_id;
+    enum type_ids subtype_id;
 
     // asm label or 0/NULL
     uint32_t label_n;
     char *label_s;
 };
 
-extern enum type_ids type_id_from_const_sym (char *_s, uint32_t s_n);
+extern bool type_ids_from_const_sym (struct type_info *_ti);
 
 #endif
 

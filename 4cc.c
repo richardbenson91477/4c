@@ -23,7 +23,7 @@ int main (int argc, const char *argv[]) {
 
     free(_s);
 
-    if (0 == syntax_tree_destroy (_syntax_root)) {
+    if (false == syntax_tree_destroy (_syntax_root)) {
         fprintf(stderr, "error: main: syntax_tree_destroy\n");
         return -4;
     }
