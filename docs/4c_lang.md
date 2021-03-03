@@ -15,7 +15,7 @@ __FIXME:__ be more specific about the generated code
 This document describes the 4c language; its syntax, standard built-in types, functions, constants, and so on.  
 
 ### Rationale
-The language known as "Modern C++" has great value in terms of performance and capabilities - at a usability cost that many people would rather avoid paying. Easier to use - and still powerful - languages like Python already exist - with an obvious performance cost. Many "C performance with modern features" languages have come forth to try and remedy this situation. Perhaps one will dethrone C++ - or perhaps none will. Nevertheless, _all_ languages have value to those who enjoy using them. I do not _expect_ 4c to become popular - nor do I plan to force the issue, by design. 4c is simply my personal attempt to avoid using "Modern C++" when I can - if others find it useful, that's great too.  
+__TODO__ 
 
 ### Potential benefits
   * LISP-like syntax rather than the standard "Algol family" syntax.  
@@ -101,9 +101,9 @@ Example: (set x-times-y (\* x y)) (computes x multiplied by y and sets the varia
 __FIXME:__ very volatile below this line  
 
 (def-type :type-name [var-list]) -> 'nil  
-(do [arg-list] type-name [fn-list]) -> ':func that returns type _type-name_  
+(do [args] type-name [fn1..fnn]) -> ':func that returns type _type-name_  
 (return value-for-do) -> 'nil  
-(if ':bool [true-fn-list] [false-fn-list]) -> 'nil  
+(if ':bool [true-fns] [false-fns]) -> 'nil  
 (while ':bool) [fn-list] [per-loop fn-list]) -> 'nil  
 (print args) -> 'nil  
 (input) -> ':str  
