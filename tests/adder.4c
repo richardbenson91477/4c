@@ -14,7 +14,7 @@
     (set add4 (make-adder 4))
     (print (add4 3) 'nl)
 
-    (print ((make-adder 5) 2) 'nl)
+    (print (eval (make-adder 5) 2) 'nl)
     (return 0)
 ]))
 
