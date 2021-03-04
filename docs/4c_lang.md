@@ -66,21 +66,23 @@ String constants (type ':str):
 
   *  "This is a string"
 
-### Built-in constants
-'nil (empty value)  
-'true (':bool true)  
-'false (':bool false)  
-'spc (blank-space ':str)  
-'nl (newline ':str)  
+Predefined constants:
 
-### Built-in type names
-':nil (empty type)  
-':func (function type)  
-':int (unsigned 64-bit integer)  
-':float (64-bit floating point number)  
-':bool (boolean 'true or 'false)  
-':str (string)  
-':list (list)  
+  *  'nil (empty value)  
+  *  'true (':bool true)  
+  *  'false (':bool false)  
+  *  'spc (blank-space ':str)  
+  *  'nl (newline ':str)  
+
+### Predefined type names
+
+  *  \#:nil (empty type)  
+  *  \#:func (function type)  
+  *  \#:int (signed 64-bit integer)  
+  *  \#:float (64-bit floating point number)  
+  *  \#:bool (boolean 'true or 'false)  
+  *  \#:str (string)  
+  *  \#:list (list)  
 
 ### User-defined types
 
@@ -88,7 +90,7 @@ String constants (type ':str):
         Names beginning with a colon (:) have their own type (see _def-type_).  
         Example: :employee (a user-defined type named :employee)  
 
-## Built-in functions
+## Predefined functions
 (**set** _var-name_ _value_)  
 Description: reference _value_ with the variable _var-name_  
 Returns: 'nil  

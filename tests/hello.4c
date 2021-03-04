@@ -1,6 +1,6 @@
 ; comments look like this
 
-(set main (do [] ':int [
+(set main (do [] #:int [
     (print "Hello, world!" 'nl)
     (return 0)
 ]))

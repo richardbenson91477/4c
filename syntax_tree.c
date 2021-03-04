@@ -142,8 +142,12 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         return NULL;
     }
     // constant
-    else if (('\'' == *_m) || ('\"' == *_m) ||
-            ('-' == *_m) || isdigit(*_m)) {
+    else if (('\'' == *_m) ||
+            ('\"' == *_m) ||
+            ('#' == *_m) ||
+            ('-' == *_m) ||
+            (':' == *_m) ||
+            isdigit(*_m)) {
         fprintf(stderr, "debug: syntax_tree_from_source: found constant\n");
         _st->syntax_type = syntax_const;
     }
@@ -154,7 +158,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         _st->syntax_type = syntax_var;
     }
 
-    // move just past '[' or '('
+    // move one char past '[' or '('
     if ((syntax_funcall == _st->syntax_type) ||
             (syntax_list == _st->syntax_type)) {
         _m += 1;
@@ -190,12 +194,11 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     if (syntax_const == _st->syntax_type) {
         // attempt to deduce type_id from const symbol
         if (false == type_ids_from_const_sym (&(_st->ti))) {
-            fprintf(stderr, "error: syntax_tree_from_source: failed to deduce type from symbol \"%s\"\n", _st->ti.sym_s);
+            fprintf(stderr, "error: syntax_tree_from_source: type_ids_from_const_sym\n");
             return NULL;
         }
 
-        fprintf(stderr, "debug: syntax_tree_from_source: deduced type \"%s\"\n",
-                type_id_syms[_st->ti.type_id]);
+        fprintf(stderr, "debug: syntax_tree_from_source: deduced type \"%s\"\n", type_id_syms[_st->ti.type_id]);
 
         // save current position and return
         *__sa = _m;

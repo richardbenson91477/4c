@@ -1,6 +1,6 @@
 ; NOTE: this is a compiler test
 
-(set main (do [] ':int [
+(set main (do [] #:int [
     (set f 0.0)
     (while (<= f 1.0) [
         (print f 'nl)

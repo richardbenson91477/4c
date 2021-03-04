@@ -4,6 +4,7 @@
 #include "cstd.h"
 #include "array.h"
 
+#define _4C_TYPE_ID_N (10)
 enum type_ids {
     type_id_nil = 0,
     type_id_func,
@@ -12,11 +13,12 @@ enum type_ids {
     type_id_bool,
     type_id_str,
     type_id_list,
-//    type_id_type,
-    type_id_user,
+    type_id_pconst,
+    type_id_ptype,
+    type_id_utype,
 };
 
-extern const char *type_id_syms[];
+extern const char *type_id_syms[_4C_TYPE_ID_N];
 
 // NOTE: keep these items "zero-able to init"
 struct type_info {

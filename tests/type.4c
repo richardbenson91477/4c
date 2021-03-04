@@ -1,18 +1,18 @@
-(set main (do [] ':int [
-    (def-type :nabs [n ':int a ':list b ':bool s ':str])
+(set main (do [] #:int [
+    (def-type :nabs [n #:int a #:list b #:bool s #:str])
 
-    (set :nabs.new (do [self :nabs] ':bool [
+    (set :nabs.new (do [self :nabs] #:bool [
         (print ":nabs.new" 'nl)
         (set self.n 3)
-        (set self.a (new ':list))
-        ;(set self.s (new ':str 6))
+        (set self.a (new #:list))
+        ;(set self.s (new #:str 6))
         (set self.s (str-dup "hello"))
         (set self.b 'false)
         (return 'true)
       ])
     )
 
-    (set :nabs.del (do [this :nabs] ':bool [
+    (set :nabs.del (do [this :nabs] #:bool [
         (print ":nabs.del" 'nl)
         (del this.a)
         (del this.s)

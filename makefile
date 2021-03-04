@@ -15,7 +15,7 @@ all: 4cc doc tags
 4cc: $(OBJS)
 
 test: all
-	./4cc tests/default.4c
+	stderr_less ./4cc tests/default.4c
 
 doc:
 	+$(MAKE) -C docs/ all
