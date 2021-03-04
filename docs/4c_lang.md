@@ -32,7 +32,7 @@ __TODO__ rationalize my weird hobby
  
 Where  
 
-  * _function-name_ specifies a built-in function or a variable of type ':func
+  * _function-name_ specifies a built-in function or a variable of type #:func
   * _arg_ is any of the following:
 
     -   An _inner_ function call which returns a result to its _outer_ function  
@@ -58,21 +58,21 @@ Where _list-item_ is any of the follwing:
   * A variable name
 
 ### Constants
-Number constants (type ':number):
+Number constants (type #:number):
 
   *  -9..9**.**9..9 .. 0 .. 9..9**.**9..9
 
-String constants (type ':str):
+String constants (type #:str):
 
   *  "This is a string"
 
 Predefined constants:
 
   *  'nil (empty value)  
-  *  'true (':bool true)  
-  *  'false (':bool false)  
-  *  'spc (blank-space ':str)  
-  *  'nl (newline ':str)  
+  *  'true (#:bool true)  
+  *  'false (#:bool false)  
+  *  'spc (blank-space #:str)  
+  *  'nl (newline #:str)  
 
 ### Predefined type names
 
@@ -99,36 +99,36 @@ Example: (set x-times-y (\* x y)) (computes x multiplied by y and sets the varia
 __FIXME:__ very volatile below this line  
 
 (def-type :type-name [var-list]) -> 'nil  
-(do [args] type-name [fn1..fnn]) -> ':func that returns type _type-name_  
+(do [args] type-name [fn1..fnn]) -> #:func that returns type _type-name_  
 (return value-for-do) -> 'nil  
-(if ':bool [true-fns] [false-fns]) -> 'nil  
-(while ':bool) [fn-list] [per-loop fn-list]) -> 'nil  
+(if #:bool [true-fns] [false-fns]) -> 'nil  
+(while #:bool) [fn-list] [per-loop fn-list]) -> 'nil  
 (print args) -> 'nil  
-(input) -> ':str  
-(and ':bool ':bool) -> ':bool  
-(or ':bool ':bool) -> ':bool  
-(not ':bool) -> ':bool  
-(+ num num) -> ':number  
-(- num num) -> ':number  
-(\* num num) -> ':number  
-(/ num num) -> ':number  
-(% num num) -> ':number  
-(= num num) -> ':bool  
-(!= num num) -> ':bool  
-(> num num) -> ':bool  
-(< num num) -> ':bool  
-(<= num num) -> ':bool  
-(>= num num) -> ':bool  
-(str-dup source-string) -> ':str  
-(str-from-char char) -> ':str  
-(str-cat string string) -> ':str  
-(str-cmp string string) -> ':bool  
-(new :type instance-var [extra-args]) -> ':bool  
-    (set :type.new (do [this :type extra-params] ':bool
+(input) -> #:str  
+(and #:bool #:bool) -> #:bool  
+(or #:bool #:bool) -> #:bool  
+(not #:bool) -> #:bool  
+(+ num num) -> #:number  
+(- num num) -> #:number  
+(\* num num) -> #:number  
+(/ num num) -> #:number  
+(% num num) -> #:number  
+(= num num) -> #:bool  
+(!= num num) -> #:bool  
+(> num num) -> #:bool  
+(< num num) -> #:bool  
+(<= num num) -> #:bool  
+(>= num num) -> #:bool  
+(str-dup source-string) -> #:str  
+(str-from-char char) -> #:str  
+(str-cat string string) -> #:str  
+(str-cmp string string) -> #:bool  
+(new :type instance-var [extra-args]) -> #:bool  
+    (set :type.new (do [this :type extra-params] #:bool
       [alloc/init this.vars]  
     ))  
-(del :type instance-var [extra-args]) -> ':bool  
-    (set :type.del (do [this :type extra-params] ':bool  
+(del :type instance-var [extra-args]) -> #:bool  
+    (set :type.del (do [this :type extra-params] #:bool  
       [dealloc/deinit this.vars]  
     ))  
 
