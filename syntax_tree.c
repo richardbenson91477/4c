@@ -126,10 +126,20 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         fprintf(stderr, "debug: syntax_tree_from_source: found function call\n");
         _st->syntax_type = syntax_funcall;
     }
+    // misplaced function call end
+    else if (')' == *_m) {
+        fprintf(stderr, "error: misplaced ')'\n");
+        return NULL;
+    }
     // list
     else if ('[' == *_m) {
         fprintf(stderr, "debug: syntax_tree_from_source: found list\n");
         _st->syntax_type = syntax_list;
+    }
+    // misplaced list end
+    else if (']' == *_m) {
+        fprintf(stderr, "error: misplaced ']'\n");
+        return NULL;
     }
     // constant
     else if (('\'' == *_m) || ('\"' == *_m) ||
@@ -177,8 +187,8 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         fprintf(stderr, "debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->ti.sym_s);
     }
 
-    // attempt to deduce type_id from symbol
     if (syntax_const == _st->syntax_type) {
+        // attempt to deduce type_id from const symbol
         if (false == type_ids_from_const_sym (&(_st->ti))) {
             fprintf(stderr, "error: syntax_tree_from_source: failed to deduce type\n");
             return NULL;
@@ -187,6 +197,11 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         fprintf(stderr, "debug: syntax_tree_from_source: deduced type \"%s\"\n",
                 type_id_syms[_st->ti.type_id]);
 
+        // save current position and return
+        *__sa = _m;
+        return _st;
+    }
+    else if (syntax_var == _st->syntax_type) {
         // save current position and return
         *__sa = _m;
         return _st;
