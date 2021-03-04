@@ -1,6 +1,6 @@
 
 (set main (do [] ':int [
-    (set sqr (do [y 'float] ':float [
+    (set sqr (do [y ':float] ':float [
         (return (* y y))
     ]))
 

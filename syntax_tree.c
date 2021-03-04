@@ -190,7 +190,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     if (syntax_const == _st->syntax_type) {
         // attempt to deduce type_id from const symbol
         if (false == type_ids_from_const_sym (&(_st->ti))) {
-            fprintf(stderr, "error: syntax_tree_from_source: failed to deduce type\n");
+            fprintf(stderr, "error: syntax_tree_from_source: failed to deduce type from symbol \"%s\"\n", _st->ti.sym_s);
             return NULL;
         }
 
