@@ -7,10 +7,13 @@ else
 CFLAGS += -O2 -fPIC
 endif
 
-OBJS=4cc.o file.o array.o syntax_tree.o type.o var.o
+INCS=array.h cstd.h file.h syntax_tree.h type.h var.h
+OBJS=4cc.o array.o file.o syntax_tree.o type.o var.o
 LDLIBS=
 
 all: 4cc doc tags
+
+$(OBJS): $(INCS)
 
 4cc: $(OBJS)
 
