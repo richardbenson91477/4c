@@ -1,7 +1,6 @@
 #ifndef _4C_SYNTAX_TREE_H
 #define _4C_SYNTAX_TREE_H
 
-#include "cstd.h"
 #include "array.h"
 #include "type.h"
 

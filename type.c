@@ -4,11 +4,12 @@
 const char *type_id_syms[_4C_TYPE_ID_N] = {
     "#:nil",
     "#:func",
+    "#:list",
+    "#:var",
     "#:int",
     "#:float",
     "#:bool",
     "#:str",
-    "#:list",
     "#:pconst",
     "#:ptype",
     "#:utype",
@@ -57,7 +58,7 @@ bool type_ids_from_const_sym (struct type_info *_ti) {
     // user-defined type
     else if (':' == *_s) {
         _ti->type_id = type_id_utype;
-        // TODO: look deeper (e.g. :users:joe)
+        // TODO: check deeper (e.g. :users:joe)
         return true;
     }
     // predefined type name

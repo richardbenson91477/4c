@@ -13,8 +13,8 @@ struct var_info *var_info_from (struct type_info *_ti_partial) {
     }
 
     // _ti_partial should contain sym_s, sym_n
-    _vi->ti.sym_n = _ti_partial->sym_n;
     _vi->ti.sym_s = strdup(_ti_partial->sym_s);
+    _vi->ti.sym_n = _ti_partial->sym_n;
 
     // create a label
     // TODO

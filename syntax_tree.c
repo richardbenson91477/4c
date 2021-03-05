@@ -205,6 +205,8 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         return _st;
     }
     else if (syntax_var == _st->syntax_type) {
+        _st->ti.type_id = type_id_var;
+
         // save current position and return
         *__sa = _m;
         return _st;
