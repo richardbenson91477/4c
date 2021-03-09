@@ -8,4 +8,4 @@ array.o
 syntax_tree.o
 type.o
 var.o
-
+func.o

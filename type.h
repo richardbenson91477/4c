@@ -3,7 +3,7 @@
 
 #include "array.h"
 
-#define _4C_TYPE_ID_N (11)
+#define _4C_TYPE_ID_N (12)
 enum type_ids {
     type_id_nil = 0,
     type_id_func,
@@ -13,6 +13,7 @@ enum type_ids {
     type_id_float,
     type_id_bool,
     type_id_str,
+    type_id_const,
     type_id_pconst,
     type_id_ptype,
     type_id_utype,
@@ -27,6 +28,8 @@ struct type_info {
     
     enum type_ids type_id;
     enum type_ids subtype_id;
+
+    bool is_pfunc_;
 
     // asm label or 0/NULL
     char *label_s;

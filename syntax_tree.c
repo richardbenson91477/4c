@@ -101,6 +101,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     fprintf(stderr, "debug: syntax_tree_from_source\n");
 
     struct syntax_tree *_st, *_st2;
+    struct func_info *_fpi = NULL;
     char *_m, *_ma;
 
     if (NULL == _s) {
@@ -175,7 +176,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         }
     }
 
-    // read symbol (excepting list) into (type_info) ti
+    // read symbol (excepting list) into (type_info) ti.sym_*
     if (syntax_list != _st->syntax_type) {
         uint32_t n = syntax_tree_sym_len (_m);
         if (0 == n) {
@@ -188,9 +189,11 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
 
         _m += n;
 
-        fprintf(stderr, "debug: syntax_tree_from_source: found symbol \"%s\"\n", _st->ti.sym_s);
+        fprintf(stderr, "debug: syntax_tree_from_source: read symbol \"%s\"\n",
+                _st->ti.sym_s);
     }
 
+    // deduce types from symbol
     if (syntax_const == _st->syntax_type) {
         // attempt to deduce type_id from const symbol
         if (false == type_ids_from_const_sym (&(_st->ti))) {
@@ -198,7 +201,8 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
             return NULL;
         }
 
-        fprintf(stderr, "debug: syntax_tree_from_source: deduced type \"%s\"\n", type_id_syms[_st->ti.type_id]);
+        fprintf(stderr, "debug: syntax_tree_from_source: sym is constant of sub-type \"%s\"\n",
+                type_id_syms[_st->ti.subtype_id]);
 
         // save current position and return
         *__sa = _m;
@@ -206,14 +210,35 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     }
     else if (syntax_var == _st->syntax_type) {
         _st->ti.type_id = type_id_var;
+        // TODO: look up varible to set subtype_id
+        fprintf(stderr, "debug: syntax_tree_from_source: sym is var of subtype (TODO)\n");
 
         // save current position and return
         *__sa = _m;
         return _st;
     }
     else if (syntax_funcall == _st->syntax_type) {
-        // first symbol in function call deduced to be of ':function type
+        // first symbol in function call must be of ':function type
         _st->ti.type_id = type_id_func;
+
+        // is function symbol a predefined func
+        _fpi = _func_p_info;
+        while (_fpi->sym_s) {
+            if (! strcmp (_st->ti.sym_s, _fpi->sym_s)) {
+                // grab return type into ti.subtype_id
+                _st->ti.subtype_id = _fpi->type_id_ret;
+                // flag as predefined func in _st
+                _st->ti.is_pfunc_ = true;
+                
+                fprintf(stderr, "debug: syntax_tree_from_source: sym is predefined function\n");
+                break;
+            }
+
+            _fpi += 1;
+        }
+        if (! _fpi->sym_s) {
+            fprintf(stderr, "debug: syntax_tree_from_source: sym is user-defined function\n");
+        }
     }
 
     while ('\0' != *_m) {
@@ -233,6 +258,11 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
 
             if (syntax_funcall == _st->syntax_type) {
                 fprintf(stderr, "debug: syntax_tree_from_source: found function call end\n");
+                
+                // validate argument types 
+                if (_st->ti.is_pfunc_) {
+                 // TODO compare _st->nodes_a items to _fpi->arg_n, _fpi->arg_type_ids;
+                }
             }
             else {
                 fprintf(stderr, "debug: syntax_tree_from_source: found list end\n");

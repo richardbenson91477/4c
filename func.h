@@ -15,7 +15,7 @@ struct func_info {
     uint32_t label_n;
 
     // return type
-    enum type_ids type_id;
+    enum type_ids type_id_ret;
 
     // argument count
     uint32_t arg_n;
@@ -31,7 +31,7 @@ enum func_p_ids {
     func_p_id_set,
 };
 
-extern const struct func_info _func_p_info [_4C_FUNC_P_ID_N];
+extern const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1];
 
 //extern bool type_ids_from_const_sym (struct type_info *_ti);
 

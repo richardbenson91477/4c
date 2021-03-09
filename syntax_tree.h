@@ -3,6 +3,7 @@
 
 #include "array.h"
 #include "type.h"
+#include "func.h"
 
 enum syntax_types {
     syntax_funcall,

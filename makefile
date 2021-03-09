@@ -18,7 +18,7 @@ $(OBJS): $(INCS)
 4cc: $(OBJS)
 
 test: all
-	stderr_less ./4cc tests/default.4c
+	./4cc tests/default.4c
 
 doc:
 	+$(MAKE) -C docs/ all

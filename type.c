@@ -10,6 +10,7 @@ const char *type_id_syms[_4C_TYPE_ID_N] = {
     "#:float",
     "#:bool",
     "#:str",
+    "#:const",
     "#:pconst",
     "#:ptype",
     "#:utype",
@@ -41,18 +42,21 @@ bool type_ids_from_const_sym (struct type_info *_ti) {
 
     // string constant
     if ('\"' == *_s) {
-        _ti->type_id = type_id_str;
+        _ti->type_id = type_id_const;
+        _ti->subtype_id = type_id_str;
         return true;
     }
     // int or float constant
     else if (('-' == *_s) || isdigit(*_s)) {
+        _ti->type_id = type_id_const;
+
         for (uint32_t c = 0; c < s_n; c ++) {
             if ('.' == *(_s + c)) {
-                _ti->type_id = type_id_float;
+                _ti->subtype_id = type_id_float;
                 return true;
             }
         }
-        _ti->type_id = type_id_int;
+        _ti->subtype_id = type_id_int;
         return true;
     }
     // user-defined type
