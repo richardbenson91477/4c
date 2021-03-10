@@ -12,11 +12,11 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
     fprintf(stderr, "debug: func_validate_args\n");
     struct syntax_tree *_st2;
 
-    if (! _fi) {
+    if (NULL == _fi) {
         fprintf(stderr, "error: func_validate_args: NULL func_info\n");
         return false;
     }
-    if (! _st) {
+    if (NULL == _st) {
         fprintf(stderr, "error: func_validate_args: NULL syntax_tree\n");
         return false;
     }
@@ -28,6 +28,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
         return false;
     }
 
+    // per arg types test
     for (uint32_t c = 0; c < _st->nodes_a.n; c++) {
         _st2 = array_get (&_st->nodes_a, c);
         if (! _st2) {
@@ -38,15 +39,21 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
         // test type
         if ((type_id_nil != _fi->arg_type_ids[c]) &&\
                 (_st2->ti.type_id != _fi->arg_type_ids[c])) {
-            fprintf(stderr, "error: func_validate_args: type mismatch: \"%s\" vs \"%s\" in function %s\n",
-                type_id_syms[_st2->ti.type_id], type_id_syms[_fi->arg_type_ids[c]], _fi->sym_s);
+            fprintf(stderr, "error: func_validate_args: type mismatch: arg %d: \"%s\" vs \"%s\" in func %s\n",
+                    c + 1, type_id_syms[_st2->ti.type_id], type_id_syms[_fi->arg_type_ids[c]], _fi->sym_s);
             return false;
+        }
+        
+        // if var type, and no subtype, assume var is new and needs function's required subtype (a hint for later)
+        if ((type_id_var == _st2->ti.type_id) && 
+                (type_id_nil == _st2->ti.subtype_id)) {
+            _st2->ti.subtype_id = _fi->arg_subtype_ids[c];
         }
 
         // test subtype
         if (_st2->ti.subtype_id != _fi->arg_subtype_ids[c]) {
-            fprintf(stderr, "error: func_validate_args: subtype mismatch: \"%s\" vs \"%s\" in function %s\n",
-                type_id_syms[_st2->ti.subtype_id], type_id_syms[_fi->arg_subtype_ids[c]], _fi->sym_s);
+            fprintf(stderr, "error: func_validate_args: subtype mismatch: arg %d: \"%s\" vs \"%s\" in function %s\n",
+                    c + 1, type_id_syms[_st2->ti.subtype_id], type_id_syms[_fi->arg_subtype_ids[c]], _fi->sym_s);
             return false;
         }
     }
