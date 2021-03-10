@@ -91,6 +91,7 @@ Predefined constants:
   *  \#:float (64-bit floating point number)  
   *  \#:bool (boolean 'true or 'false)  
   *  \#:str (string)  
+  *  \#:const (number or string constant)
   *  \#:pconst (pre-defined constant)
   *  \#:ptype (pre-defined type)
   *  \#:utype (user-defined type)
@@ -102,29 +103,28 @@ Predefined constants:
         Example: :employee (a user-defined type named :employee)  
 
 ## Predefined functions
+NOTE: very volatile below  
 
-### (print _arg_)  
-Description: Print a string representation of _arg_ to standard output  
+### (print-i _arg_)  
+Description: Print a string representation of integer _arg_ to standard output  
 Returns: 'nil  
-Example: (**print** "Hello, world!") (**print** 'nl)  
-> Hello, world!  
+Example: (**print-i** 3)
+> 3
 
-### (+ _int1_ _int2_)  
-Description: Adds _int1_ and _int2_  
+### (add-i _arg1_ _arg2_)  
+Description: Return the sum of integers _arg1_ and _arg2_  
 Returns: #:int  
-Example: (print (**+** 6 3))  
+Example: (print-i (**add-i** 6 3))  
 > 9  
 
-Example: (print (**+** (**+** 1 2) 3))  
+Example: (print-i (**add-i** (**add-i** 1 2) 3))  
 > 6  
 
-### (set _var-name_ _value_)  
-Description: reference _value_ with the variable _var-name_  
+### (set-i _var-name_ _value_)  
+Description: reference integer _value_ with the variable _var-name_  
 Returns: 'nil  
-Example: (**set** x (**+** 1 2)) (print x) (print 'nl)
+Example: (**set-i** x (**add-i** 1 2)) (print-i x)  
 > 3  
-
-NOTE: very volatile below  
 
 (def-type :type-name [var-list]) -> 'nil  
 (do [args] type-name [fn1..fnn]) -> #:func that returns type _type-name_  
