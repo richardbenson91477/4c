@@ -18,7 +18,7 @@ $(OBJS): $(INCS)
 4cc: $(OBJS)
 
 test: all
-	./4cc tests/default.4c
+	./4cc tests/default.4c 2>&1 | less
 
 doc:
 	+$(MAKE) -C docs/ all

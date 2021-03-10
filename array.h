@@ -14,6 +14,7 @@ struct array {
 
 extern bool array_add (struct array *_a, void *_v);
 extern bool array_del (struct array *_a, uint32_t i);
+extern void *array_get (struct array *_a, uint32_t i);
 
 #endif
 

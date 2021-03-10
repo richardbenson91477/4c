@@ -2,6 +2,7 @@
 #define _4C_FUNC_H
 
 #include "type.h"
+#include "syntax_tree.h"
 
 #define _4C_FUNC_MAX_ARGS (32)
 
@@ -32,8 +33,7 @@ enum func_p_ids {
 };
 
 extern const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1];
-
-//extern bool type_ids_from_const_sym (struct type_info *_ti);
+extern bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st);
 
 #endif
 

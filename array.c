@@ -27,7 +27,7 @@ bool array_del (struct array *_a, uint32_t i) {
     fprintf(stderr, "debug: array_del\n");
 
     if ((0 == _a->n) || (i >= _a->n)) {
-        fprintf(stderr, "error: array_del: empty\n");
+        fprintf(stderr, "error: array_del: range\n");
         return false;
     }
 
@@ -39,5 +39,16 @@ bool array_del (struct array *_a, uint32_t i) {
 
     _a->n --;
     return true;
+}
+
+void *array_get (struct array *_a, uint32_t i) {
+    fprintf(stderr, "debug: array_get\n");
+
+    if ((0 == _a->n) || (i >= _a->n)) {
+        fprintf(stderr, "error: array_get: range\n");
+        return false;
+    }
+
+    return *(_a->__p + i);
 }
 

@@ -1,4 +1,5 @@
 #include "syntax_tree.h"
+#include "func.h"
 
 char *syntax_tree_sym_seek (char *_s) {
     fprintf(stderr, "debug: syntax_tree_sym_seek\n");
@@ -241,6 +242,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         }
     }
 
+    // recursively read further symbols of function or list
     while ('\0' != *_m) {
         // seek ahead to something significant (2)
         _ma = syntax_tree_sym_seek (_m);
@@ -261,7 +263,10 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
                 
                 // validate argument types 
                 if (_st->ti.is_pfunc_) {
-                 // TODO compare _st->nodes_a items to _fpi->arg_n, _fpi->arg_type_ids;
+                    if (! func_validate_args (_fpi, _st)) {
+                        fprintf(stderr, "error: syntax_tree_from_source: func_validate_args\n");
+                        return NULL;
+                    }
                 }
             }
             else {
