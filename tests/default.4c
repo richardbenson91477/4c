@@ -1,1 +1,5 @@
-(print-i (add-i 1 2))
+[
+  (set-i x (add-i 1 2))
+  (print-i x)
+]
+

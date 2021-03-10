@@ -20,9 +20,10 @@ struct func_info {
 
     // argument count
     uint32_t arg_n;
-
     // argument types
     enum type_ids arg_type_ids[_4C_FUNC_MAX_ARGS];
+    // argument subtypes
+    enum type_ids arg_subtype_ids[_4C_FUNC_MAX_ARGS];
 };
 
 #define _4C_FUNC_P_ID_N (3)

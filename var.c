@@ -1,6 +1,6 @@
 #include "var.h"
 
-struct var_info *var_info_from (struct type_info *_ti_partial) {
+struct var_info *var_info_from (struct type_info *_ti) {
     fprintf(stderr, "debug: var_info_from");
 
     struct var_info *_vi;
@@ -12,13 +12,12 @@ struct var_info *var_info_from (struct type_info *_ti_partial) {
         return NULL;
     }
 
-    // _ti_partial should contain sym_s, sym_n
-    _vi->ti.sym_s = strdup(_ti_partial->sym_s);
-    _vi->ti.sym_n = _ti_partial->sym_n;
+    // _ti must contain sym_s, sym_n
+    _vi->ti.sym_s = strdup(_ti->sym_s);
+    _vi->ti.sym_n = _ti->sym_n;
 
     // create a label
     // TODO
 
     return _vi;
 }
-

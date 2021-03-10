@@ -154,7 +154,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         _st->syntax_type = syntax_const;
     }
     // variable
-    // TODO: enforce variable name rules
+    // NOTE: consider enforcing variable name rules
     else {
         fprintf(stderr, "debug: syntax_tree_from_source: found variable\n");
         _st->syntax_type = syntax_var;
@@ -212,7 +212,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     else if (syntax_var == _st->syntax_type) {
         _st->ti.type_id = type_id_var;
         // TODO: look up varible to set subtype_id
-        fprintf(stderr, "debug: syntax_tree_from_source: sym is var of subtype (TODO)\n");
+        fprintf(stderr, "debug: syntax_tree_from_source: sym is var of subtype (unknown)\n");
 
         // save current position and return
         *__sa = _m;
@@ -223,14 +223,14 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         _st->ti.type_id = type_id_func;
 
         // is function symbol a predefined func
-        _fpi = _func_p_info;
+        _fpi = (struct func_info *) _func_p_info;
         while (_fpi->sym_s) {
             if (! strcmp (_st->ti.sym_s, _fpi->sym_s)) {
                 // grab return type into ti.subtype_id
                 _st->ti.subtype_id = _fpi->type_id_ret;
                 // flag as predefined func in _st
                 _st->ti.is_pfunc_ = true;
-                
+ 
                 fprintf(stderr, "debug: syntax_tree_from_source: sym is predefined function\n");
                 break;
             }

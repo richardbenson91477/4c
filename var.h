@@ -8,7 +8,7 @@ struct var_info {
     // ...
 };
 
-extern struct var_info *var_info_from (struct type_info *_ti_partial);
+extern struct var_info *var_info_from (struct type_info *_ti);
 
 #endif
 
