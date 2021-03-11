@@ -10,7 +10,7 @@ char *file_load (const char *file_s) {
     }
 
     fseek(f_in, 0, SEEK_END);
-    uint32_t b_n = ftell(f_in);
+    int32_t b_n = ftell(f_in);
     fseek(f_in, 0, SEEK_SET);
 
     if (0 == b_n) {

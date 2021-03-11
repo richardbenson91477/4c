@@ -9,17 +9,17 @@
 struct func_info {
     // function symbol
     char *sym_s;
-    uint32_t sym_n;
+    int32_t sym_n;
  
     // asm label
     char *label_s;
-    uint32_t label_n;
+    int32_t label_n;
 
     // return type
     enum type_ids type_id_ret;
 
     // argument count
-    uint32_t arg_n;
+    int32_t arg_n;
     // argument types
     enum type_ids arg_type_ids[_4C_FUNC_MAX_ARGS];
     // argument subtypes

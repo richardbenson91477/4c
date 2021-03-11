@@ -30,7 +30,7 @@ char *syntax_tree_sym_seek (char *_s) {
     return NULL;
 }
 
-uint32_t syntax_tree_sym_len (char *_s) {
+int32_t syntax_tree_sym_len (char *_s) {
     fprintf(stderr, "debug: syntax_tree_sym_len\n");
 
     char *_m = _s;
@@ -45,7 +45,7 @@ uint32_t syntax_tree_sym_len (char *_s) {
     }
  
     // we have at least one character
-    uint32_t s_n = 1;
+    int32_t s_n = 1;
 
     // is it a double-quote
     if ('\"' == *_m) {
@@ -181,7 +181,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
 
     // read symbol (excepting list) into (type_info) ti.sym_*
     if (syntax_list != _st->syntax_type) {
-        uint32_t n = syntax_tree_sym_len (_m);
+        int32_t n = syntax_tree_sym_len (_m);
         if (0 == n) {
             fprintf(stderr, "error: syntax_tree_from_source: syntax_tree_sym_len\n");
             return NULL;

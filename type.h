@@ -24,7 +24,7 @@ extern const char *type_id_syms[_4C_TYPE_ID_N];
 // NOTE: keep these items "zero-able to init"
 struct type_info {
     char *sym_s;
-    uint32_t sym_n;
+    int32_t sym_n;
     
     enum type_ids type_id;
     enum type_ids subtype_id;
@@ -33,7 +33,7 @@ struct type_info {
 
     // asm label or 0/NULL
     char *label_s;
-    uint32_t label_n;
+    int32_t label_n;
 };
 
 extern bool type_ids_from_const_sym (struct type_info *_ti);

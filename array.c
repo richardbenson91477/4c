@@ -23,7 +23,7 @@ bool array_add (struct array *_a, void *_v) {
     return true;
 }
 
-bool array_del (struct array *_a, uint32_t i) {
+bool array_del (struct array *_a, int32_t i) {
     fprintf(stderr, "debug: array_del\n");
 
     if ((0 == _a->n) || (i >= _a->n)) {
@@ -32,7 +32,7 @@ bool array_del (struct array *_a, uint32_t i) {
     }
 
     void **__v = _a->__p + i;
-    for (uint32_t c = i; c < (_a->n - 1); c ++) {
+    for (int32_t c = i; c < (_a->n - 1); c ++) {
         *__v = *(__v + 1);
         __v ++;
     }
@@ -41,7 +41,7 @@ bool array_del (struct array *_a, uint32_t i) {
     return true;
 }
 
-void *array_get (struct array *_a, uint32_t i) {
+void *array_get (struct array *_a, int32_t i) {
     fprintf(stderr, "debug: array_get\n");
 
     if ((0 == _a->n) || (i >= _a->n)) {

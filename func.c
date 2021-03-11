@@ -42,7 +42,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
     }
 
     // per arg types test
-    for (uint32_t c = 0; c < _st->nodes_a.n; c++) {
+    for (int32_t c = 0; c < _st->nodes_a.n; c++) {
         _st2 = array_get (&_st->nodes_a, c);
         if (NULL == _st2) {
             fprintf(stderr, "error: func_validate_args: array_get\n");

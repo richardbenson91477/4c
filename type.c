@@ -25,7 +25,7 @@ bool type_ids_from_const_sym (struct type_info *_ti) {
     }
 
     const char *_s = _ti->sym_s;
-    const uint32_t s_n = _ti->sym_n;
+    const int32_t s_n = _ti->sym_n;
 
     if (NULL == _s) {
         fprintf(stderr, "error: type_ids_from_const_sym: NULL sym\n");
@@ -50,7 +50,7 @@ bool type_ids_from_const_sym (struct type_info *_ti) {
     else if (('-' == *_s) || isdigit(*_s)) {
         _ti->type_id = type_id_const;
 
-        for (uint32_t c = 0; c < s_n; c ++) {
+        for (int32_t c = 0; c < s_n; c ++) {
             if ('.' == *(_s + c)) {
                 _ti->subtype_id = type_id_float;
                 return true;
@@ -67,7 +67,7 @@ bool type_ids_from_const_sym (struct type_info *_ti) {
     }
     // predefined type name
     else if ('#' == *_s) {
-        for (uint32_t c = 0; c < _4C_TYPE_ID_N; c++) {
+        for (int32_t c = 0; c < _4C_TYPE_ID_N; c++) {
             if (0 == strcmp (type_id_syms[c], _s)) {
                 _ti->type_id = type_id_ptype;
                 _ti->subtype_id = c;
