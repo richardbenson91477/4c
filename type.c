@@ -108,7 +108,8 @@ bool type_ids_from_const_sym (struct type_info *_ti) {
             return true;
         }
         else {
-            fprintf(stderr, "error: type_ids_from_const_sym: unknown predefined constant \"%s\"\n", _s);
+            fprintf(stderr, "error: type_ids_from_const_sym: unknown predefined ocnstant "
+                        "%s\"\n", _s);
             return false;
         }
     }

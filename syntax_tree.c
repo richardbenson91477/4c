@@ -214,8 +214,8 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     else if (syntax_var == _st->syntax_type) {
         _st->ti.type_id = type_id_var;
         // TODO: look up varible to set subtype_id
-        fprintf(stderr, "debug: syntax_tree_from_source: \"%s\" is var of subtype (to be determined)\n",
-                _st->ti.sym_s);
+        fprintf(stderr, "debug: syntax_tree_from_source: \"%s\" is var of subtype "
+                    "(to be determined)\n", _st->ti.sym_s);
 
         // save current position and return
         *__sa = _m;
@@ -238,7 +238,8 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
                 // flag as predefined func in _st
                 _st->ti.is_pfunc_ = true;
  
-                fprintf(stderr, "debug: syntax_tree_from_source: \"%s\" is a predefined function\n",
+                fprintf(stderr, "debug: syntax_tree_from_source: \"%s\" is a predefined "
+                        "function\n",
                         _st->ti.sym_s);
                 break;
             }
