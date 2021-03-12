@@ -1,5 +1,10 @@
 (set-func main (do [] #:int [
-    (def-type :nlbs [n #:int l #:list b #:bool s #:str])
+    (def-type :nlbs [
+        n #:int
+        l #:list
+        b #:bool
+        s #:str
+        ])
 
     (set-func new-nabs (do [self :nlbs] #:bool [
         (print-s "debug: new-nabs")

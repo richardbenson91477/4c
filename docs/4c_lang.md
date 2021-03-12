@@ -145,7 +145,7 @@ Example: (**if** (eq-i 1 1) [(print-s "one is one")] [(print-s "we've got a bigg
 Description: create a function that executes _fn-list_, using variable/type pair list _args_  
 Returns: function (type #:func) that returns a value of type _type_  
 Example: (**do** [x #:int y #:int] #:int [(return-i (add-i x y))])   
-> _sum of x and y_  
+> (function that returns the sum of integers x and y)  
 
 ### (return-_type_ _value_) -> 'nil  
 Description:  
@@ -156,33 +156,27 @@ Example:
 (while _condition_ [main-fn-list] [per-loop-fn-list]) -> 'nil  
 
 (input) -> #:str  
+(str-from-char _char_) -> value of type #:str  
 
-(and #:bool #:bool) -> #:bool  
-(or #:bool #:bool) -> #:bool  
-(not #:bool) -> #:bool  
+(and _bool1_ _bool2_) -> value of type #:bool  
+(or _bool1_ _bool2_) -> value of type #:bool  
+(not _bool_) -> value of type #:bool  
 
-(sub-_type_ _val1_ _val2_) -> #:_type_  
-(mul-_type_ _val1_ _val2_) -> #:_type_  
-(div-_type_ _val1_ _val2_) -> #:_type_  
-(mod-_type_ _val1_ _val2_) -> #:_type_  
-(eq-_type_ _val1_ _val2_) -> #:_type_  
-(neq-_type_ _val1_ _val2_) -> #:_type_  
-(gt-_type_ _val1_ _val2_) -> #:_type_  
-(gte-_type_ _val1_ _val2_) -> #:_type_  
-(lt-_type_ _val1_ _val2_) -> #:_type_  
-(lte-_type_ _val1_ _val2_) -> #:_type_  
+(sub-_type_ _val1_ _val2_) -> value of type _type_  
+(mul-_type_ _val1_ _val2_) -> value of type _type_  
+(div-_type_ _val1_ _val2_) -> value of type _type_  
+(mod-_type_ _val1_ _val2_) -> value of type _type_  
+(eq-_type_ _val1_ _val2_) -> value of type _type_  
+(neq-_type_ _val1_ _val2_) -> value of type _type_  
+(gt-_type_ _val1_ _val2_) -> value of type _type_
+(gte-_type_ _val1_ _val2_) -> value of type _type_  
+(lt-_type_ _val1_ _val2_) -> value of type _type_  
+(lte-_type_ _val1_ _val2_) -> value of type _type_  
 
-(str-from-char char) -> #:str  
-
+(new _type-name_) -> #:bool  
+(del-_type_ _instance_) -> #:bool  
+(dup-_type_ _value_) -> value of type _type_  
 (def-type :type-name [var-list]) -> 'nil  
-(new :type instance-var [extra-args]) -> #:bool  
-    (set :type.new (do [this :type extra-params] #:bool
-      [alloc/init this.vars]  
-    ))  
-(del :type instance-var [extra-args]) -> #:bool  
-    (set :type.del (do [this :type extra-params] #:bool  
-      [dealloc/deinit this.vars]  
-    ))  
 
 ## Credits
 
