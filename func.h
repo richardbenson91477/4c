@@ -6,10 +6,22 @@
 
 #define _4C_FUNC_MAX_ARGS (32)
 
+#define _4C_FUNC_P_ID_N (6)
+enum func_p_ids {
+    func_p_id_print_i = 0,
+    func_p_id_add_i,
+    func_p_id_set_i,
+    func_p_id_if,
+    func_p_id_do,
+    func_p_id_return_i,
+};
+
 struct func_info {
     // function symbol
     char *sym_s;
     int32_t sym_n;
+
+    enum func_p_ids func_p_id;
  
     // asm label
     char *label_s;
@@ -24,15 +36,6 @@ struct func_info {
     enum type_ids arg_type_ids[_4C_FUNC_MAX_ARGS];
     // argument subtypes
     enum type_ids arg_subtype_ids[_4C_FUNC_MAX_ARGS];
-};
-
-#define _4C_FUNC_P_ID_N (6)
-enum func_p_ids {
-    func_p_id_print_i = 0,
-    func_p_id_add_i,
-    func_p_id_set_i,
-    func_p_id_if,
-    func_p_id_do,
 };
 
 extern const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1];

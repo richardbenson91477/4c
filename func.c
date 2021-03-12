@@ -2,42 +2,42 @@
 
 // match order of funcs in func.h
 const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
-    {"print-i", 7,
+    {"print-i", 7, func_p_id_print_i,
         "_4c_func_print_i", 16,
         type_id_nil,
         1, {type_id_nil},
            {type_id_int}},
-    {"add-i", 5,
+    {"add-i", 5, func_p_id_add_i,
         "_4c_func_add_i", 14,
         type_id_int,
         2, {type_id_nil, type_id_nil},
            {type_id_int, type_id_int}},
-    {"set-i", 5,
+    {"set-i", 5, func_p_id_set_i,
         "_4c_func_set_i", 14,
         type_id_nil,
         2, {type_id_var, type_id_nil},
            {type_id_int, type_id_int}},
-    {"if", 2,
+    {"if", 2, func_p_id_if,
         "_4c_func_if", 11,
         type_id_nil,
         3, {type_id_nil, type_id_list, type_id_list},
            {type_id_bool, type_id_nil, type_id_nil}},
-    {"do", 2,
+    {"do", 2, func_p_id_do,
         "_4c_func_do", 11,
         type_id_func,
-        3, {type_id_list, type_id_ptype, type_id_list},
+        3, {type_id_list, type_id_type, type_id_list},
            {type_id_nil, type_id_nil, type_id_nil}},
-    {"return-i", 8,
+    {"return-i", 8, func_p_id_return_i,
         "_4c_func_return_i", 17,
         type_id_nil,
         1, {type_id_nil},
            {type_id_int}},
-    {NULL, 0, NULL, 0, type_id_nil, 0, {type_id_nil}, {type_id_nil}}
+    {NULL, 0, 0, NULL, 0, type_id_nil, 0, {type_id_nil}, {type_id_nil}}
 };
 
 bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
     fprintf(stderr, "debug: func_validate_args\n");
-    struct syntax_tree *_st2;
+    struct syntax_tree *_st2, *_st3, *_st4;
 
     if (NULL == _fi) {
         fprintf(stderr, "error: func_validate_args: NULL func_info\n");
@@ -55,7 +55,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
         return false;
     }
 
-    // per arg types test
+    // per arg type test
     for (int32_t c = 0; c < _st->nodes_a.n; c++) {
         _st2 = array_get (&_st->nodes_a, c);
         if (NULL == _st2) {
@@ -92,6 +92,59 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
                     type_id_syms[_st2->ti.subtype_id], type_id_syms[_fi->arg_subtype_ids[c]],
                     _fi->sym_s);
             return false;
+        }
+    }
+
+    // function specific arg type tests
+    if (func_p_id_print_i == _fi->func_p_id) {
+    }
+    else if (func_p_id_add_i == _fi->func_p_id) {
+    }
+    else if (func_p_id_set_i == _fi->func_p_id) {
+    }
+    else if (func_p_id_if == _fi->func_p_id) {
+    }
+    else if (func_p_id_do == _fi->func_p_id) {
+        // element 0 format: [(var, type) * x] from x = 0 -> max
+        _st2 = array_get (&_st->nodes_a, 0);
+        if (NULL == _st2) {
+            fprintf(stderr, "error: func_validate_args: array_get (2)\n");
+            return false;
+        }
+
+        // item count must be an even number
+        if (0 != (_st2->nodes_a.n % 2)) {
+            fprintf(stderr, "error: func_validate_args: \"do\" odd var count\n");
+            return false;
+        }
+
+        // per list item type test
+        for (int32_t c = 0; c < _st2->nodes_a.n; c += 2) {
+            // get item
+            _st3 = array_get (&_st2->nodes_a, c);
+            if (NULL == _st3) {
+                fprintf(stderr, "error: func_validate_args: array_get (3)\n");
+                return false;
+            }
+            // ensure #:var
+            if (type_id_var != _st3->ti.type_id) {
+                fprintf(stderr, "error: func_validate_args: \"do\" arg 0 elem %d not #:var\n", c);
+                return false;
+            }
+            
+            // get next item
+            _st4 = array_get (&_st2->nodes_a, c + 1);
+
+            // ensure type #:type
+            if (type_id_type != _st4->ti.type_id) {
+                fprintf(stderr, "error: func_validate_args: \"do\" arg 0 elem %d not #:type\n", c + 1);
+                return false;
+            }
+            
+            // set var subtype
+            _st3->ti.subtype_id = _st4->ti.subtype_id;
+
+            fprintf(stderr, "got this far\n\n");
         }
     }
 

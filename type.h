@@ -8,14 +8,14 @@ enum type_ids {
     type_id_nil = 0,
     type_id_func,
     type_id_list,
+    type_id_type,
+    type_id_const,
     type_id_var,
     type_id_int,
     type_id_float,
     type_id_bool,
     type_id_str,
-    type_id_const,
     type_id_pconst,
-    type_id_ptype,
     type_id_utype,
 };
 

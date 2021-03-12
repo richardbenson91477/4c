@@ -10,6 +10,7 @@ endif
 INCS=array.h cstd.h file.h syntax_tree.h type.h var.h func.h
 OBJS=4cc.o array.o file.o syntax_tree.o type.o var.o func.o
 LDLIBS=
+#LDFLAGS+="-static"
 
 all: 4cc doc tags
 

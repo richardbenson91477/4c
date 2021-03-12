@@ -5,14 +5,14 @@ const char *type_id_syms[_4C_TYPE_ID_N] = {
     "#:nil",
     "#:func",
     "#:list",
+    "#:type",
+    "#:const",
     "#:var",
     "#:int",
     "#:float",
     "#:bool",
     "#:str",
-    "#:const",
     "#:pconst",
-    "#:ptype",
     "#:utype",
 };
 
@@ -61,7 +61,8 @@ bool type_ids_from_const_sym (struct type_info *_ti) {
     }
     // user-defined type
     else if (':' == *_s) {
-        _ti->type_id = type_id_utype;
+        _ti->type_id = type_id_type;
+        _ti->subtype_id = type_id_utype;
         // TODO: check deeper (e.g. :users:joe)
         return true;
     }
@@ -69,7 +70,7 @@ bool type_ids_from_const_sym (struct type_info *_ti) {
     else if ('#' == *_s) {
         for (int32_t c = 0; c < _4C_TYPE_ID_N; c++) {
             if (0 == strcmp (type_id_syms[c], _s)) {
-                _ti->type_id = type_id_ptype;
+                _ti->type_id = type_id_type;
                 _ti->subtype_id = c;
                 return true;
             }
