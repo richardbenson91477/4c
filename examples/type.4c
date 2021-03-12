@@ -6,8 +6,8 @@
         s #:str
         ])
 
-    (set-func new-nabs (do [self :nlbs] #:bool [
-        (print-s "debug: new-nabs")
+    (set-func new-nlbs (do [self :nlbs] #:bool [
+        (print-s "debug: new-nlbs")
         (print-s 'nl)
         (set-i self.n 3)
         (set-l self.l (new #:list))
@@ -17,8 +17,8 @@
       ])
     )
 
-    (set-func del-nabs (do [this :nlbs] #:bool [
-        (print-s "debug: del-nabs")
+    (set-func del-nlbs (do [this :nlbs] #:bool [
+        (print-s "debug: del-nlbs")
         (print-s 'nl)
         (del-l this.l)
         (del-s this.s)

@@ -12,7 +12,8 @@
         )
 
         (print-s 'nl)
-      ] [(set-i i (sub-i i 1))]
+        ]
+      [(set-i i (sub-i i 1))]
     )
 
     (print-s 'nl)

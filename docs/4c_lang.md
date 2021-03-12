@@ -86,14 +86,14 @@ Predefined constants:
   *  \#:nil (empty type)  
   *  \#:func (function)  
   *  \#:list (list)  
+  *  \#:type (type reference)
+  *  \#:const (number or string constant)
   *  \#:var (variable)
   *  \#:int (signed 64-bit integer)  
   *  \#:float (64-bit floating point number)  
   *  \#:bool (boolean 'true or 'false)  
   *  \#:str (string)  
-  *  \#:const (number or string constant)
   *  \#:pconst (pre-defined constant)
-  *  \#:ptype (pre-defined type)
   *  \#:utype (user-defined type)
 
 ### User-defined types
