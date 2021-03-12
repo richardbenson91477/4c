@@ -63,7 +63,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
             return false;
         }
 
-        // test type
+        // test type if specified
         if ((type_id_nil != _fi->arg_type_ids[c]) &&\
                 (_st2->ti.type_id != _fi->arg_type_ids[c])) {
             fprintf(stderr, "error: func_validate_args: type mismatch: arg %d: \"%s\" vs \"%s\" "
@@ -74,16 +74,16 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
             return false;
         }
         
-        // if var type, and no subtype, assume var is new and needs function's required subtype
-        //     (a hint for later)
+        // var is new if type #:var, subtype #:nil
         if ((type_id_var == _st2->ti.type_id) && 
                 (type_id_nil == _st2->ti.subtype_id)) {
+            // set subtype hint using function's required subtype
             _st2->ti.subtype_id = _fi->arg_subtype_ids[c];
             fprintf(stderr, "debug: func_validate_args: deduced new var \"%s\" has subtype \"%s\"\n",
                     _st2->ti.sym_s, type_id_syms[_st2->ti.subtype_id]);
         }
 
-        // test subtype
+        // test subtype if specified
         if ((type_id_nil != _fi->arg_subtype_ids[c]) &&\
                 (_st2->ti.subtype_id != _fi->arg_subtype_ids[c])) {
             fprintf(stderr, "error: func_validate_args: subtype: arg %d: \"%s\" vs \"%s\" "
@@ -95,7 +95,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
         }
     }
 
-    // function specific arg type tests
+    // function specific depth 2 type tests
     if (func_p_id_print_i == _fi->func_p_id) {
     }
     else if (func_p_id_add_i == _fi->func_p_id) {
@@ -114,7 +114,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
 
         // item count must be an even number
         if (0 != (_st2->nodes_a.n % 2)) {
-            fprintf(stderr, "error: func_validate_args: \"do\" odd var count\n");
+            fprintf(stderr, "error: func_validate_args: \"do\": odd var count\n");
             return false;
         }
 
@@ -128,7 +128,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
             }
             // ensure #:var
             if (type_id_var != _st3->ti.type_id) {
-                fprintf(stderr, "error: func_validate_args: \"do\" arg 0 elem %d not #:var\n", c);
+                fprintf(stderr, "error: func_validate_args: \"do\": arg 0 elem %d not #:var\n", c);
                 return false;
             }
             
@@ -137,14 +137,15 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
 
             // ensure type #:type
             if (type_id_type != _st4->ti.type_id) {
-                fprintf(stderr, "error: func_validate_args: \"do\" arg 0 elem %d not #:type\n", c + 1);
+                fprintf(stderr, "error: func_validate_args: \"do\": arg 0 elem %d not #:type\n", c + 1);
                 return false;
             }
             
-            // set var subtype
+            // set var subtype hint
             _st3->ti.subtype_id = _st4->ti.subtype_id;
 
-            fprintf(stderr, "got this far\n\n");
+            fprintf(stderr, "debug: func_validate_args: \"do\": set var \"%s\" subtype \"%s\"\n",
+                    _st3->ti.sym_s, type_id_syms[_st4->ti.subtype_id]);
         }
     }
 
