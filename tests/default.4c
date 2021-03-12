@@ -1,9 +1,8 @@
-[   
-    (if 'true [
-        (set-i x (add-i 1 2))
-        ] [
-        (set-i x (add-i 3 4))
-        ] )
+(do [] #:int [   
+    (if 'true 
+        [(set-i x (add-i 1 2))]
+        [(set-i x (add-i 3 4))]
+        )
     (print-i x)
-]
+])
 

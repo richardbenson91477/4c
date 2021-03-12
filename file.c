@@ -1,11 +1,11 @@
 #include "file.h"
 
 char *file_load (const char *file_s) {
-    fprintf(stderr, "debug: file_load %s\n", file_s);
+    fprintf(stderr, "debug: file_load \"%s\"\n", file_s);
 
     FILE *f_in = fopen(file_s, "r");
     if (NULL == f_in) {
-        fprintf(stderr, "error: file_load: fopen %s\n", file_s);
+        fprintf(stderr, "error: file_load: fopen \"%s\"\n", file_s);
         return NULL;
     }
 

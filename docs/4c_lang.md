@@ -38,16 +38,16 @@ Where
   * _arg_ is any of the following:
 
     -   An _inner_ function call which returns a result to its _outer_ function  
-        Example: (+ **(+ 1 1)** 2)
+        Example: (add-i **(add-i 1 1)** 2)
 
     -   A list  
-        Example: [3 x 'false (+ y z)]
+        Example: [3 x 'false (add-i y z)]
 
     -   A constant  
         Examples: 3 "Hello" 'nl
 
     -   A variable name  
-        Examples: x my-string
+        Examples: x my-string-var
 
 **Lists** of values take the following form:  
 [_list-item_**1**_ .. _list-item_**n**_]  
@@ -126,11 +126,21 @@ Returns: 'nil
 Example: (**set-i** x (**add-i** 1 2)) (print-i x)  
 > 3  
 
+### (if _condiiton_ [true-fns] [false-fns]) -> 'nil  
+Description: if boolean _condition_ is true, execute true-fns, otherwise execute false-fns  
+Returns: 'nil  
+Example: (if (eq-i 1 1) [(print-s "one is one")] [(print-s "we've got a bigger problem")])
+> one is one
+
+### (do [_args_] _type_ [_fn list_])
+Description: using variable/type pair list _args_, execute _fn list_
+Returns: function (type #:func) that returns a value of type _type_
+Example: (do [x #:int y #:int] #:int [(return-i (add-i x y))])   
+> _sum of x and y_
+
 (def-type :type-name [var-list]) -> 'nil  
-(do [args] type-name [fn1..fnn]) -> #:func that returns type _type-name_  
-(return value-for-do) -> 'nil  
-(if #:bool [true-fns] [false-fns]) -> 'nil  
-(while #:bool) [fn-list] [per-loop fn-list]) -> 'nil  
+(return-i value-for-do) -> 'nil  
+(while #:bool [fn-list] [per-loop fn-list]) -> 'nil  
 (input) -> #:str  
 (and #:bool #:bool) -> #:bool  
 (or #:bool #:bool) -> #:bool  
