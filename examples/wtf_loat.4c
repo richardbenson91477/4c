@@ -1,10 +1,12 @@
 ; NOTE: this is a compiler test
 
-(set main (do [] #:int [
-    (set f 0.0)
-    (while (<= f 1.0) [
-        (print f 'nl)
-      ] [(set f (+ f 0.1))]
+(set-func main (do [] #:int [
+    (set-f n 0.0)
+    (while (lte-f n 1.0) [
+        (print-f n)
+        (print-s 'nl)
+        ] 
+      [(set-f n (add-f n 0.1))]
     )
     (return 0)
 ]))

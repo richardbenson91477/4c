@@ -104,7 +104,7 @@ Predefined constants:
 
 ## Predefined functions
 
-**Note:** various predefined functions use the following shorthand for predefined types:
+**Note:** various predefined function names use the following shorthand for predefined types:
 
   * **i**: #:int  
   * **f**: #:float  

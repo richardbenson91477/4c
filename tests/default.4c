@@ -4,5 +4,6 @@
         [(set-i x (add-i 3 4))]
         )
     (print-i x)
+    (return-i 0)
 ])
 

@@ -27,6 +27,11 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
         type_id_func,
         3, {type_id_list, type_id_ptype, type_id_list},
            {type_id_nil, type_id_nil, type_id_nil}},
+    {"return-i", 8,
+        "_4c_func_return_i", 17,
+        type_id_nil,
+        1, {type_id_nil},
+           {type_id_int}},
     {NULL, 0, NULL, 0, type_id_nil, 0, {type_id_nil}, {type_id_nil}}
 };
 

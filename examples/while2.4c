@@ -1,20 +1,21 @@
 
-(set main (do [] #:int [
-    (set i 4)
-    (while (> i 0) [
-        (print (str-from (+ i 96)))
+(set-func main (do [] #:int [
+    (set-i i 4)
+    (while (gt-i i 0) [
+        (print-s (str-from-char (add-i i 96)))
 
         (set j 4)
-        (while (> j 0) [
-            (print (str-from (+ j 64)))
-            ] [(set j (- j 1))]
+        (while (gt-i j 0) [
+            (print-s (str-from-char (add-i j 64)))
+            ] 
+          [(set-i j (sub-i j 1))]
         )
 
-        (print 'nl)
-      ] [(set i (- i 1))]
+        (print-s 'nl)
+      ] [(set-i i (sub-i i 1))]
     )
 
-    (print 'nl)
-    (return 0)
+    (print-s 'nl)
+    (return-i 0)
 ]))
 

@@ -1,20 +1,21 @@
-(set main (do [] #:int [
-    (set add2 (do [x #:int] #:int [
-        (return (+ 3 x))
+(set-func main (do [] #:int [
+    (set-func add2 (do [x #:int] #:int [
+        (return-i (add-i 3 x))
     ]))
 
-    (print (add2 3) 'nl)
+    (print-i (add2 3) 'nl)
 
     (set make-adder (do [x #:int] #:func [
-        (return (do [y #:int] #:int [
-            (return (+ x y))
+        (return-func (do [y #:int] #:int [
+            (return-i (add-i x y))
         ]))
     ]))
 
-    (set add4 (make-adder 4))
-    (print (add4 3) 'nl)
+    (set-func add4 (make-adder 4))
+    (print-i (add4 3) 'nl)
 
-    (print (eval (make-adder 5) 2) 'nl)
+    (print-i (eval (make-adder 5) 2))
+    (print-s 'nl)
     (return 0)
 ]))
 

@@ -1,7 +1,8 @@
 ; comments look like this
 
-(set main (do [] #:int [
-    (print "Hello, world!" 'nl)
-    (return 0)
+(set-func main (do [] #:int [
+    (print-s "Hello, world!")
+    (print-s 'nl)
+    (return-i 0)
 ]))
 

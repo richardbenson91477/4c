@@ -1,6 +1,8 @@
-(set main (do [] #:int [
-    (set a 1)
-    (set a (+ a 9))
-    (print a 'nl)
+(set-func main (do [] #:int [
+    (set-i a 1)
+    (set-i a (add-i a 9))
+    (print-i a)
+    (print-s 'nl)
+    (return-i 0)
 ]))
 

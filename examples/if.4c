@@ -1,14 +1,16 @@
 
-(set main (do [] #:int [
-    (set x 0)
-    ;(set x 1)
-    (if (!= x 0) [
-        (print "x is nonzero" 'nl)
-        (return 0)
+(set-func main (do [] #:int [
+    (set-i x 0)
+    ;(set-i x 1)
+    (if (ne-i x 0) [
+        (print-s "x is nonzero")
+        (print-s 'nl)
+        (return-i 0)
       ] [
-        (print "x is zero" 'nl)
-        (return -1)
+        (print-s "x is zero")
+        (print-s 'nl)
+        (return-i -1)
       ])
-    (return 0)
+    (return-i 0)
 ]))
 

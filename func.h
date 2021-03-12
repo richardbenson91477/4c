@@ -26,7 +26,7 @@ struct func_info {
     enum type_ids arg_subtype_ids[_4C_FUNC_MAX_ARGS];
 };
 
-#define _4C_FUNC_P_ID_N (5)
+#define _4C_FUNC_P_ID_N (6)
 enum func_p_ids {
     func_p_id_print_i = 0,
     func_p_id_add_i,
