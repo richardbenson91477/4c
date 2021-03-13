@@ -1,9 +1,4 @@
-(do [x #:int] #:int [   
-    (if 'true 
-        [(set-i x (add-i 1 2))]
-        [(set-i x (add-i 3 4))]
-        )
-    (print-i x)
+(do [] #:int [   
     (return-i 0)
 ])
 

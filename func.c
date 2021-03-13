@@ -95,7 +95,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
         }
     }
 
-    // function specific depth 2 type tests
+    // function specific in depth type tests
     if (func_p_id_print_i == _fi->func_p_id) {
     }
     else if (func_p_id_add_i == _fi->func_p_id) {
@@ -105,20 +105,21 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
     else if (func_p_id_if == _fi->func_p_id) {
     }
     else if (func_p_id_do == _fi->func_p_id) {
-        // element 0 format: [(var, type) * x] from x = 0 -> max
+        // var list
+        // format: [(var, type) * x] from x = 0 -> max
         _st2 = array_get (&_st->nodes_a, 0);
         if (NULL == _st2) {
             fprintf(stderr, "error: func_validate_args: array_get (2)\n");
             return false;
         }
 
-        // item count must be an even number
+        // var list item count must be an even number
         if (0 != (_st2->nodes_a.n % 2)) {
             fprintf(stderr, "error: func_validate_args: \"do\": odd var count\n");
             return false;
         }
 
-        // per list item type test
+        // var list per item type test
         for (int32_t c = 0; c < _st2->nodes_a.n; c += 2) {
             // get item
             _st3 = array_get (&_st2->nodes_a, c);
