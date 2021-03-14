@@ -34,7 +34,7 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
            {type_id_int}},
     {"return-b", 8, func_p_id_return_b,
         "_4c_func_return_b", 17,
-        type_id_bool,
+        type_id_bool, // see above comment
         1, {type_id_nil},
            {type_id_bool}},
     {NULL, 0, 0, NULL, 0, type_id_nil, 0, {type_id_nil}, {type_id_nil}}
@@ -218,7 +218,7 @@ bool func_validate_return_type (struct syntax_tree *_st, enum type_ids type_id_r
         }
     }
 
-    // skip unsuitable branches
+    // skip other unsuitable branches
     // ...?
 
     // recurse into any remaining branches

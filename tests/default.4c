@@ -1,5 +1,10 @@
 (do [] #:int [   
+    (if 'false [
+        (return-i 1)
+    ] [
+        (return-i 2)
+    ])
+
     (return-i 0)
-    (return-i 1)
 ])
 
