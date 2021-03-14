@@ -6,7 +6,7 @@
 
 #define _4C_FUNC_MAX_ARGS (32)
 
-#define _4C_FUNC_P_ID_N (6)
+#define _4C_FUNC_P_ID_N (7)
 enum func_p_ids {
     func_p_id_print_i = 0,
     func_p_id_add_i,
@@ -14,6 +14,7 @@ enum func_p_ids {
     func_p_id_if,
     func_p_id_do,
     func_p_id_return_i,
+    func_p_id_return_b,
 };
 
 struct func_info {
@@ -40,6 +41,7 @@ struct func_info {
 
 extern const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1];
 extern bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st);
+extern bool func_validate_return_type (struct func_info *_fi, struct syntax_tree *_st);
 
 #endif
 

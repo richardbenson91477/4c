@@ -19,7 +19,7 @@ $(OBJS): $(INCS)
 4cc: $(OBJS)
 
 test: all
-	./4cc tests/default.4c 2>&1 | vimpager
+	./4cc tests/default.4c 2>&1
 
 doc:
 	+$(MAKE) -C docs/ all

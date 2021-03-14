@@ -237,7 +237,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
                 _st->ti.subtype_id = _fi->type_id_ret;
                 // flag as predefined func in _st
                 _st->ti.is_pfunc_ = true;
-                // we will need this later
+                // we will need this elsewhere
                 _st->ti._fi = _fi;
  
                 fprintf(stderr, "debug: syntax_tree_from_source: \"%s\" is a predefined "
@@ -276,7 +276,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
  
                 // validate argument types 
                 if (_st->ti.is_pfunc_) {
-                    if (! func_validate_args (_fi, _st)) {
+                    if (! func_validate_args (_st->ti._fi, _st)) {
                         fprintf(stderr, "error: syntax_tree_from_source: func_validate_args\n");
                         return NULL;
                     }

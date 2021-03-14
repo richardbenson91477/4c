@@ -32,6 +32,11 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
         type_id_int, // returns don't really return a value, but this is handy for type checking "do"
         1, {type_id_nil},
            {type_id_int}},
+    {"return-b", 8, func_p_id_return_b,
+        "_4c_func_return_i", 17,
+        type_id_bool,
+        1, {type_id_nil},
+           {type_id_bool}},
     {NULL, 0, 0, NULL, 0, type_id_nil, 0, {type_id_nil}, {type_id_nil}}
 };
 
@@ -157,9 +162,71 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
             return false;
         }
  
-        // search syntax subtrees for "return-*", excepting nested do branches,
-        // to ensure all return- calls match our "do" return type
-        // syntax_tree_search_
+        // validate that inner return- call types match current return type
+        if (! func_validate_return_type (_fi, _st)) {
+            fprintf(stderr, "error: func_validate_args: func_validate_return_type\n");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// search syntax subtrees, excepting nested "do"s, to validate return- call types
+bool func_validate_return_type (struct func_info *_fi, struct syntax_tree *_st) {
+    fprintf(stderr, "debug: func_validate_return_type\n");
+    struct syntax_tree *_st2;
+    struct func_info *_fi2;
+
+    if (NULL == _fi) {
+        fprintf(stderr, "error: func_validate_return_type: NULL func_info\n");
+        return false;
+    }
+    if (NULL == _st) {
+        fprintf(stderr, "error: func_validate_return_type: NULL syntax_tree\n");
+        return false;
+    }
+
+    // are we a predefined function
+    _fi2 = _st2->ti._fi;
+    if (NULL != _fi2) {
+        // which one
+        switch (_fi2->func_p_id) {
+            case func_p_id_do:
+                fprintf(stderr, "debug: func_validate_return_type: ignoring inner do\n");
+                // do not recurse inner "do"
+                return true;
+                break;
+
+            case func_p_id_return_i:
+            case func_p_id_return_b:
+                if (_fi2->type_id_ret != _fi->type_id_ret) {
+                    fprintf(stderr, "error: func_validate_return_type: incorrect return type\n");
+                    return false;
+                }
+                else {
+                    fprintf(stderr, "debug: func_validate_return_type: correct return type\n");
+                    return true;
+                }
+                break;
+        }
+    }
+
+    // skip unsuitable branches
+    // ...?
+
+    // recurse into any remaining branches
+    for (int32_t c = 0; c < _st->nodes_a.n; c++) {
+        _st2 = array_get (&_st->nodes_a, c);
+        if (NULL == _st2) {
+            fprintf(stderr, "error: func_validate_return_type: array_get\n");
+            return false;
+        }
+
+        if (! func_validate_return_type (_fi, _st2)) {
+            fprintf(stderr, "error: func_validate_return_type: func_validate_return_type\n");
+            return false;
+        }
     }
 
     return true;
