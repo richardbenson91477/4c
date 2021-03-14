@@ -29,7 +29,7 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
            {type_id_nil, type_id_nil, type_id_nil}},
     {"return-i", 8, func_p_id_return_i,
         "_4c_func_return_i", 17,
-        type_id_nil,
+        type_id_int, // returns don't really return a value, but this is handy for type checking "do"
         1, {type_id_nil},
            {type_id_int}},
     {NULL, 0, 0, NULL, 0, type_id_nil, 0, {type_id_nil}, {type_id_nil}}
@@ -95,7 +95,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
         }
     }
 
-    // function specific in depth type tests
+    // function specific in-depth argument type tests
     if (func_p_id_print_i == _fi->func_p_id) {
     }
     else if (func_p_id_add_i == _fi->func_p_id) {
@@ -104,6 +104,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
     }
     else if (func_p_id_if == _fi->func_p_id) {
     }
+    // "do" arguments
     else if (func_p_id_do == _fi->func_p_id) {
         // var list
         // format: [(var, type) * x] from x = 0 -> max
@@ -148,6 +149,17 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
             fprintf(stderr, "debug: func_validate_args: \"do\": set var \"%s\" subtype \"%s\"\n",
                     _st3->ti.sym_s, type_id_syms[_st4->ti.subtype_id]);
         }
+
+        // function list
+        _st2 = array_get (&_st->nodes_a, 2);
+        if (NULL == _st2) {
+            fprintf(stderr, "error: func_validate_args: array_get (4)\n");
+            return false;
+        }
+ 
+        // search syntax subtrees for "return-*", ignoring nested do branches,
+        // to ensure all other return- calls match our "do" return type
+        //syntax_
     }
 
     return true;

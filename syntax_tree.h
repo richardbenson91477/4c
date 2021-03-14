@@ -23,5 +23,7 @@ struct syntax_tree {
 extern struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa);
 extern bool syntax_tree_destroy (struct syntax_tree *_st);
 
+//extern bool syntax_tree_search_for_type (struct syntax_tree *_st, );
+
 #endif
 
