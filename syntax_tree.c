@@ -102,7 +102,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
     fprintf(stderr, "debug: syntax_tree_from_source\n");
 
     struct syntax_tree *_st, *_st2;
-    struct func_info *_fpi = NULL;
+    struct func_info *_fi = NULL;
     char *_m, *_ma;
 
     if (NULL == _s) {
@@ -230,13 +230,15 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
         _st->ti.type_id = type_id_func;
 
         // is function symbol a predefined func
-        _fpi = (struct func_info *) _func_p_info;
-        while (_fpi->sym_s) {
-            if (! strcmp (_st->ti.sym_s, _fpi->sym_s)) {
+        _fi = (struct func_info *) _func_p_info;
+        while (_fi->sym_s) {
+            if (! strcmp (_st->ti.sym_s, _fi->sym_s)) {
                 // grab return type into ti.subtype_id
-                _st->ti.subtype_id = _fpi->type_id_ret;
+                _st->ti.subtype_id = _fi->type_id_ret;
                 // flag as predefined func in _st
                 _st->ti.is_pfunc_ = true;
+                // we will need this later
+                _st->ti._fi = _fi;
  
                 fprintf(stderr, "debug: syntax_tree_from_source: \"%s\" is a predefined "
                         "function\n",
@@ -244,9 +246,9 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
                 break;
             }
 
-            _fpi += 1;
+            _fi += 1;
         }
-        if (! _fpi->sym_s) {
+        if (! _fi->sym_s) {
             fprintf(stderr, "debug: syntax_tree_from_source: \"%s\" is a user-defined function\n",
                     _st->ti.sym_s);
         }
@@ -274,7 +276,7 @@ struct syntax_tree *syntax_tree_from_source (char *_s, char **__sa) {
  
                 // validate argument types 
                 if (_st->ti.is_pfunc_) {
-                    if (! func_validate_args (_fpi, _st)) {
+                    if (! func_validate_args (_fi, _st)) {
                         fprintf(stderr, "error: syntax_tree_from_source: func_validate_args\n");
                         return NULL;
                     }

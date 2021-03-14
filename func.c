@@ -157,9 +157,9 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
             return false;
         }
  
-        // search syntax subtrees for "return-*", ignoring nested do branches,
-        // to ensure all other return- calls match our "do" return type
-        //syntax_
+        // search syntax subtrees for "return-*", excepting nested do branches,
+        // to ensure all return- calls match our "do" return type
+        // syntax_tree_search_
     }
 
     return true;

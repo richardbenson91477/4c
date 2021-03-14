@@ -30,6 +30,7 @@ struct type_info {
     enum type_ids subtype_id;
 
     bool is_pfunc_;
+    struct func_info *_fi;
 
     // asm label or 0/NULL
     char *label_s;
