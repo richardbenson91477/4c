@@ -41,7 +41,7 @@ struct func_info {
 
 extern const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1];
 extern bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st);
-extern bool func_validate_return_type (struct func_info *_fi, struct syntax_tree *_st);
+extern bool func_validate_return_type (struct syntax_tree *_st, enum type_ids type_id_ret);
 
 #endif
 

@@ -33,7 +33,7 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
         1, {type_id_nil},
            {type_id_int}},
     {"return-b", 8, func_p_id_return_b,
-        "_4c_func_return_i", 17,
+        "_4c_func_return_b", 17,
         type_id_bool,
         1, {type_id_nil},
            {type_id_bool}},
@@ -43,6 +43,7 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
 bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
     fprintf(stderr, "debug: func_validate_args\n");
     struct syntax_tree *_st2, *_st3, *_st4;
+    struct type_info type_id_inner_ret;
 
     if (NULL == _fi) {
         fprintf(stderr, "error: func_validate_args: NULL func_info\n");
@@ -161,9 +162,16 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
             fprintf(stderr, "error: func_validate_args: array_get (4)\n");
             return false;
         }
- 
+            
+        // get the inner return type
+        _st3 = array_get (&_st->nodes_a, 1);
+        if (NULL == _st3) {
+            fprintf(stderr, "error: func_validate_args: array_get (5)\n");
+            return false;
+        }
+
         // validate that inner return- call types match current return type
-        if (! func_validate_return_type (_fi, _st2)) {
+        if (! func_validate_return_type (_st2, _st3->ti.subtype_id)) {
             fprintf(stderr, "error: func_validate_args: func_validate_return_type\n");
             return false;
         }
@@ -172,26 +180,22 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
     return true;
 }
 
-// search syntax subtrees, excepting nested "do"s, to validate return- call types
-bool func_validate_return_type (struct func_info *_fi, struct syntax_tree *_st) {
+// search syntax subtrees, ignoring nested "do"s, to validate return- call types
+bool func_validate_return_type (struct syntax_tree *_st, enum type_ids type_id_ret) {
     fprintf(stderr, "debug: func_validate_return_type\n");
     struct syntax_tree *_st2;
-    struct func_info *_fi2;
+    struct func_info *_fi;
 
-    if (NULL == _fi) {
-        fprintf(stderr, "error: func_validate_return_type: NULL func_info\n");
-        return false;
-    }
     if (NULL == _st) {
         fprintf(stderr, "error: func_validate_return_type: NULL syntax_tree\n");
         return false;
     }
 
     // are we a predefined function
-    _fi2 = _st->ti._fi;
-    if (NULL != _fi2) {
+    _fi = _st->ti._fi;
+    if (NULL != _fi) {
         // which one
-        switch (_fi2->func_p_id) {
+        switch (_fi->func_p_id) {
             case func_p_id_do:
                 fprintf(stderr, "debug: func_validate_return_type: ignoring inner do\n");
                 // do not recurse inner "do"
@@ -200,8 +204,10 @@ bool func_validate_return_type (struct func_info *_fi, struct syntax_tree *_st) 
 
             case func_p_id_return_i:
             case func_p_id_return_b:
-                if (_fi2->type_id_ret != _fi->type_id_ret) {
-                    fprintf(stderr, "error: func_validate_return_type: incorrect return type\n");
+                if (_fi->type_id_ret != _fi->type_id_ret) {
+                    fprintf(stderr, "error: func_validate_return_type: incorrect return type %s: "
+                            "expected %s\n",
+                            type_id_syms[_fi->type_id_ret], type_id_syms[_fi->type_id_ret]);
                     return false;
                 }
                 else {
@@ -223,7 +229,7 @@ bool func_validate_return_type (struct func_info *_fi, struct syntax_tree *_st) 
             return false;
         }
 
-        if (! func_validate_return_type (_fi, _st2)) {
+        if (! func_validate_return_type (_st2, type_id_ret)) {
             fprintf(stderr, "error: func_validate_return_type: func_validate_return_type\n");
             return false;
         }
