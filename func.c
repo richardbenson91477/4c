@@ -163,7 +163,7 @@ bool func_validate_args (struct func_info *_fi, struct syntax_tree *_st) {
         }
  
         // validate that inner return- call types match current return type
-        if (! func_validate_return_type (_fi, _st)) {
+        if (! func_validate_return_type (_fi, _st2)) {
             fprintf(stderr, "error: func_validate_args: func_validate_return_type\n");
             return false;
         }
@@ -188,7 +188,7 @@ bool func_validate_return_type (struct func_info *_fi, struct syntax_tree *_st) 
     }
 
     // are we a predefined function
-    _fi2 = _st2->ti._fi;
+    _fi2 = _st->ti._fi;
     if (NULL != _fi2) {
         // which one
         switch (_fi2->func_p_id) {
