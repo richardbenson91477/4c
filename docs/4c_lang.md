@@ -148,30 +148,31 @@ Example: (**do** [x #:int y #:int] #:int [(return-i (add-i x y))])
 > (function that returns the sum of integers x and y)  
 
 ### (return-_type_ _value_) -> 'nil  
-Description:  
+Description: Return _value_ from the current function  
 Returns: 'nil  
-Example:  
->  
+Example: (do [x #:int y #:int] #:int [(**return-i** (add-i x y))])  
+> (function that returns the sum of integers x and y)  
 
 (while _condition_ [main-fn-list] [per-loop-fn-list]) -> 'nil  
 
 (input) -> #:str  
 (str-from-char _char_) -> value of type #:str  
 
-(and _bool1_ _bool2_) -> value of type #:bool  
-(or _bool1_ _bool2_) -> value of type #:bool  
-(not _bool_) -> value of type #:bool  
-
 (sub-_type_ _val1_ _val2_) -> value of type _type_  
 (mul-_type_ _val1_ _val2_) -> value of type _type_  
 (div-_type_ _val1_ _val2_) -> value of type _type_  
 (mod-_type_ _val1_ _val2_) -> value of type _type_  
-(eq-_type_ _val1_ _val2_) -> value of type _type_  
-(neq-_type_ _val1_ _val2_) -> value of type _type_  
-(gt-_type_ _val1_ _val2_) -> value of type _type_
-(gte-_type_ _val1_ _val2_) -> value of type _type_  
-(lt-_type_ _val1_ _val2_) -> value of type _type_  
-(lte-_type_ _val1_ _val2_) -> value of type _type_  
+
+(and _bool1_ _bool2_) -> value of type #:bool  
+(or _bool1_ _bool2_) -> value of type #:bool  
+(not _bool_) -> value of type #:bool  
+
+(eq-_type_ _val1_ _val2_) -> value of type #:bool  
+(neq-_type_ _val1_ _val2_) -> value of type #:bool  
+(gt-_type_ _val1_ _val2_) -> value of type #:bool  
+(gte-_type_ _val1_ _val2_) -> value of type #:bool  
+(lt-_type_ _val1_ _val2_) -> value of type #:bool  
+(lte-_type_ _val1_ _val2_) -> value of type #:bool  
 
 (new _type-name_) -> #:bool  
 (del-_type_ _instance_) -> #:bool  

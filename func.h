@@ -6,15 +6,18 @@
 
 #define _4C_FUNC_MAX_ARGS (32)
 
-#define _4C_FUNC_P_ID_N (7)
+#define _4C_FUNC_P_ID_N (10)
 enum func_p_ids {
     func_p_id_print_i = 0,
+    func_p_id_print_s,
     func_p_id_add_i,
     func_p_id_set_i,
+    func_p_id_set_func,
     func_p_id_if,
     func_p_id_do,
     func_p_id_return_i,
     func_p_id_return_b,
+    func_p_id_neq_i,
 };
 
 struct func_info {

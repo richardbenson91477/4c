@@ -7,6 +7,11 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
         type_id_nil,
         1, {type_id_nil},
            {type_id_int}},
+    {"print-s", 7, func_p_id_print_s,
+        "_4c_func_print_s", 16,
+        type_id_nil,
+        1, {type_id_nil},
+           {type_id_str}},
     {"add-i", 5, func_p_id_add_i,
         "_4c_func_add_i", 14,
         type_id_int,
@@ -17,6 +22,11 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
         type_id_nil,
         2, {type_id_var, type_id_nil},
            {type_id_int, type_id_int}},
+    {"set-func", 8, func_p_id_set_func,
+        "_4c_func_set_i", 17,
+        type_id_nil,
+        2, {type_id_var, type_id_nil},
+           {type_id_func, type_id_func}},
     {"if", 2, func_p_id_if,
         "_4c_func_if", 11,
         type_id_nil,
@@ -37,6 +47,11 @@ const struct func_info _func_p_info [_4C_FUNC_P_ID_N + 1] = {
         type_id_bool, // see above comment
         1, {type_id_nil},
            {type_id_bool}},
+    {"neq-i", 5, func_p_id_neq_i,
+        "_4c_func_neq_i", 14,
+        type_id_bool,
+        2, {type_id_nil, type_id_nil},
+           {type_id_int, type_id_int}},
     {NULL, 0, 0, NULL, 0, type_id_nil, 0, {type_id_nil}, {type_id_nil}}
 };
 
